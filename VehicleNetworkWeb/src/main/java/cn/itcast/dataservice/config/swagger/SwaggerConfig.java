@@ -19,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    // swagger(openapi的ui界面
     private ApiInfo apiInfo() {
         // todo 创建API构建对象，并设置对象相关属性
         return new ApiInfoBuilder()
@@ -26,7 +27,7 @@ public class SwaggerConfig {
                 .description("本文档提供并展示系统所有对外接口的明细")
                 .termsOfServiceUrl("")
                 .version("2.0")
-                .contact(new Contact("传智-黑马程序员-车联网大数据", "http://www.itcast.cn/", "heima@itcast.cn"))
+                .contact(new Contact("rene-车联网大数据", "http://120.55.78.114:8080/webroot/decision", "heima@itcast.cn"))
                 .build();
     }
 

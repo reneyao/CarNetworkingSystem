@@ -1,7 +1,5 @@
 package cn.itcast.streaming.sink;
 
-
-
 import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.utils.DateUtil;
 import org.apache.flink.configuration.Configuration;

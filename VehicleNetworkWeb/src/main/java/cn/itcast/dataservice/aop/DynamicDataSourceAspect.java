@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
+
+// 切面实现
 /**
  * @author laowei
  * @commpany itcast
@@ -23,7 +25,7 @@ import java.lang.reflect.Method;
  *               @Component：当前类创建对象，交给spring管理
  */
 @Aspect
-@Component
+@Component                // 使其成为spring 管理的Bean
 public class DynamicDataSourceAspect {
 
     private final Logger logger = LoggerFactory.getLogger(DynamicDataSourceAspect.class);

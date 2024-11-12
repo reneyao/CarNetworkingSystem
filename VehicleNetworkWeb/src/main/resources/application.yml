@@ -2,6 +2,7 @@
 mybatis:
   mapperLocations: classpath:/cn/itcast/dataservice/mapper/*.xml
 
+# 数据库信息配置到这里了
 # todo 配置多个数据源属性：hive、mysql
 spring:
   datasource:
@@ -9,18 +10,21 @@ spring:
     mysql:
       type:
         com.alibaba.druid.pool.DruidDataSource
-      url: jdbc:mysql://hadoop102:3306/vehicle_networking?useUnicode=true&useSSL=false&characterEncoding=utf-8
-      username: rene
-      password: 123456
+      # 输入自己mysql的地址
+      url: jdbc:mysql://120.55.78.114:3306/vehicle_networking?useUnicode=true&useSSL=false&characterEncoding=utf-8
+      username: root
+      password: Aabc939596
       driver-class-name: com.mysql.jdbc.Driver
     # todo hive数据源
+    # 输入自己hive的信息,itcast_ods是hive创建的库
     hive:
-      url: jdbc:hive2://hadoop102:10000/itcast_ods
+      url: jdbc:hive2://node03:10000/itcast_ods
       type: com.alibaba.druid.pool.DruidDataSource
-      username: rene
+      username: root
       password: 123456
       driver-class-name: org.apache.hive.jdbc.HiveDriver
     # todo 连接池统一配置，应用到所有的数据源
+    # 统一配置
     commonconfig:
       initialSize: 1
       minIdle: 1

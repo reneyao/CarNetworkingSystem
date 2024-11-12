@@ -14,6 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface LogAudit {
+    // 设置注解，默认值为空：“”
     // todo 初始化，赋默认值
     String value() default "";
 }

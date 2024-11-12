@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
     // todo 定义一个本地的线程
+    // JDK中sql包下，数据库数据源接口，可以各种获得数据库连接
     private static final ThreadLocal<String> dataSources = new InheritableThreadLocal<>();
 
     // todo 设置数据源对象

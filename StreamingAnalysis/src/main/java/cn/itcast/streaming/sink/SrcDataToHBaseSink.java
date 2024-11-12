@@ -1,24 +1,24 @@
 package cn.itcast.streaming.sink;
 
-// 导对包
-import cn.itcast.entity.ItcastDataObj;;
+import cn.itcast.entity.ItcastDataObj;
+import cn.itcast.utils.ConfigLoader;
 import cn.itcast.utils.DateUtil;
+
 import cn.itcast.utils.StringUtil;
-import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
+import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.hive.metastore.hbase.HbaseMetastoreProto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import org.apache.hadoop.hbase.client.*;
-import org.apache.hadoop.hbase.util.Bytes;
 
-
+import org.apache.hadoop.hbase.client.Connection;
 
 /**
  * 需求：将正常的数据实时的写入到hbase中
@@ -34,25 +34,26 @@ import org.apache.hadoop.hbase.util.Bytes;
  */
 public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
     //定义日志操作对象
-    private final static Logger logger = LoggerFactory.getLogger(SrcDataToHBaseSink.class); // 记录日志
+    private final static Logger logger = LoggerFactory.getLogger(SrcDataToHBaseSink.class);
 
     //定义操作的hbase的表名
     private String tableName;
     //创建hbase客户端的Table对象，用于写操作
-    private Table table;       // 操作表的对象
+    private Table table;   // 这个对象
     //定义connection连接对象
-    private Connection conn = null;
+    private Connection connection;
 
     /**
      * 定义构造方法，传递操作的Hbase的表名
      * @param tableName
      */
-    public SrcDataToHBaseSink(String tableName) {      // 构造方法，需要输入表名
+    public SrcDataToHBaseSink(String tableName) {
         this.tableName = tableName;
     }
 
 
-    // 重写父类的方法
+   // 重写open，invoke方法，将数据从kafka写入到hbase中
+
     /**
      * 初始化方法，每个线程初始化一次
      * @param parameters
@@ -62,20 +63,15 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         //TODO 1）定义hbase的连接配置对象
-        ParameterTool tools = (ParameterTool) getRuntimeContext().getExecutionConfig().getGlobalJobParameters();
-        String zkQuorm = tools.getRequired("zookeeper.quorum");
-        String port = tools.getRequired("zookeeper.clientPort");
-        org.apache.hadoop.conf.Configuration def = new org.apache.hadoop.conf.Configuration();
-        def.set(HConstants.ZOOKEEPER_QUORUM,zkQuorm);
-        def.set(HConstants.ZOOKEEPER_CLIENT_PORT,port);
-        def.set(TableInputFormat.INPUT_TABLE,tableName);
-        org.apache.hadoop.conf.Configuration conf = HBaseConfiguration.create(def);  // hbase
-        // 创建连接
-        conn = ConnectionFactory.createConnection(conf);
-
-        conn.getTable(TableName.valueOf(tableName));
-
-
+        org.apache.hadoop.conf.Configuration configuration = HBaseConfiguration.create();
+        configuration.set("hbase.zookeeper.quorum", ConfigLoader.getProperty("zookeeper.quorum"));
+        configuration.set("hbase.zookeeper.property.clientPort", ConfigLoader.getProperty("zookeeper.clientPort"));
+        configuration.set(TableInputFormat.INPUT_TABLE, tableName);
+        //TODO 2）创建hbase的连接对象
+        connection = ConnectionFactory.createConnection(configuration);  // 将配置传入
+        //实例化Table对象
+        table = connection.getTable(TableName.valueOf(tableName));  // 注意
+        logger.warn("获得hbase的连接对象，{}表对象初始化成功！", tableName);
     }
 
     /**
@@ -111,6 +107,7 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
         Put put = new Put(Bytes.toBytes(rowKey));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(itcastDataObj.getVin()));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("terminalTime"), Bytes.toBytes(itcastDataObj.getTerminalTime()));
+        // ？  解释：均要写入
         if (itcastDataObj.getSoc() != -999999) put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("soc"), Bytes.toBytes(String.valueOf(itcastDataObj.getSoc())));
         if (itcastDataObj.getLat() != -999999) put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("lat"), Bytes.toBytes(String.valueOf(itcastDataObj.getLat())));
         if (itcastDataObj.getLng() != -999999) put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("lng"), Bytes.toBytes(String.valueOf(itcastDataObj.getLng())));
@@ -347,7 +344,6 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
         return put;
     }
 
-
     /**
      * 释放资源的时候执行
      * @throws Exception
@@ -356,6 +352,6 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
     public void close() throws Exception {
         super.close();
         if(table!=null) table.close();
-        if(conn!=null) conn.close();
+        if(connection!=null) connection.close();
     }
 }

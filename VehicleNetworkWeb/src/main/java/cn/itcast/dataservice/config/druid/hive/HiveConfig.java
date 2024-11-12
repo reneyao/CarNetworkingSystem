@@ -34,7 +34,8 @@ public class HiveConfig {
      * @desc todo 根据hive配置信息获得dataSource对象
      * @return DataSource(hiveDataSource)
      */
-    @Bean("hiveDataSource")
+    // rene：原是Bean("hiveDataSource")，改动为@Autowired
+    @Bean(name = "hiveDataSource")
     @Qualifier("hiveDataSource")
     public DataSource dataSource(){
         DruidDataSource datasource = new DruidDataSource();

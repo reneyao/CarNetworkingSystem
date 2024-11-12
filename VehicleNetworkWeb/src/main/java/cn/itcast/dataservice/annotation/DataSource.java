@@ -14,6 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
 public @interface DataSource {
+    // 有多个数据源，动态选择数据源
     // todo value成员变量，应为注解修饰类型为“Method”，即日定义注解内容为value方法，default是设置默认值
     String value() default MYSQL;
     // todo 定义mysql数据源key=value

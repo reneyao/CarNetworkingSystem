@@ -6,7 +6,7 @@
         <artifactId>CarNetworkingSystem</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <!--这是数据落盘的子项目模块-->
     <artifactId>SourceDataProcess</artifactId>
     <packaging>jar</packaging>
 

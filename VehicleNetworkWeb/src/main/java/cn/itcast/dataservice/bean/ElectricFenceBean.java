@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ElectricFenceBean {
+    // 测试接口
     /** todo 车架号 */
     private String vin;
     /** todo 进电子围栏时间 */

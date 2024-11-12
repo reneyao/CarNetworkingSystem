@@ -37,8 +37,9 @@ public class MysqlConfig {
      * @desc todo 根据mysql配置信息获得dataSource对象
      * @return DataSource(mysqlDataSource)
      */
+
     @Primary
-    @Bean("mysqlDataSource")
+    @Bean(name = "mysqlDataSource")
     @Qualifier("mysqlDataSource")
     public DataSource dataSource(){
         DruidDataSource datasource = new DruidDataSource();
@@ -66,6 +67,7 @@ public class MysqlConfig {
         } catch (SQLException e) {
             log.error("Druid configuration initialization filter error.", e);
         }
+
         return datasource;
     }
 }

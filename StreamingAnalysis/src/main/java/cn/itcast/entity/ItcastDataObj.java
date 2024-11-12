@@ -1,15 +1,8 @@
 package cn.itcast.entity;
 
 import cn.itcast.utils.DateUtil;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-// 实现数据报文的所有字段
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ItcastDataObj {
+
     // 档位驱动力状态	0：无驱动力 1：有驱动力
     private int gearDriveForce = -999999;
     // 电池单体一致性差报警	0：正常 1：异常
@@ -522,7 +515,7 @@ public class ItcastDataObj {
      */
     private String ObcFaultCode = "";
 
-    // 扩展字段 终端时间
+    // 扩展字段 终端时间   操作时间
     private Long terminalTimeStamp = -999999L;
     // 扩展字段，用于存储异常数据
     private String errorData = "";
@@ -796,7 +789,1930 @@ public class ItcastDataObj {
         if (vehCfgInfo != "") resultString.append(vehCfgInfo).append("\t"); else resultString.append("NULL").append("\t");
         if (vacBrkPRmu != -999999) resultString.append(vacBrkPRmu).append("\t"); else resultString.append("NULL").append("\t");
         resultString.append(DateUtil.getCurrentDateTime());
-        // toHiveString方法书写完成
+
         return resultString.toString();
+    }
+
+    // get,set,toString方法
+
+
+    public int getGearDriveForce() {
+        return gearDriveForce;
+    }
+
+    public void setGearDriveForce(int gearDriveForce) {
+        this.gearDriveForce = gearDriveForce;
+    }
+
+    public int getBatteryConsistencyDifferenceAlarm() {
+        return batteryConsistencyDifferenceAlarm;
+    }
+
+    public void setBatteryConsistencyDifferenceAlarm(int batteryConsistencyDifferenceAlarm) {
+        this.batteryConsistencyDifferenceAlarm = batteryConsistencyDifferenceAlarm;
+    }
+
+    public int getSoc() {
+        return soc;
+    }
+
+    public void setSoc(int soc) {
+        this.soc = soc;
+    }
+
+    public int getSocJumpAlarm() {
+        return socJumpAlarm;
+    }
+
+    public void setSocJumpAlarm(int socJumpAlarm) {
+        this.socJumpAlarm = socJumpAlarm;
+    }
+
+    public int getCaterpillaringFunction() {
+        return caterpillaringFunction;
+    }
+
+    public void setCaterpillaringFunction(int caterpillaringFunction) {
+        this.caterpillaringFunction = caterpillaringFunction;
+    }
+
+    public int getSatNum() {
+        return satNum;
+    }
+
+    public void setSatNum(int satNum) {
+        this.satNum = satNum;
+    }
+
+    public int getSocLowAlarm() {
+        return socLowAlarm;
+    }
+
+    public void setSocLowAlarm(int socLowAlarm) {
+        this.socLowAlarm = socLowAlarm;
+    }
+
+    public int getChargingGunConnectionState() {
+        return chargingGunConnectionState;
+    }
+
+    public void setChargingGunConnectionState(int chargingGunConnectionState) {
+        this.chargingGunConnectionState = chargingGunConnectionState;
+    }
+
+    public int getMinTemperatureSubSystemNum() {
+        return minTemperatureSubSystemNum;
+    }
+
+    public void setMinTemperatureSubSystemNum(int minTemperatureSubSystemNum) {
+        this.minTemperatureSubSystemNum = minTemperatureSubSystemNum;
+    }
+
+    public int getChargedElectronicLockStatus() {
+        return chargedElectronicLockStatus;
+    }
+
+    public void setChargedElectronicLockStatus(int chargedElectronicLockStatus) {
+        this.chargedElectronicLockStatus = chargedElectronicLockStatus;
+    }
+
+    public int getMaxVoltageBatteryNum() {
+        return maxVoltageBatteryNum;
+    }
+
+    public void setMaxVoltageBatteryNum(int maxVoltageBatteryNum) {
+        this.maxVoltageBatteryNum = maxVoltageBatteryNum;
+    }
+
+    public String getTerminalTime() {
+        return terminalTime;
+    }
+
+    public void setTerminalTime(String terminalTime) {
+        this.terminalTime = terminalTime;
+    }
+
+    public int getSingleBatteryOverVoltageAlarm() {
+        return singleBatteryOverVoltageAlarm;
+    }
+
+    public void setSingleBatteryOverVoltageAlarm(int singleBatteryOverVoltageAlarm) {
+        this.singleBatteryOverVoltageAlarm = singleBatteryOverVoltageAlarm;
+    }
+
+    public int getOtherFaultCount() {
+        return otherFaultCount;
+    }
+
+    public void setOtherFaultCount(int otherFaultCount) {
+        this.otherFaultCount = otherFaultCount;
+    }
+
+    public int getVehicleStorageDeviceOvervoltageAlarm() {
+        return vehicleStorageDeviceOvervoltageAlarm;
+    }
+
+    public void setVehicleStorageDeviceOvervoltageAlarm(int vehicleStorageDeviceOvervoltageAlarm) {
+        this.vehicleStorageDeviceOvervoltageAlarm = vehicleStorageDeviceOvervoltageAlarm;
+    }
+
+    public int getBrakeSystemAlarm() {
+        return brakeSystemAlarm;
+    }
+
+    public void setBrakeSystemAlarm(int brakeSystemAlarm) {
+        this.brakeSystemAlarm = brakeSystemAlarm;
+    }
+
+    public String getServerTime() {
+        return serverTime;
+    }
+
+    public void setServerTime(String serverTime) {
+        this.serverTime = serverTime;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+
+    public int getRechargeableStorageDevicesFaultCount() {
+        return rechargeableStorageDevicesFaultCount;
+    }
+
+    public void setRechargeableStorageDevicesFaultCount(int rechargeableStorageDevicesFaultCount) {
+        this.rechargeableStorageDevicesFaultCount = rechargeableStorageDevicesFaultCount;
+    }
+
+    public int getDriveMotorTemperatureAlarm() {
+        return driveMotorTemperatureAlarm;
+    }
+
+    public void setDriveMotorTemperatureAlarm(int driveMotorTemperatureAlarm) {
+        this.driveMotorTemperatureAlarm = driveMotorTemperatureAlarm;
+    }
+
+    public int getGearBrakeForce() {
+        return gearBrakeForce;
+    }
+
+    public void setGearBrakeForce(int gearBrakeForce) {
+        this.gearBrakeForce = gearBrakeForce;
+    }
+
+    public int getDcdcStatusAlarm() {
+        return dcdcStatusAlarm;
+    }
+
+    public void setDcdcStatusAlarm(int dcdcStatusAlarm) {
+        this.dcdcStatusAlarm = dcdcStatusAlarm;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public String getDriveMotorFaultCodes() {
+        return driveMotorFaultCodes;
+    }
+
+    public void setDriveMotorFaultCodes(String driveMotorFaultCodes) {
+        this.driveMotorFaultCodes = driveMotorFaultCodes;
+    }
+
+    public int getDriveMotorFaultCount() {
+        return driveMotorFaultCount;
+    }
+
+    public void setDriveMotorFaultCount(int driveMotorFaultCount) {
+        this.driveMotorFaultCount = driveMotorFaultCount;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public Double getVehicleSpeed() {
+        return vehicleSpeed;
+    }
+
+    public void setVehicleSpeed(Double vehicleSpeed) {
+        this.vehicleSpeed = vehicleSpeed;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public int getChargingTimeExtensionReason() {
+        return chargingTimeExtensionReason;
+    }
+
+    public void setChargingTimeExtensionReason(int chargingTimeExtensionReason) {
+        this.chargingTimeExtensionReason = chargingTimeExtensionReason;
+    }
+
+    public String getNevChargeSystemVoltageDtoList() {
+        return nevChargeSystemVoltageDtoList;
+    }
+
+    public void setNevChargeSystemVoltageDtoList(String nevChargeSystemVoltageDtoList) {
+        this.nevChargeSystemVoltageDtoList = nevChargeSystemVoltageDtoList;
+    }
+
+    public int getCurrentBatteryStartNum() {
+        return currentBatteryStartNum;
+    }
+
+    public void setCurrentBatteryStartNum(int currentBatteryStartNum) {
+        this.currentBatteryStartNum = currentBatteryStartNum;
+    }
+
+    public String getBatteryVoltage() {
+        return batteryVoltage;
+    }
+
+    public void setBatteryVoltage(String batteryVoltage) {
+        this.batteryVoltage = batteryVoltage;
+    }
+
+    public Double getChargeSystemVoltage() {
+        return chargeSystemVoltage;
+    }
+
+    public void setChargeSystemVoltage(Double chargeSystemVoltage) {
+        this.chargeSystemVoltage = chargeSystemVoltage;
+    }
+
+    public int getCurrentBatteryCount() {
+        return currentBatteryCount;
+    }
+
+    public void setCurrentBatteryCount(int currentBatteryCount) {
+        this.currentBatteryCount = currentBatteryCount;
+    }
+
+    public int getBatteryCount() {
+        return batteryCount;
+    }
+
+    public void setBatteryCount(int batteryCount) {
+        this.batteryCount = batteryCount;
+    }
+
+    public int getChildSystemNum() {
+        return childSystemNum;
+    }
+
+    public void setChildSystemNum(int childSystemNum) {
+        this.childSystemNum = childSystemNum;
+    }
+
+    public Double getChargeSystemCurrent() {
+        return chargeSystemCurrent;
+    }
+
+    public void setChargeSystemCurrent(Double chargeSystemCurrent) {
+        this.chargeSystemCurrent = chargeSystemCurrent;
+    }
+
+    public String getGpsTime() {
+        return gpsTime;
+    }
+
+    public void setGpsTime(String gpsTime) {
+        this.gpsTime = gpsTime;
+    }
+
+    public int getEngineFaultCount() {
+        return engineFaultCount;
+    }
+
+    public void setEngineFaultCount(int engineFaultCount) {
+        this.engineFaultCount = engineFaultCount;
+    }
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
+    }
+
+    public Double getCurrentElectricity() {
+        return currentElectricity;
+    }
+
+    public void setCurrentElectricity(Double currentElectricity) {
+        this.currentElectricity = currentElectricity;
+    }
+
+    public int getSingleBatteryUnderVoltageAlarm() {
+        return singleBatteryUnderVoltageAlarm;
+    }
+
+    public void setSingleBatteryUnderVoltageAlarm(int singleBatteryUnderVoltageAlarm) {
+        this.singleBatteryUnderVoltageAlarm = singleBatteryUnderVoltageAlarm;
+    }
+
+    public int getMaxVoltageBatterySubSystemNum() {
+        return maxVoltageBatterySubSystemNum;
+    }
+
+    public void setMaxVoltageBatterySubSystemNum(int maxVoltageBatterySubSystemNum) {
+        this.maxVoltageBatterySubSystemNum = maxVoltageBatterySubSystemNum;
+    }
+
+    public int getMinTemperatureProbe() {
+        return minTemperatureProbe;
+    }
+
+    public void setMinTemperatureProbe(int minTemperatureProbe) {
+        this.minTemperatureProbe = minTemperatureProbe;
+    }
+
+    public int getDriveMotorNum() {
+        return driveMotorNum;
+    }
+
+    public void setDriveMotorNum(int driveMotorNum) {
+        this.driveMotorNum = driveMotorNum;
+    }
+
+    public Double getTotalVoltage() {
+        return totalVoltage;
+    }
+
+    public void setTotalVoltage(Double totalVoltage) {
+        this.totalVoltage = totalVoltage;
+    }
+
+    public int getTemperatureDifferenceAlarm() {
+        return temperatureDifferenceAlarm;
+    }
+
+    public void setTemperatureDifferenceAlarm(int temperatureDifferenceAlarm) {
+        this.temperatureDifferenceAlarm = temperatureDifferenceAlarm;
+    }
+
+    public int getMaxAlarmLevel() {
+        return maxAlarmLevel;
+    }
+
+    public void setMaxAlarmLevel(int maxAlarmLevel) {
+        this.maxAlarmLevel = maxAlarmLevel;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getGeerPosition() {
+        return geerPosition;
+    }
+
+    public void setGeerPosition(int geerPosition) {
+        this.geerPosition = geerPosition;
+    }
+
+    public Double getAverageEnergyConsumption() {
+        return averageEnergyConsumption;
+    }
+
+    public void setAverageEnergyConsumption(Double averageEnergyConsumption) {
+        this.averageEnergyConsumption = averageEnergyConsumption;
+    }
+
+    public Double getMinVoltageBattery() {
+        return minVoltageBattery;
+    }
+
+    public void setMinVoltageBattery(Double minVoltageBattery) {
+        this.minVoltageBattery = minVoltageBattery;
+    }
+
+    public int getGeerStatus() {
+        return geerStatus;
+    }
+
+    public void setGeerStatus(int geerStatus) {
+        this.geerStatus = geerStatus;
+    }
+
+    public String getDriveMotorData() {
+        return driveMotorData;
+    }
+
+    public void setDriveMotorData(String driveMotorData) {
+        this.driveMotorData = driveMotorData;
+    }
+
+    public Double getControllerInputVoltage() {
+        return controllerInputVoltage;
+    }
+
+    public void setControllerInputVoltage(Double controllerInputVoltage) {
+        this.controllerInputVoltage = controllerInputVoltage;
+    }
+
+    public Double getControllerTemperature() {
+        return controllerTemperature;
+    }
+
+    public void setControllerTemperature(Double controllerTemperature) {
+        this.controllerTemperature = controllerTemperature;
+    }
+
+    public Double getRevolutionSpeed() {
+        return revolutionSpeed;
+    }
+
+    public void setRevolutionSpeed(Double revolutionSpeed) {
+        this.revolutionSpeed = revolutionSpeed;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public Double getControllerDcBusCurrent() {
+        return controllerDcBusCurrent;
+    }
+
+    public void setControllerDcBusCurrent(Double controllerDcBusCurrent) {
+        this.controllerDcBusCurrent = controllerDcBusCurrent;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
+
+    public Double getTorque() {
+        return torque;
+    }
+
+    public void setTorque(Double torque) {
+        this.torque = torque;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getMinVoltageBatteryNum() {
+        return minVoltageBatteryNum;
+    }
+
+    public void setMinVoltageBatteryNum(int minVoltageBatteryNum) {
+        this.minVoltageBatteryNum = minVoltageBatteryNum;
+    }
+
+    public String getValidGps() {
+        return validGps;
+    }
+
+    public void setValidGps(String validGps) {
+        this.validGps = validGps;
+    }
+
+    public String getEngineFaultCodes() {
+        return engineFaultCodes;
+    }
+
+    public void setEngineFaultCodes(String engineFaultCodes) {
+        this.engineFaultCodes = engineFaultCodes;
+    }
+
+    public Double getMinTemperatureValue() {
+        return minTemperatureValue;
+    }
+
+    public void setMinTemperatureValue(Double minTemperatureValue) {
+        this.minTemperatureValue = minTemperatureValue;
+    }
+
+    public int getChargeStatus() {
+        return chargeStatus;
+    }
+
+    public void setChargeStatus(int chargeStatus) {
+        this.chargeStatus = chargeStatus;
+    }
+
+    public String getIgnitionTime() {
+        return ignitionTime;
+    }
+
+    public void setIgnitionTime(String ignitionTime) {
+        this.ignitionTime = ignitionTime;
+    }
+
+    public Double getTotalOdometer() {
+        return totalOdometer;
+    }
+
+    public void setTotalOdometer(Double totalOdometer) {
+        this.totalOdometer = totalOdometer;
+    }
+
+    public Double getAlti() {
+        return alti;
+    }
+
+    public void setAlti(Double alti) {
+        this.alti = alti;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
+    public int getSocHighAlarm() {
+        return socHighAlarm;
+    }
+
+    public void setSocHighAlarm(int socHighAlarm) {
+        this.socHighAlarm = socHighAlarm;
+    }
+
+    public int getVehicleStorageDeviceUndervoltageAlarm() {
+        return vehicleStorageDeviceUndervoltageAlarm;
+    }
+
+    public void setVehicleStorageDeviceUndervoltageAlarm(int vehicleStorageDeviceUndervoltageAlarm) {
+        this.vehicleStorageDeviceUndervoltageAlarm = vehicleStorageDeviceUndervoltageAlarm;
+    }
+
+    public Double getTotalCurrent() {
+        return totalCurrent;
+    }
+
+    public void setTotalCurrent(Double totalCurrent) {
+        this.totalCurrent = totalCurrent;
+    }
+
+    public int getBatteryAlarm() {
+        return batteryAlarm;
+    }
+
+    public void setBatteryAlarm(int batteryAlarm) {
+        this.batteryAlarm = batteryAlarm;
+    }
+
+    public int getRechargeableStorageDeviceMismatchAlarm() {
+        return rechargeableStorageDeviceMismatchAlarm;
+    }
+
+    public void setRechargeableStorageDeviceMismatchAlarm(int rechargeableStorageDeviceMismatchAlarm) {
+        this.rechargeableStorageDeviceMismatchAlarm = rechargeableStorageDeviceMismatchAlarm;
+    }
+
+    public int getIsHistoryPoi() {
+        return isHistoryPoi;
+    }
+
+    public void setIsHistoryPoi(int isHistoryPoi) {
+        this.isHistoryPoi = isHistoryPoi;
+    }
+
+    public int getVehiclePureDeviceTypeOvercharge() {
+        return vehiclePureDeviceTypeOvercharge;
+    }
+
+    public void setVehiclePureDeviceTypeOvercharge(int vehiclePureDeviceTypeOvercharge) {
+        this.vehiclePureDeviceTypeOvercharge = vehiclePureDeviceTypeOvercharge;
+    }
+
+    public Double getMaxVoltageBattery() {
+        return maxVoltageBattery;
+    }
+
+    public void setMaxVoltageBattery(Double maxVoltageBattery) {
+        this.maxVoltageBattery = maxVoltageBattery;
+    }
+
+    public int getDcdcTemperatureAlarm() {
+        return dcdcTemperatureAlarm;
+    }
+
+    public void setDcdcTemperatureAlarm(int dcdcTemperatureAlarm) {
+        this.dcdcTemperatureAlarm = dcdcTemperatureAlarm;
+    }
+
+    public String getIsValidGps() {
+        return isValidGps;
+    }
+
+    public void setIsValidGps(String isValidGps) {
+        this.isValidGps = isValidGps;
+    }
+
+    public String getLastUpdatedTime() {
+        return lastUpdatedTime;
+    }
+
+    public void setLastUpdatedTime(String lastUpdatedTime) {
+        this.lastUpdatedTime = lastUpdatedTime;
+    }
+
+    public int getDriveMotorControllerTemperatureAlarm() {
+        return driveMotorControllerTemperatureAlarm;
+    }
+
+    public void setDriveMotorControllerTemperatureAlarm(int driveMotorControllerTemperatureAlarm) {
+        this.driveMotorControllerTemperatureAlarm = driveMotorControllerTemperatureAlarm;
+    }
+
+    public String getNevChargeSystemTemperatureDtoList() {
+        return nevChargeSystemTemperatureDtoList;
+    }
+
+    public void setNevChargeSystemTemperatureDtoList(String nevChargeSystemTemperatureDtoList) {
+        this.nevChargeSystemTemperatureDtoList = nevChargeSystemTemperatureDtoList;
+    }
+
+    public String getProbeTemperatures() {
+        return probeTemperatures;
+    }
+
+    public void setProbeTemperatures(String probeTemperatures) {
+        this.probeTemperatures = probeTemperatures;
+    }
+
+    public int getChargeTemperatureProbeNum() {
+        return chargeTemperatureProbeNum;
+    }
+
+    public void setChargeTemperatureProbeNum(int chargeTemperatureProbeNum) {
+        this.chargeTemperatureProbeNum = chargeTemperatureProbeNum;
+    }
+
+    public Double getIgniteCumulativeMileage() {
+        return igniteCumulativeMileage;
+    }
+
+    public void setIgniteCumulativeMileage(Double igniteCumulativeMileage) {
+        this.igniteCumulativeMileage = igniteCumulativeMileage;
+    }
+
+    public int getDcStatus() {
+        return dcStatus;
+    }
+
+    public void setDcStatus(int dcStatus) {
+        this.dcStatus = dcStatus;
+    }
+
+    public String getRepay() {
+        return repay;
+    }
+
+    public void setRepay(String repay) {
+        this.repay = repay;
+    }
+
+    public int getMaxTemperatureSubSystemNum() {
+        return maxTemperatureSubSystemNum;
+    }
+
+    public void setMaxTemperatureSubSystemNum(int maxTemperatureSubSystemNum) {
+        this.maxTemperatureSubSystemNum = maxTemperatureSubSystemNum;
+    }
+
+    public int getCarStatus() {
+        return carStatus;
+    }
+
+    public void setCarStatus(int carStatus) {
+        this.carStatus = carStatus;
+    }
+
+    public int getMinVoltageBatterySubSystemNum() {
+        return minVoltageBatterySubSystemNum;
+    }
+
+    public void setMinVoltageBatterySubSystemNum(int minVoltageBatterySubSystemNum) {
+        this.minVoltageBatterySubSystemNum = minVoltageBatterySubSystemNum;
+    }
+
+    public Double getHeading() {
+        return heading;
+    }
+
+    public void setHeading(Double heading) {
+        this.heading = heading;
+    }
+
+    public String getIpuFaultCodes() {
+        return IpuFaultCodes;
+    }
+
+    public void setIpuFaultCodes(String ipuFaultCodes) {
+        IpuFaultCodes = ipuFaultCodes;
+    }
+
+    public String getTuid() {
+        return tuid;
+    }
+
+    public void setTuid(String tuid) {
+        this.tuid = tuid;
+    }
+
+    public int getEnergyRecoveryStatus() {
+        return energyRecoveryStatus;
+    }
+
+    public void setEnergyRecoveryStatus(int energyRecoveryStatus) {
+        this.energyRecoveryStatus = energyRecoveryStatus;
+    }
+
+    public int getFireStatus() {
+        return fireStatus;
+    }
+
+    public void setFireStatus(int fireStatus) {
+        this.fireStatus = fireStatus;
+    }
+
+    public String getTargetType() {
+        return targetType;
+    }
+
+    public void setTargetType(String targetType) {
+        this.targetType = targetType;
+    }
+
+    public int getMaxTemperatureProbe() {
+        return maxTemperatureProbe;
+    }
+
+    public void setMaxTemperatureProbe(int maxTemperatureProbe) {
+        this.maxTemperatureProbe = maxTemperatureProbe;
+    }
+
+    public String getRechargeableStorageDevicesFaultCodes() {
+        return rechargeableStorageDevicesFaultCodes;
+    }
+
+    public void setRechargeableStorageDevicesFaultCodes(String rechargeableStorageDevicesFaultCodes) {
+        this.rechargeableStorageDevicesFaultCodes = rechargeableStorageDevicesFaultCodes;
+    }
+
+    public int getCarMode() {
+        return carMode;
+    }
+
+    public void setCarMode(int carMode) {
+        this.carMode = carMode;
+    }
+
+    public int getHighVoltageInterlockStateAlarm() {
+        return highVoltageInterlockStateAlarm;
+    }
+
+    public void setHighVoltageInterlockStateAlarm(int highVoltageInterlockStateAlarm) {
+        this.highVoltageInterlockStateAlarm = highVoltageInterlockStateAlarm;
+    }
+
+    public int getInsulationAlarm() {
+        return insulationAlarm;
+    }
+
+    public void setInsulationAlarm(int insulationAlarm) {
+        this.insulationAlarm = insulationAlarm;
+    }
+
+    public int getMileageInformation() {
+        return mileageInformation;
+    }
+
+    public void setMileageInformation(int mileageInformation) {
+        this.mileageInformation = mileageInformation;
+    }
+
+    public Double getMaxTemperatureValue() {
+        return maxTemperatureValue;
+    }
+
+    public void setMaxTemperatureValue(Double maxTemperatureValue) {
+        this.maxTemperatureValue = maxTemperatureValue;
+    }
+
+    public String getOtherFaultCodes() {
+        return otherFaultCodes;
+    }
+
+    public void setOtherFaultCodes(String otherFaultCodes) {
+        this.otherFaultCodes = otherFaultCodes;
+    }
+
+    public Double getRemainPower() {
+        return remainPower;
+    }
+
+    public void setRemainPower(Double remainPower) {
+        this.remainPower = remainPower;
+    }
+
+    public int getInsulateResistance() {
+        return insulateResistance;
+    }
+
+    public void setInsulateResistance(int insulateResistance) {
+        this.insulateResistance = insulateResistance;
+    }
+
+    public int getBatteryLowTemperatureHeater() {
+        return batteryLowTemperatureHeater;
+    }
+
+    public void setBatteryLowTemperatureHeater(int batteryLowTemperatureHeater) {
+        this.batteryLowTemperatureHeater = batteryLowTemperatureHeater;
+    }
+
+    public String getFuelConsumption100km() {
+        return fuelConsumption100km;
+    }
+
+    public void setFuelConsumption100km(String fuelConsumption100km) {
+        this.fuelConsumption100km = fuelConsumption100km;
+    }
+
+    public String getFuelConsumption() {
+        return fuelConsumption;
+    }
+
+    public void setFuelConsumption(String fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
+
+    public String getEngineSpeed() {
+        return engineSpeed;
+    }
+
+    public void setEngineSpeed(String engineSpeed) {
+        this.engineSpeed = engineSpeed;
+    }
+
+    public String getEngineStatus() {
+        return engineStatus;
+    }
+
+    public void setEngineStatus(String engineStatus) {
+        this.engineStatus = engineStatus;
+    }
+
+    public int getTrunk() {
+        return trunk;
+    }
+
+    public void setTrunk(int trunk) {
+        this.trunk = trunk;
+    }
+
+    public int getLowBeam() {
+        return lowBeam;
+    }
+
+    public void setLowBeam(int lowBeam) {
+        this.lowBeam = lowBeam;
+    }
+
+    public String getTriggerLatchOverheatProtect() {
+        return triggerLatchOverheatProtect;
+    }
+
+    public void setTriggerLatchOverheatProtect(String triggerLatchOverheatProtect) {
+        this.triggerLatchOverheatProtect = triggerLatchOverheatProtect;
+    }
+
+    public int getTurnLndicatorRight() {
+        return turnLndicatorRight;
+    }
+
+    public void setTurnLndicatorRight(int turnLndicatorRight) {
+        this.turnLndicatorRight = turnLndicatorRight;
+    }
+
+    public int getHighBeam() {
+        return highBeam;
+    }
+
+    public void setHighBeam(int highBeam) {
+        this.highBeam = highBeam;
+    }
+
+    public int getTurnLndicatorLeft() {
+        return turnLndicatorLeft;
+    }
+
+    public void setTurnLndicatorLeft(int turnLndicatorLeft) {
+        this.turnLndicatorLeft = turnLndicatorLeft;
+    }
+
+    public int getBcuSwVers() {
+        return bcuSwVers;
+    }
+
+    public void setBcuSwVers(int bcuSwVers) {
+        this.bcuSwVers = bcuSwVers;
+    }
+
+    public int getBcuHwVers() {
+        return bcuHwVers;
+    }
+
+    public void setBcuHwVers(int bcuHwVers) {
+        this.bcuHwVers = bcuHwVers;
+    }
+
+    public int getBcuOperMod() {
+        return bcuOperMod;
+    }
+
+    public void setBcuOperMod(int bcuOperMod) {
+        this.bcuOperMod = bcuOperMod;
+    }
+
+    public int getChrgEndReason() {
+        return chrgEndReason;
+    }
+
+    public void setChrgEndReason(int chrgEndReason) {
+        this.chrgEndReason = chrgEndReason;
+    }
+
+    public String getBCURegenEngDisp() {
+        return BCURegenEngDisp;
+    }
+
+    public void setBCURegenEngDisp(String BCURegenEngDisp) {
+        this.BCURegenEngDisp = BCURegenEngDisp;
+    }
+
+    public int getBCURegenCpDisp() {
+        return BCURegenCpDisp;
+    }
+
+    public void setBCURegenCpDisp(int BCURegenCpDisp) {
+        this.BCURegenCpDisp = BCURegenCpDisp;
+    }
+
+    public int getBcuChrgMod() {
+        return bcuChrgMod;
+    }
+
+    public void setBcuChrgMod(int bcuChrgMod) {
+        this.bcuChrgMod = bcuChrgMod;
+    }
+
+    public int getBatteryChargeStatus() {
+        return batteryChargeStatus;
+    }
+
+    public void setBatteryChargeStatus(int batteryChargeStatus) {
+        this.batteryChargeStatus = batteryChargeStatus;
+    }
+
+    public int getBcuFltRnk() {
+        return bcuFltRnk;
+    }
+
+    public void setBcuFltRnk(int bcuFltRnk) {
+        this.bcuFltRnk = bcuFltRnk;
+    }
+
+    public String getBattPoleTOver() {
+        return battPoleTOver;
+    }
+
+    public void setBattPoleTOver(String battPoleTOver) {
+        this.battPoleTOver = battPoleTOver;
+    }
+
+    public Double getBcuSOH() {
+        return bcuSOH;
+    }
+
+    public void setBcuSOH(Double bcuSOH) {
+        this.bcuSOH = bcuSOH;
+    }
+
+    public int getBattIntrHeatActive() {
+        return battIntrHeatActive;
+    }
+
+    public void setBattIntrHeatActive(int battIntrHeatActive) {
+        this.battIntrHeatActive = battIntrHeatActive;
+    }
+
+    public int getBattIntrHeatReq() {
+        return battIntrHeatReq;
+    }
+
+    public void setBattIntrHeatReq(int battIntrHeatReq) {
+        this.battIntrHeatReq = battIntrHeatReq;
+    }
+
+    public String getBCUBattTarT() {
+        return BCUBattTarT;
+    }
+
+    public void setBCUBattTarT(String BCUBattTarT) {
+        this.BCUBattTarT = BCUBattTarT;
+    }
+
+    public int getBattExtHeatReq() {
+        return battExtHeatReq;
+    }
+
+    public void setBattExtHeatReq(int battExtHeatReq) {
+        this.battExtHeatReq = battExtHeatReq;
+    }
+
+    public String getBCUMaxChrgPwrLongT() {
+        return BCUMaxChrgPwrLongT;
+    }
+
+    public void setBCUMaxChrgPwrLongT(String BCUMaxChrgPwrLongT) {
+        this.BCUMaxChrgPwrLongT = BCUMaxChrgPwrLongT;
+    }
+
+    public String getBCUMaxDchaPwrLongT() {
+        return BCUMaxDchaPwrLongT;
+    }
+
+    public void setBCUMaxDchaPwrLongT(String BCUMaxDchaPwrLongT) {
+        this.BCUMaxDchaPwrLongT = BCUMaxDchaPwrLongT;
+    }
+
+    public String getBCUTotalRegenEngDisp() {
+        return BCUTotalRegenEngDisp;
+    }
+
+    public void setBCUTotalRegenEngDisp(String BCUTotalRegenEngDisp) {
+        this.BCUTotalRegenEngDisp = BCUTotalRegenEngDisp;
+    }
+
+    public String getBCUTotalRegenCpDisp() {
+        return BCUTotalRegenCpDisp;
+    }
+
+    public void setBCUTotalRegenCpDisp(String BCUTotalRegenCpDisp) {
+        this.BCUTotalRegenCpDisp = BCUTotalRegenCpDisp;
+    }
+
+    public int getDcdcFltRnk() {
+        return dcdcFltRnk;
+    }
+
+    public void setDcdcFltRnk(int dcdcFltRnk) {
+        this.dcdcFltRnk = dcdcFltRnk;
+    }
+
+    public String getDcdcFaultCode() {
+        return DcdcFaultCode;
+    }
+
+    public void setDcdcFaultCode(String dcdcFaultCode) {
+        DcdcFaultCode = dcdcFaultCode;
+    }
+
+    public Double getDcdcOutpCrrt() {
+        return dcdcOutpCrrt;
+    }
+
+    public void setDcdcOutpCrrt(Double dcdcOutpCrrt) {
+        this.dcdcOutpCrrt = dcdcOutpCrrt;
+    }
+
+    public Double getDcdcOutpU() {
+        return dcdcOutpU;
+    }
+
+    public void setDcdcOutpU(Double dcdcOutpU) {
+        this.dcdcOutpU = dcdcOutpU;
+    }
+
+    public int getDcdcAvlOutpPwr() {
+        return dcdcAvlOutpPwr;
+    }
+
+    public void setDcdcAvlOutpPwr(int dcdcAvlOutpPwr) {
+        this.dcdcAvlOutpPwr = dcdcAvlOutpPwr;
+    }
+
+    public String getAbsActiveStatus() {
+        return absActiveStatus;
+    }
+
+    public void setAbsActiveStatus(String absActiveStatus) {
+        this.absActiveStatus = absActiveStatus;
+    }
+
+    public String getAbsStatus() {
+        return absStatus;
+    }
+
+    public void setAbsStatus(String absStatus) {
+        this.absStatus = absStatus;
+    }
+
+    public String getVcuBrkErr() {
+        return VcuBrkErr;
+    }
+
+    public void setVcuBrkErr(String vcuBrkErr) {
+        VcuBrkErr = vcuBrkErr;
+    }
+
+    public String getEPB_AchievedClampForce() {
+        return EPB_AchievedClampForce;
+    }
+
+    public void setEPB_AchievedClampForce(String EPB_AchievedClampForce) {
+        this.EPB_AchievedClampForce = EPB_AchievedClampForce;
+    }
+
+    public String getEpbSwitchPosition() {
+        return epbSwitchPosition;
+    }
+
+    public void setEpbSwitchPosition(String epbSwitchPosition) {
+        this.epbSwitchPosition = epbSwitchPosition;
+    }
+
+    public String getEpbStatus() {
+        return epbStatus;
+    }
+
+    public void setEpbStatus(String epbStatus) {
+        this.epbStatus = epbStatus;
+    }
+
+    public String getEspActiveStatus() {
+        return espActiveStatus;
+    }
+
+    public void setEspActiveStatus(String espActiveStatus) {
+        this.espActiveStatus = espActiveStatus;
+    }
+
+    public String getEspFunctionStatus() {
+        return espFunctionStatus;
+    }
+
+    public void setEspFunctionStatus(String espFunctionStatus) {
+        this.espFunctionStatus = espFunctionStatus;
+    }
+
+    public String getESP_TCSFailStatus() {
+        return ESP_TCSFailStatus;
+    }
+
+    public void setESP_TCSFailStatus(String ESP_TCSFailStatus) {
+        this.ESP_TCSFailStatus = ESP_TCSFailStatus;
+    }
+
+    public String getHhcActive() {
+        return hhcActive;
+    }
+
+    public void setHhcActive(String hhcActive) {
+        this.hhcActive = hhcActive;
+    }
+
+    public String getTcsActive() {
+        return tcsActive;
+    }
+
+    public void setTcsActive(String tcsActive) {
+        this.tcsActive = tcsActive;
+    }
+
+    public String getEspMasterCylinderBrakePressure() {
+        return espMasterCylinderBrakePressure;
+    }
+
+    public void setEspMasterCylinderBrakePressure(String espMasterCylinderBrakePressure) {
+        this.espMasterCylinderBrakePressure = espMasterCylinderBrakePressure;
+    }
+
+    public String getESP_MasterCylinderBrakePressureValid() {
+        return ESP_MasterCylinderBrakePressureValid;
+    }
+
+    public void setESP_MasterCylinderBrakePressureValid(String ESP_MasterCylinderBrakePressureValid) {
+        this.ESP_MasterCylinderBrakePressureValid = ESP_MasterCylinderBrakePressureValid;
+    }
+
+    public String getEspTorqSensorStatus() {
+        return espTorqSensorStatus;
+    }
+
+    public void setEspTorqSensorStatus(String espTorqSensorStatus) {
+        this.espTorqSensorStatus = espTorqSensorStatus;
+    }
+
+    public String getEPS_EPSFailed() {
+        return EPS_EPSFailed;
+    }
+
+    public void setEPS_EPSFailed(String EPS_EPSFailed) {
+        this.EPS_EPSFailed = EPS_EPSFailed;
+    }
+
+    public String getSasFailure() {
+        return sasFailure;
+    }
+
+    public void setSasFailure(String sasFailure) {
+        this.sasFailure = sasFailure;
+    }
+
+    public String getSasSteeringAngleSpeed() {
+        return sasSteeringAngleSpeed;
+    }
+
+    public void setSasSteeringAngleSpeed(String sasSteeringAngleSpeed) {
+        this.sasSteeringAngleSpeed = sasSteeringAngleSpeed;
+    }
+
+    public String getSasSteeringAngle() {
+        return sasSteeringAngle;
+    }
+
+    public void setSasSteeringAngle(String sasSteeringAngle) {
+        this.sasSteeringAngle = sasSteeringAngle;
+    }
+
+    public String getSasSteeringAngleValid() {
+        return sasSteeringAngleValid;
+    }
+
+    public void setSasSteeringAngleValid(String sasSteeringAngleValid) {
+        this.sasSteeringAngleValid = sasSteeringAngleValid;
+    }
+
+    public String getEspSteeringTorque() {
+        return espSteeringTorque;
+    }
+
+    public void setEspSteeringTorque(String espSteeringTorque) {
+        this.espSteeringTorque = espSteeringTorque;
+    }
+
+    public int getAcReq() {
+        return acReq;
+    }
+
+    public void setAcReq(int acReq) {
+        this.acReq = acReq;
+    }
+
+    public int getAcSystemFailure() {
+        return acSystemFailure;
+    }
+
+    public void setAcSystemFailure(int acSystemFailure) {
+        this.acSystemFailure = acSystemFailure;
+    }
+
+    public Double getPtcPwrAct() {
+        return ptcPwrAct;
+    }
+
+    public void setPtcPwrAct(Double ptcPwrAct) {
+        this.ptcPwrAct = ptcPwrAct;
+    }
+
+    public int getPlasmaStatus() {
+        return plasmaStatus;
+    }
+
+    public void setPlasmaStatus(int plasmaStatus) {
+        this.plasmaStatus = plasmaStatus;
+    }
+
+    public int getBattInTemperature() {
+        return battInTemperature;
+    }
+
+    public void setBattInTemperature(int battInTemperature) {
+        this.battInTemperature = battInTemperature;
+    }
+
+    public String getBattWarmLoopSts() {
+        return battWarmLoopSts;
+    }
+
+    public void setBattWarmLoopSts(String battWarmLoopSts) {
+        this.battWarmLoopSts = battWarmLoopSts;
+    }
+
+    public String getBattCoolngLoopSts() {
+        return battCoolngLoopSts;
+    }
+
+    public void setBattCoolngLoopSts(String battCoolngLoopSts) {
+        this.battCoolngLoopSts = battCoolngLoopSts;
+    }
+
+    public String getBattCoolActv() {
+        return battCoolActv;
+    }
+
+    public void setBattCoolActv(String battCoolActv) {
+        this.battCoolActv = battCoolActv;
+    }
+
+    public int getMotorOutTemperature() {
+        return motorOutTemperature;
+    }
+
+    public void setMotorOutTemperature(int motorOutTemperature) {
+        this.motorOutTemperature = motorOutTemperature;
+    }
+
+    public String getPowerStatusFeedBack() {
+        return powerStatusFeedBack;
+    }
+
+    public void setPowerStatusFeedBack(String powerStatusFeedBack) {
+        this.powerStatusFeedBack = powerStatusFeedBack;
+    }
+
+    public int getAC_RearDefrosterSwitch() {
+        return AC_RearDefrosterSwitch;
+    }
+
+    public void setAC_RearDefrosterSwitch(int AC_RearDefrosterSwitch) {
+        this.AC_RearDefrosterSwitch = AC_RearDefrosterSwitch;
+    }
+
+    public int getRearFoglamp() {
+        return rearFoglamp;
+    }
+
+    public void setRearFoglamp(int rearFoglamp) {
+        this.rearFoglamp = rearFoglamp;
+    }
+
+    public int getDriverDoorLock() {
+        return driverDoorLock;
+    }
+
+    public void setDriverDoorLock(int driverDoorLock) {
+        this.driverDoorLock = driverDoorLock;
+    }
+
+    public Double getAcDriverReqTemp() {
+        return acDriverReqTemp;
+    }
+
+    public void setAcDriverReqTemp(Double acDriverReqTemp) {
+        this.acDriverReqTemp = acDriverReqTemp;
+    }
+
+    public int getKeyAlarm() {
+        return keyAlarm;
+    }
+
+    public void setKeyAlarm(int keyAlarm) {
+        this.keyAlarm = keyAlarm;
+    }
+
+    public int getAirCleanStsRemind() {
+        return airCleanStsRemind;
+    }
+
+    public void setAirCleanStsRemind(int airCleanStsRemind) {
+        this.airCleanStsRemind = airCleanStsRemind;
+    }
+
+    public int getRecycleType() {
+        return recycleType;
+    }
+
+    public void setRecycleType(int recycleType) {
+        this.recycleType = recycleType;
+    }
+
+    public String getStartControlsignal() {
+        return startControlsignal;
+    }
+
+    public void setStartControlsignal(String startControlsignal) {
+        this.startControlsignal = startControlsignal;
+    }
+
+    public int getAirBagWarningLamp() {
+        return airBagWarningLamp;
+    }
+
+    public void setAirBagWarningLamp(int airBagWarningLamp) {
+        this.airBagWarningLamp = airBagWarningLamp;
+    }
+
+    public int getFrontDefrosterSwitch() {
+        return frontDefrosterSwitch;
+    }
+
+    public void setFrontDefrosterSwitch(int frontDefrosterSwitch) {
+        this.frontDefrosterSwitch = frontDefrosterSwitch;
+    }
+
+    public String getFrontBlowType() {
+        return frontBlowType;
+    }
+
+    public void setFrontBlowType(String frontBlowType) {
+        this.frontBlowType = frontBlowType;
+    }
+
+    public int getFrontReqWindLevel() {
+        return frontReqWindLevel;
+    }
+
+    public void setFrontReqWindLevel(int frontReqWindLevel) {
+        this.frontReqWindLevel = frontReqWindLevel;
+    }
+
+    public String getBcmFrontWiperStatus() {
+        return bcmFrontWiperStatus;
+    }
+
+    public void setBcmFrontWiperStatus(String bcmFrontWiperStatus) {
+        this.bcmFrontWiperStatus = bcmFrontWiperStatus;
+    }
+
+    public String getTmsPwrAct() {
+        return tmsPwrAct;
+    }
+
+    public void setTmsPwrAct(String tmsPwrAct) {
+        this.tmsPwrAct = tmsPwrAct;
+    }
+
+    public int getKeyUndetectedAlarmSign() {
+        return keyUndetectedAlarmSign;
+    }
+
+    public void setKeyUndetectedAlarmSign(int keyUndetectedAlarmSign) {
+        this.keyUndetectedAlarmSign = keyUndetectedAlarmSign;
+    }
+
+    public String getPositionLamp() {
+        return positionLamp;
+    }
+
+    public void setPositionLamp(String positionLamp) {
+        this.positionLamp = positionLamp;
+    }
+
+    public int getDriverReqTempModel() {
+        return driverReqTempModel;
+    }
+
+    public void setDriverReqTempModel(int driverReqTempModel) {
+        this.driverReqTempModel = driverReqTempModel;
+    }
+
+    public int getTurnLightSwitchSts() {
+        return turnLightSwitchSts;
+    }
+
+    public void setTurnLightSwitchSts(int turnLightSwitchSts) {
+        this.turnLightSwitchSts = turnLightSwitchSts;
+    }
+
+    public int getAutoHeadlightStatus() {
+        return autoHeadlightStatus;
+    }
+
+    public void setAutoHeadlightStatus(int autoHeadlightStatus) {
+        this.autoHeadlightStatus = autoHeadlightStatus;
+    }
+
+    public int getDriverDoor() {
+        return driverDoor;
+    }
+
+    public void setDriverDoor(int driverDoor) {
+        this.driverDoor = driverDoor;
+    }
+
+    public int getFrntIpuFltRnk() {
+        return frntIpuFltRnk;
+    }
+
+    public void setFrntIpuFltRnk(int frntIpuFltRnk) {
+        this.frntIpuFltRnk = frntIpuFltRnk;
+    }
+
+    public String getFrontIpuSwVers() {
+        return frontIpuSwVers;
+    }
+
+    public void setFrontIpuSwVers(String frontIpuSwVers) {
+        this.frontIpuSwVers = frontIpuSwVers;
+    }
+
+    public int getFrontIpuHwVers() {
+        return frontIpuHwVers;
+    }
+
+    public void setFrontIpuHwVers(int frontIpuHwVers) {
+        this.frontIpuHwVers = frontIpuHwVers;
+    }
+
+    public int getFrntMotTqLongTermMax() {
+        return frntMotTqLongTermMax;
+    }
+
+    public void setFrntMotTqLongTermMax(int frntMotTqLongTermMax) {
+        this.frntMotTqLongTermMax = frntMotTqLongTermMax;
+    }
+
+    public int getFrntMotTqLongTermMin() {
+        return frntMotTqLongTermMin;
+    }
+
+    public void setFrntMotTqLongTermMin(int frntMotTqLongTermMin) {
+        this.frntMotTqLongTermMin = frntMotTqLongTermMin;
+    }
+
+    public int getCpvValue() {
+        return cpvValue;
+    }
+
+    public void setCpvValue(int cpvValue) {
+        this.cpvValue = cpvValue;
+    }
+
+    public int getObcChrgSts() {
+        return obcChrgSts;
+    }
+
+    public void setObcChrgSts(int obcChrgSts) {
+        this.obcChrgSts = obcChrgSts;
+    }
+
+    public String getObcFltRnk() {
+        return obcFltRnk;
+    }
+
+    public void setObcFltRnk(String obcFltRnk) {
+        this.obcFltRnk = obcFltRnk;
+    }
+
+    public String getBcuFaultCodes() {
+        return BcuFaultCodes;
+    }
+
+    public void setBcuFaultCodes(String bcuFaultCodes) {
+        BcuFaultCodes = bcuFaultCodes;
+    }
+
+    public Double getObcChrgInpAcI() {
+        return obcChrgInpAcI;
+    }
+
+    public void setObcChrgInpAcI(Double obcChrgInpAcI) {
+        this.obcChrgInpAcI = obcChrgInpAcI;
+    }
+
+    public int getObcChrgInpAcU() {
+        return obcChrgInpAcU;
+    }
+
+    public void setObcChrgInpAcU(int obcChrgInpAcU) {
+        this.obcChrgInpAcU = obcChrgInpAcU;
+    }
+
+    public Double getObcChrgDcI() {
+        return obcChrgDcI;
+    }
+
+    public void setObcChrgDcI(Double obcChrgDcI) {
+        this.obcChrgDcI = obcChrgDcI;
+    }
+
+    public Double getObcChrgDcU() {
+        return obcChrgDcU;
+    }
+
+    public void setObcChrgDcU(Double obcChrgDcU) {
+        this.obcChrgDcU = obcChrgDcU;
+    }
+
+    public int getObcTemperature() {
+        return obcTemperature;
+    }
+
+    public void setObcTemperature(int obcTemperature) {
+        this.obcTemperature = obcTemperature;
+    }
+
+    public int getObcMaxChrgOutpPwrAvl() {
+        return obcMaxChrgOutpPwrAvl;
+    }
+
+    public void setObcMaxChrgOutpPwrAvl(int obcMaxChrgOutpPwrAvl) {
+        this.obcMaxChrgOutpPwrAvl = obcMaxChrgOutpPwrAvl;
+    }
+
+    public int getPassengerBuckleSwitch() {
+        return passengerBuckleSwitch;
+    }
+
+    public void setPassengerBuckleSwitch(int passengerBuckleSwitch) {
+        this.passengerBuckleSwitch = passengerBuckleSwitch;
+    }
+
+    public String getCrashlfo() {
+        return crashlfo;
+    }
+
+    public void setCrashlfo(String crashlfo) {
+        this.crashlfo = crashlfo;
+    }
+
+    public int getDriverBuckleSwitch() {
+        return driverBuckleSwitch;
+    }
+
+    public void setDriverBuckleSwitch(int driverBuckleSwitch) {
+        this.driverBuckleSwitch = driverBuckleSwitch;
+    }
+
+    public String getEngineStartHibit() {
+        return engineStartHibit;
+    }
+
+    public void setEngineStartHibit(String engineStartHibit) {
+        this.engineStartHibit = engineStartHibit;
+    }
+
+    public String getLockCommand() {
+        return lockCommand;
+    }
+
+    public void setLockCommand(String lockCommand) {
+        this.lockCommand = lockCommand;
+    }
+
+    public String getSearchCarReq() {
+        return searchCarReq;
+    }
+
+    public void setSearchCarReq(String searchCarReq) {
+        this.searchCarReq = searchCarReq;
+    }
+
+    public String getAcTempValueReq() {
+        return acTempValueReq;
+    }
+
+    public void setAcTempValueReq(String acTempValueReq) {
+        this.acTempValueReq = acTempValueReq;
+    }
+
+    public String getVcuFaultCode() {
+        return VcuFaultCode;
+    }
+
+    public void setVcuFaultCode(String vcuFaultCode) {
+        VcuFaultCode = vcuFaultCode;
+    }
+
+    public String getVcuErrAmnt() {
+        return vcuErrAmnt;
+    }
+
+    public void setVcuErrAmnt(String vcuErrAmnt) {
+        this.vcuErrAmnt = vcuErrAmnt;
+    }
+
+    public int getVcuSwVers() {
+        return vcuSwVers;
+    }
+
+    public void setVcuSwVers(int vcuSwVers) {
+        this.vcuSwVers = vcuSwVers;
+    }
+
+    public int getVcuHwVers() {
+        return vcuHwVers;
+    }
+
+    public void setVcuHwVers(int vcuHwVers) {
+        this.vcuHwVers = vcuHwVers;
+    }
+
+    public String getLowSpdWarnStatus() {
+        return lowSpdWarnStatus;
+    }
+
+    public void setLowSpdWarnStatus(String lowSpdWarnStatus) {
+        this.lowSpdWarnStatus = lowSpdWarnStatus;
+    }
+
+    public int getLowBattChrgRqe() {
+        return lowBattChrgRqe;
+    }
+
+    public void setLowBattChrgRqe(int lowBattChrgRqe) {
+        this.lowBattChrgRqe = lowBattChrgRqe;
+    }
+
+    public String getLowBattChrgSts() {
+        return lowBattChrgSts;
+    }
+
+    public void setLowBattChrgSts(String lowBattChrgSts) {
+        this.lowBattChrgSts = lowBattChrgSts;
+    }
+
+    public Double getLowBattU() {
+        return lowBattU;
+    }
+
+    public void setLowBattU(Double lowBattU) {
+        this.lowBattU = lowBattU;
+    }
+
+    public int getHandlebrakeStatus() {
+        return handlebrakeStatus;
+    }
+
+    public void setHandlebrakeStatus(int handlebrakeStatus) {
+        this.handlebrakeStatus = handlebrakeStatus;
+    }
+
+    public String getShiftPositionValid() {
+        return shiftPositionValid;
+    }
+
+    public void setShiftPositionValid(String shiftPositionValid) {
+        this.shiftPositionValid = shiftPositionValid;
+    }
+
+    public String getAccPedalValid() {
+        return accPedalValid;
+    }
+
+    public void setAccPedalValid(String accPedalValid) {
+        this.accPedalValid = accPedalValid;
+    }
+
+    public int getDriveMode() {
+        return driveMode;
+    }
+
+    public void setDriveMode(int driveMode) {
+        this.driveMode = driveMode;
+    }
+
+    public int getDriveModeButtonStatus() {
+        return driveModeButtonStatus;
+    }
+
+    public void setDriveModeButtonStatus(int driveModeButtonStatus) {
+        this.driveModeButtonStatus = driveModeButtonStatus;
+    }
+
+    public int getVCUSRSCrashOutpSts() {
+        return VCUSRSCrashOutpSts;
+    }
+
+    public void setVCUSRSCrashOutpSts(int VCUSRSCrashOutpSts) {
+        this.VCUSRSCrashOutpSts = VCUSRSCrashOutpSts;
+    }
+
+    public int getTextDispEna() {
+        return textDispEna;
+    }
+
+    public void setTextDispEna(int textDispEna) {
+        this.textDispEna = textDispEna;
+    }
+
+    public int getCrsCtrlStatus() {
+        return crsCtrlStatus;
+    }
+
+    public void setCrsCtrlStatus(int crsCtrlStatus) {
+        this.crsCtrlStatus = crsCtrlStatus;
+    }
+
+    public int getCrsTarSpd() {
+        return crsTarSpd;
+    }
+
+    public void setCrsTarSpd(int crsTarSpd) {
+        this.crsTarSpd = crsTarSpd;
+    }
+
+    public int getCrsTextDisp() {
+        return crsTextDisp;
+    }
+
+    public void setCrsTextDisp(int crsTextDisp) {
+        this.crsTextDisp = crsTextDisp;
+    }
+
+    public int getKeyOn() {
+        return keyOn;
+    }
+
+    public void setKeyOn(int keyOn) {
+        this.keyOn = keyOn;
+    }
+
+    public int getVehPwrlim() {
+        return vehPwrlim;
+    }
+
+    public void setVehPwrlim(int vehPwrlim) {
+        this.vehPwrlim = vehPwrlim;
+    }
+
+    public String getVehCfgInfo() {
+        return vehCfgInfo;
+    }
+
+    public void setVehCfgInfo(String vehCfgInfo) {
+        this.vehCfgInfo = vehCfgInfo;
+    }
+
+    public int getVacBrkPRmu() {
+        return vacBrkPRmu;
+    }
+
+    public void setVacBrkPRmu(int vacBrkPRmu) {
+        this.vacBrkPRmu = vacBrkPRmu;
+    }
+
+    public String getObcFaultCode() {
+        return ObcFaultCode;
+    }
+
+    public void setObcFaultCode(String obcFaultCode) {
+        ObcFaultCode = obcFaultCode;
+    }
+
+    public Long getTerminalTimeStamp() {
+        return terminalTimeStamp;
+    }
+
+    public void setTerminalTimeStamp(Long terminalTimeStamp) {
+        this.terminalTimeStamp = terminalTimeStamp;
+    }
+
+    public String getErrorData() {
+        return errorData;
+    }
+
+    public void setErrorData(String errorData) {
+        this.errorData = errorData;
     }
 }

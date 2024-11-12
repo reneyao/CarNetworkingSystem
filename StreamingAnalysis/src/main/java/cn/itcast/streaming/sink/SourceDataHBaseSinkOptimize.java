@@ -3,21 +3,15 @@ package cn.itcast.streaming.sink;
 import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.utils.ConfigLoader;
 import cn.itcast.utils.DateUtil;
-import cn.itcast.utils.StringUtil;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
-import org.apache.hadoop.hbase.client.BufferedMutator;
-import org.apache.hadoop.hbase.client.BufferedMutatorParams;
-import org.apache.hadoop.hbase.client.ConnectionFactory;
-import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
 
 public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj> {
     private Logger logger = LoggerFactory.getLogger("SourceDataHBaseSinkOptimize");
@@ -31,7 +25,6 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
     public SourceDataHBaseSinkOptimize(String tableName) {
         this.tableName = tableName;
     }
-
     @Override
     public void open(Configuration parameters) throws Exception {
         org.apache.hadoop.conf.Configuration config = HBaseConfiguration.create();
@@ -41,12 +34,12 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
         TableName tname = TableName.valueOf(tableName);
         config.set(TableInputFormat.INPUT_TABLE, tname.getNameAsString());
 
-        conn = (Connection) ConnectionFactory.createConnection(config);
+        conn = ConnectionFactory.createConnection(config);
         BufferedMutatorParams params = new BufferedMutatorParams(tname);
         //设置缓存10MB，当达到10MB时数据会自动刷到HBase
         params.writeBufferSize(1024 * 1024 * 10);
-        // 强制缓冲区提交数据
-        mutator = (BufferedMutator) conn.getMetaData();
+        // 强制缓冲区提交数据        BufferedMutator接口用于批量提交写操作，适用于高吞吐量的场景。
+        mutator = conn.getBufferedMutator(params);
     }
 
     @Override
@@ -56,28 +49,10 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
         mutator.flush();
     }
 
+    // 简化代码
     private Put hbasePut(ItcastDataObj itcastDataObj){
 // rowkey设计:保证rowKey不会有序
         Put put = new Put(Bytes.toBytes(itcastDataObj.getVin() + "_" + (Long.MAX_VALUE - itcastDataObj.getTerminalTimeStamp())));
-        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(itcastDataObj.getVin()));
-        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("terminalTime"), Bytes.toBytes(itcastDataObj.getTerminalTime()));
-
-        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("processTime"), Bytes.toBytes(DateUtil.getCurrentDateTime()));
-        return put;
-    }
-
-    private Put setDataSourcePut(ItcastDataObj itcastDataObj){
-        //如何设计rowkey
-        //使用itcastDataObj.getVin() 会破坏了唯一原则
-        //itcastDataObj.getVin() + itcastDataObj.getTerminalTime()：热点问题
-        //1611298737570->0757378921161
-        //1611298756579->9756578921161
-        //Long.MAX_VALUE-itcastDataObj.getTerminalTimeTimestamp()
-        //需要将时间戳数据反转（自己实现）
-        String rowKey = itcastDataObj.getVin() + "_" + StringUtil.reverse(itcastDataObj.getTerminalTimeStamp().toString());
-        //定义列族的名称
-        String cf = "cf";
-        Put put = new Put(Bytes.toBytes(rowKey));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(itcastDataObj.getVin()));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("terminalTime"), Bytes.toBytes(itcastDataObj.getTerminalTime()));
         if (itcastDataObj.getSoc() != -999999) put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("soc"), Bytes.toBytes(String.valueOf(itcastDataObj.getSoc())));
@@ -316,6 +291,7 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
         return put;
     }
 
+
     @Override
     public void close() throws Exception {
         if (mutator != null) {
@@ -326,4 +302,6 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
             conn.close();
         }
     }
+
+
 }

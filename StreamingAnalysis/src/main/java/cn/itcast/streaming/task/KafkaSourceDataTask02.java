@@ -1,6 +1,8 @@
 package cn.itcast.streaming.task;
 
+import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.streaming.sink.SrcDataToHBaseSink;
+import cn.itcast.utils.JsonParseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.flink.api.common.serialization.SimpleStringEncoder;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -8,8 +10,6 @@ import org.apache.flink.core.fs.Path;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import cn.itcast.utils.JsonParseUtil;
-import cn.itcast.entity.ItcastDataObj;
 import org.apache.flink.streaming.api.functions.sink.filesystem.OutputFileConfig;
 import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 import org.apache.flink.streaming.api.functions.sink.filesystem.bucketassigners.DateTimeBucketAssigner;
@@ -17,6 +17,10 @@ import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.
 
 import java.util.concurrent.TimeUnit;
 
+// 数据写入，正常数据写入到hbase，hive中（互做备份
+// 异常数据写入到hive中，做记录
+
+// 测试BaseTask的使用
 /**
  * 需求：原始数据ETL操作
  * flink消费kafka数据，将消费出来的数据进行转换、清洗、过滤以后，正常的数据需要写入到hbase和hdfs，异常的数据写入到hdfs中
@@ -62,39 +66,44 @@ public class KafkaSourceDataTask02 extends BaseTask {
          * 13）启动作业，运行任务
          */
 
-        //TODO 1）初始化flink流式处理的开发环境(使用basetask的方法
+        //TODO 1）初始化flink流式处理的开发环境  getSimpleName()  获得类名 返回的是字符串格式
         StreamExecutionEnvironment env = getEnv(KafkaSourceDataTask02.class.getSimpleName());
 
-        //TODO 6）将kafka消费者对象添加到环境中   使用BaseTask的静态方法，将kafka的消费者加入到数据源
-        DataStream<String> dataStreamSource= createKafkaStream(SimpleStringSchema.class);
+        //TODO 6）将kafka消费者对象添加到环境中
+        DataStream<String> dataStreamSource= createKafkaStream(SimpleStringSchema.class);  // 简单的string对象的序列化，反序列化对象类
+
         //打印输出测试
-        dataStreamSource.print();
-
-        //TODO 7）将json字符串解析成对象
+//        dataStreamSource.print();
+        //TODO 7）将json字符串解析成对象  借助map一一对应转化
         SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = dataStreamSource.map(JsonParseUtil::parseJsonToObject);
-        itcastDataObjStream.printToErr("解析后的数据>>>");      // 打印输出
-
-        //TODO 8）获取到异常的数据
-        SingleOutputStreamOperator<ItcastDataObj> errorDataStream = itcastDataObjStream.filter(itcastDataObj -> !StringUtils.isEmpty(itcastDataObj.getErrorData()));
+        itcastDataObjStream.printToErr("解析后的数据>>>");
+        //TODO 8）获取到异常的数据   如果数据为空判断为异常数据
+        SingleOutputStreamOperator<ItcastDataObj> errorDataStream = itcastDataObjStream.filter(
+                itcastDataObj -> !StringUtils.isEmpty(itcastDataObj.getErrorData()));
         errorDataStream.printToErr("异常数据>>>");
-
         //指定写入的文件名称和格式
         OutputFileConfig config = OutputFileConfig.builder().withPartPrefix("prefix").withPartSuffix(".txt").build();
+
         //TODO 9）将异常的数据写入到hdfs中
+        // 在flink1.2以后可以直接使用  FileSink操作，而不用使用StreamingFileSink，操作更加便利
         StreamingFileSink errorFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/ods.db/itcast_error"),
                         new SimpleStringEncoder<>("utf-8"))
+                // 按照数据进行桶分区
                 .withBucketAssigner(new DateTimeBucketAssigner("yyyyMMdd"))
+               // 设置滚动策略
                 .withRollingPolicy(
                         DefaultRollingPolicy.builder()
+                                // 设置文件滚动的时间间隔为5秒钟，表示每5秒钟生成一个新文件。
                                 .withRolloverInterval(TimeUnit.SECONDS.toMillis(5)) //设置滚动时间间隔，5秒钟产生一个文件
+                                // 设置不活动的时间间隔为2秒钟，即2秒没有数据进入，则生成一个新的文件
                                 .withInactivityInterval(TimeUnit.SECONDS.toMillis(2)) //设置不活动的时间间隔，未写入数据处于不活动状态时滚动文件
+                               // 设置文件的最大大小为128MB，当文件大小达到128MB时滚动生成一个新文件。
                                 .withMaxPartSize(128*1024*1024)//文件大小，默认是128M滚动一次
                                 .build()
                 ).withOutputFileConfig(config).build();
         errorDataStream.map(ItcastDataObj::toHiveString).addSink(errorFileSink);
 
-        //TODO 10）获取到正常的数据
-        // 数据流操作
+        //TODO 10）获取到正常的数据  （区分在与异常数据会加 “！”号 ，即是不等于号
         SingleOutputStreamOperator<ItcastDataObj> srcDataStream = itcastDataObjStream.filter(itcastDataObj -> StringUtils.isEmpty(itcastDataObj.getErrorData()));
         srcDataStream.print("正常数据>>>");
 
@@ -108,8 +117,8 @@ public class KafkaSourceDataTask02 extends BaseTask {
          *   1：hive中创建表
          *   2：将数据写入到hive读取的hdfs的数据路径
          **/
-        //指定写入的文件名称和格式
-        StreamingFileSink srcFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/hive/warehouse/ods.db/itcast_src"),
+        //指定写入的文件名称和格式  文件在hdfs中存储的位置"/apps/hive/warehouse/ods.db/itcast_src"
+        StreamingFileSink srcFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/ods.db/itcast_src"),
                         new SimpleStringEncoder<>("utf-8"))
                 /**
                  * 指定分桶的策略
@@ -124,7 +133,7 @@ public class KafkaSourceDataTask02 extends BaseTask {
                  * OnCheckpointRollingPolicy
                  */
                 .withRollingPolicy(
-                        //使用默认的滚动策略（设置各个参数
+                        //使用默认的滚动策略
                         DefaultRollingPolicy.builder()
                                 .withRolloverInterval(TimeUnit.SECONDS.toMillis(5)) //设置滚动时间间隔，5秒钟产生一个文件
                                 .withInactivityInterval(TimeUnit.SECONDS.toMillis(2)) //设置不活动的时间间隔，未写入数据处于不活动状态时滚动文件
@@ -133,9 +142,12 @@ public class KafkaSourceDataTask02 extends BaseTask {
                 ).withOutputFileConfig(config).build();
         srcDataStream.map(ItcastDataObj::toHiveString).addSink(srcFileSink);
 
+        // TODO 12) 将数据落入hbase
+        // 定义hbaseSink
+        SrcDataToHBaseSink hbaseSink = new SrcDataToHBaseSink("itcast_src");
+        // 保存原始数据存入 hbase   srcDataStream 是正常数据，并经过处理后的数据源
+        srcDataStream.addSink(hbaseSink);
 
-        // TODO 12）将正常的数据写入到hbase中
-        srcDataStream.addSink(new SrcDataToHBaseSink("itcast_src"));     // 输入操作的表名
         //TODO 13）启动作业，运行任务
         env.execute();
     }

@@ -1,13 +1,7 @@
 package cn.itcast.utils;
 
-/**
- * 读取资源目录文件下的配置文件
- * 1.读取资源目录下的我呢见并生成输入流
- * 2.创建配置文件并将输入流加载进来
- * 3.定义get获取对象
- *
- */
 
+// 配置文件的加载类
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -26,7 +20,7 @@ public class ConfigLoader {
      */
 
     //TODO 1）使用classLoader（类加载器），加载conf.properties
-    private final static InputStream inputStream = ConfigLoader.class.getClassLoader().getResourceAsStream("conf.properties");
+    private final static InputStream inputStream = cn.itcast.utils.ConfigLoader.class.getClassLoader().getResourceAsStream("conf.properties");
 
     //定义properties
     private  final static Properties props = new Properties();
@@ -50,3 +44,4 @@ public class ConfigLoader {
         return  Integer.parseInt(props.getProperty(key));
     }
 }
+
