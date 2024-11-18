@@ -2,146 +2,163 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>CarNetworkingSystem</artifactId>
-        <groupId>cn.itcast</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>VehicleNetworkWeb</name>
+    <parent>
+        <groupId>cn.itcast</groupId>
+        <artifactId>CarNetworkingSystem</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>VehicleNetworkWeb</artifactId>
     <packaging>war</packaging>
+    <name>VehicleNetworkWeb</name>
+
+    <properties>
+        <!--        <java.version>1.8</java.version>-->
+        <!--        <lombok.version>1.18.24</lombok.version>-->
+        <!--        <spring-boot.version>2.1.13.RELEASE</spring-boot.version>-->
+        <!--        <gson.version>2.8.8</gson.version>-->
+        <!--        <springfox.version>3.0.0</springfox.version>-->
+        <!--        <mybatis-spring.version>2.2.0</mybatis-spring.version>-->
+        <!--        <mysql.version>8.0.26</mysql.version>-->
+        <!--        <hive.version>2.3.9</hive.version>-->
+        <!--        <druid.version>1.2.8</druid.version>-->
+        <log4j.version>2.14.1</log4j.version>
+    </properties>
 
     <dependencies>
-        <!-- lombok -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
 
-        <!-- swagger-ui -->
+        <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-version}</version>
+            <version>${springfox.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox-version}</version>
+            <version>${springfox.version}</version>
         </dependency>
 
-        <!-- spring-boot-starter -->
+        <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- 项目编译所需gson包 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
             <scope>compile</scope>
-            <optional>true</optional>
         </dependency>
-        <!-- springboot 环境配置执行器-->
+
+        <!-- Spring Boot Configuration Processor -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
+            <optional>true</optional>
         </dependency>
-        <!-- spring aop依赖 -->
+
+        <!-- Spring AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-        <!-- spring-mongo-->
+
+        <!-- Spring Data MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-        <!-- springboot web -->
+
+        <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-        <!--mybatis-srping-->
+
+        <!-- MyBatis Spring Boot Starter -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis-spring.version}</version>
         </dependency>
-        <!-- mysql jdbc-->
+
+        <!-- MySQL Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-        <!-- spring-boot tomcat -->
+
+        <!-- Spring Boot Tomcat -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <version>${spring-boot.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- hive jdbc-->
+
+        <!-- Hive JDBC -->
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-jdbc</artifactId>
             <version>${hive.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.apahce.hive</groupId>
+                    <groupId>org.apache.hive</groupId>
                     <artifactId>orc</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- 数据库连接池 -->
+
+        <!-- Druid Connection Pool -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
-        <!-- swagger-ui -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox-version}</version>
-        </dependency>
-        <!-- 解决DataAppliction缺少依赖-->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.12.1</version>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!--spring-boot的maven依赖-->
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

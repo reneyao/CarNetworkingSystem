@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author laowei
  * @commpany itcast
- * @Date 2020/9/16 0:48
+ * @Date 2024/9/16 0:48
  * @Description TODO 后台数据服务SpringBoot启动类
  *  @SpringBootApplication: 配置springboot快速启动类注解
  *  @EnableSwagger2 ： 接口开发工具
