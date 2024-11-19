@@ -19,6 +19,7 @@ public class HiveServiceImpl implements HiveService {
 
     @Override
     public Long totalNum() {
+        // 从hive中取数
         Long total = hiveJdbcDao.getJdbcTemplate().queryForObject("select count(1) totalNum from itcast_src", Long.class);
         return total;
     }

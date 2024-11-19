@@ -22,6 +22,7 @@ public class SwaggerConfig {
     // swagger(openapi的ui界面
     private ApiInfo apiInfo() {
         // todo 创建API构建对象，并设置对象相关属性
+        // 这里是swagger界面的各种设置
         return new ApiInfoBuilder()
                 .title("分析平台-数据接口Restful API文档")
                 .description("本文档提供并展示系统所有对外接口的明细")

@@ -1,11 +1,9 @@
 package cn.itcast.dataservice.bean;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
-import java.util.Date;
 
 /**
  * @Auther: laowei

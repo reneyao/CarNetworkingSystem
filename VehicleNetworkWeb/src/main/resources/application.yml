@@ -2,7 +2,7 @@
 mybatis:
   mapperLocations: classpath:/cn/itcast/dataservice/mapper/*.xml
 
-# 数据库信息配置到这里了
+# 数据库信息配置到这里了，mybatis可以支持，mysql，hive。而hbase需要使用特定的api进行操作
 # todo 配置多个数据源属性：hive、mysql
 spring:
   datasource:

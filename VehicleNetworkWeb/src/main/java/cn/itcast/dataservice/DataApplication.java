@@ -7,10 +7,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 // 这个代码是直接导入的
 /**
- * @author laowei
+ * @author rene
  * @commpany itcast
- * @Date 2020/9/16 0:48
- * @Description TODO 后台数据服务SpringBoot启动类
+ * @Date 2024/9/16 0:48
+ * @Description  后台数据服务SpringBoot启动类
  *  @SpringBootApplication: 配置springboot快速启动类注解
  *  @EnableSwagger2 ： 接口开发工具
  *  @MapperScan ： 扫描加载mybatis的接口的包路径
