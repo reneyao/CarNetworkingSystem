@@ -6,16 +6,14 @@
         <artifactId>CarNetworkingSystem</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <!--这是数据落盘的子项目模块-->
     <artifactId>SourceDataProcess</artifactId>
     <packaging>jar</packaging>
 
     <name>SourceDataProcess</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
 
     <dependencies>
         <dependency>
@@ -27,7 +25,7 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka_2.11</artifactId>
+            <artifactId>flink-connector-kafka_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
         <!-- flink 开发环境依赖 start -->
@@ -38,22 +36,23 @@
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_2.11</artifactId>
+            <artifactId>flink-streaming-java_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
+        <!--特殊处理-->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-filesystem_2.11</artifactId>
+            <artifactId>flink-connector-filesystem_2.12</artifactId>
             <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka-0.11_2.11</artifactId>
+            <artifactId>flink-connector-kafka-0.11_2.12</artifactId>
             <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-statebackend-rocksdb_2.11</artifactId>
+            <artifactId>flink-statebackend-rocksdb_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
         <!-- flink 开发环境依赖 end -->
@@ -83,11 +82,11 @@
 
         <!-- Add the log4j -> sfl4j (-> logback) bridge into the classpath
          Hadoop is logging to log4j! -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>log4j-over-slf4j</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

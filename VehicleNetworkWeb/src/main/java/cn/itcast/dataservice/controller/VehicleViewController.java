@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
-// 这个是可视化展示页面
 /**
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/17 23:13
- * @Description TODO 车辆网项目web页面可视化控制类
+ * @Description  车辆网项目web页面可视化控制类
  */
 @Slf4j
 @RestController

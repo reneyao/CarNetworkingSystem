@@ -19,29 +19,29 @@ import java.util.Arrays;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 0:56
- * @Description TODO 创建日志切面类
+ * @Description  创建日志切面类
  */
 @Aspect
 @Component
 public class WebLogAspect extends AbstractAspect{
     private Logger logger = LoggerFactory.getLogger(getClass());
-    // todo 定义启动时间变量
+    //  定义启动时间变量
     ThreadLocal<Long> startTime = new ThreadLocal<>();
-    // todo 定义方法方法名称变量
+    //  定义方法方法名称变量
     ThreadLocal<String> method = new ThreadLocal<>();
-    // todo 设置切入点
+    //  设置切入点
     @Pointcut("@annotation(cn.itcast.dataservice.annotation.LogAudit)")
     public void webLog(){}
-    // todo 进入切入点，最先执行此方法
+    //  进入切入点，最先执行此方法
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
 
         startTime.set(System.currentTimeMillis());
 
-        // todo 接收到请求，记录请求内容
+        //  接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        // todo 根据http请求获得ip地址
+        //  根据http请求获得ip地址
         String ipAddr = getIpAddr(request);
         String method = request.getMethod();
 
@@ -52,7 +52,7 @@ public class WebLogAspect extends AbstractAspect{
         }
         this.method.set(methodAnnotation);
 
-        // todo 记录下请求内容
+        //  记录下请求内容
         logger.info(
                 String.format("%s 接口：%s \n\t 请求url: %s \n\t 请求IP: %s \n\t 请求参数：%s",
                         method, methodAnnotation, request.getRequestURL().toString(),
@@ -60,10 +60,10 @@ public class WebLogAspect extends AbstractAspect{
         );
     }
 
-    // todo 切入点执行完成前，最后执行此方法
+    //  切入点执行完成前，最后执行此方法
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) throws Throwable {
-        // todo 处理完请求，返回内容 以及耗时
+        //  处理完请求，返回内容 以及耗时
         if(logger.isDebugEnabled()){
             logger.debug(String.format("接口[%s]执行耗时: %ss， 结果如下：\n\t %s" ,
                     method.get(), (System.currentTimeMillis() - startTime.get()) / 1000.0, ret));

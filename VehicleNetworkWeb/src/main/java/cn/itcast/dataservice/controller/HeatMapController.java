@@ -5,7 +5,6 @@ import cn.itcast.dataservice.annotation.LogAudit;
 import cn.itcast.dataservice.service.HeatMapService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +15,15 @@ import java.util.List;
 /**
  * @Auther: laowei
  * @Date: 2020/9/16 1:57
- * @Description: TODO 热力图后台数据服务接口，控制器类
+ * @Description:  热力图后台数据服务接口，控制器类
  */
 @Slf4j
 @RestController
-// TODO 注解实现，针对单个请求解决跨域请求问题
+// 注解实现，针对单个请求解决跨域请求问题
 //@CrossOrigin(origins = "*",allowCredentials="true",allowedHeaders = "",methods = {})
 @Api(value = "热力图数据源接口")
 public class HeatMapController {
+
 
     @Autowired
     private HeatMapService heatMapService;

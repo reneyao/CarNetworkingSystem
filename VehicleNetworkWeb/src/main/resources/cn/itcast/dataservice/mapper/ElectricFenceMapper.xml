@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--对于大多数数据库都可以使用,数据源为mysql，hive，而mysql有优先注解，先出mysql数据库取数-->
 <mapper namespace="cn.itcast.dataservice.mapper.ElectricFenceMapper">
-
+    <!--从electric_fence表中取数-->
     <select id="queryAll" resultType="cn.itcast.dataservice.bean.ElectricFenceBean">
         select * from electric_fence LIMIT #{pageNo},#{pageSize}
     </select>

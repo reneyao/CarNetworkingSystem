@@ -1,11 +1,11 @@
 package cn.itcast.utils;
 
-import cn.itcast.entity.DateFormatDefine;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// 日期处理类，根据枚举类来设定
+import cn.itcast.entity.DateFormatDefine;
 /**
  * 简单的时间处理类
  * 包含功能：
@@ -18,22 +18,23 @@ import java.util.Date;
  */
 public class DateUtil {
     /**
-     * TODO 1、直接获得当前日期，格式：“yyyy-MM-dd HH:mm:ss”
+     *  1、直接获得当前日期，格式：“yyyy-MM-dd HH:mm:ss”
      * @return
      */
     public static String getCurrentDateTime(){
+        // DATE_TIME_FORMAT.getFormat()  私有方法调用
         return new SimpleDateFormat(DateFormatDefine.DATE_TIME_FORMAT.getFormat()).format(new Date());
     }
 
     /**
-     * TODO 2、直接获得当前日期，格式：”yyyyMMdd”
+     * 2、直接获得当前日期，格式：”yyyyMMdd”
      * @return
      */
     public static String getCurrentDate(){
         return new SimpleDateFormat(DateFormatDefine.DATE_FORMAT.getFormat()).format(new Date());
     }
     /**
-     * TODO 3、字符串日期格式转换，传入参数格式：“yyyyMMdd”，转成Date类型
+     *  3、字符串日期格式转换，传入参数格式：“yyyyMMdd”，转成Date类型
      * @param str
      * @return
      */
@@ -50,7 +51,7 @@ public class DateUtil {
     }
 
     /**
-     * TODO 4、字符串日期格式转换，传入参数格式：“yyyy-MM-dd”，转成Date类型
+     * 4、字符串日期格式转换，传入参数格式：“yyyy-MM-dd”，转成Date类型
      * @param str
      * @return
      */
@@ -67,7 +68,7 @@ public class DateUtil {
     }
 
     /**
-     * TODO 5、字符串日期格式转换，传入参数格式：“yyyy-MM-dd HH:mm:ss”，转成Date类型
+     *  5、字符串日期格式转换，传入参数格式：“yyyy-MM-dd HH:mm:ss”，转成Date类型
      * @param str
      * @return
      */
@@ -83,7 +84,7 @@ public class DateUtil {
     }
 
     /**
-     * TODO 6、字符串日期格式转换，传入参数格式：”yyyy-MM-dd HH:mm:ss“，转成”yyyyMMdd”格式
+     * 6、字符串日期格式转换，传入参数格式：”yyyy-MM-dd HH:mm:ss“，转成”yyyyMMdd”格式
      * @param str
      * @return
      */
@@ -94,5 +95,23 @@ public class DateUtil {
         //第二步：再将日期对象转换成指定的日期字符串
         dateStr = new SimpleDateFormat(DateFormatDefine.DATE_FORMAT.getFormat()).format(date);
         return dateStr;
+    }
+
+    /**
+     * 将日期格式的转化为毫秒级的时间戳
+     * @param dateStr
+     * @param format
+     * @return
+     */
+    public static long dateToTimestamp(String dateStr, String format) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            Date date = sdf.parse(dateStr);
+            // long类型
+            return date.getTime();
+        } catch (ParseException e) {
+            System.err.println("日期格式解析错误: " + e.getMessage());
+            return -1;
+        }
     }
 }

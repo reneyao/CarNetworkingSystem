@@ -1,7 +1,5 @@
 package cn.itcast.streaming.sink;
 
-
-
 import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.utils.DateUtil;
 import org.apache.flink.configuration.Configuration;
@@ -12,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 /**
- * TODO 自定义sink，数据写入hive
+ * 自定义sink，数据写入hive
  */
 public class SaveErrorDataHiveSink extends RichSinkFunction<ItcastDataObj> {
 

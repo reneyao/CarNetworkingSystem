@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @Auther: laowei
  * @Date: 2020/9/16 1:52
- * @Description: TODO 热力图后台数据服务接口，service实现类
+ * @Description: 热力图后台数据服务接口，service实现类
  */
 @Service
 public class HeatMapServiceImpl implements HeatMapService {

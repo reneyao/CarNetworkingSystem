@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author laowei
+ * @author rene
  * @commpany itcast
- * @Date 2020/9/16 2:04
- * @Description TODO 电子围栏后台数据服务接口Mapper接口，对应xml文件名称
+ * @Date 2024/9/16 2:04
+ * @Description  电子围栏后台数据服务接口Mapper接口，对应xml文件名称
  */
 @Repository
 public interface ElectricFenceMapper {

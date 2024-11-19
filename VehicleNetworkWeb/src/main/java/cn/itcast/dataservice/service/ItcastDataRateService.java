@@ -8,7 +8,7 @@ import java.util.List;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 2:01
- * @Description TODO
+ * @Description
  */
 public interface ItcastDataRateService {
     List<ItcastDataRateBean> queryAll(int pageNo, int pageSize);

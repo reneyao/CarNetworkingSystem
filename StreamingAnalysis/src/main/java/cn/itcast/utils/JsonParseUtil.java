@@ -1,7 +1,7 @@
 package cn.itcast.utils;
 
-// 拓展两个字段：errorData、terminalTimeStamp
 
+// 对json文件进行处理（需要预先建立好ItcastDataObj对象类
 
 import cn.itcast.entity.ItcastDataObj;
 import org.apache.commons.lang.StringUtils;
@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
 /**
@@ -244,6 +243,7 @@ public class JsonParseUtil {
             itcastDataObj.setVehPwrlim(convertIntType("vehPwrlim", vehicleMap));
             itcastDataObj.setVehCfgInfo(convertStringType("vehCfgInfo", vehicleMap));
             itcastDataObj.setVacBrkPRmu(convertIntType("vacBrkPRmu", vehicleMap));
+            // 处理完毕全部指标
 
             /**
              * 解析复杂数据结构：
@@ -301,7 +301,7 @@ public class JsonParseUtil {
                 }
             }
 
-            //TODO 区分数据是正常的数据还是异常的数据！区分的依据是vin为空或者terminalTime为空
+            // 区分数据是正常的数据还是异常的数据！区分的依据是vin为空或者terminalTime为空
             if(StringUtils.isEmpty(itcastDataObj.getVin()) || StringUtils.isEmpty(itcastDataObj.getTerminalTime())){
                 //异常数据
                 if(!StringUtils.isEmpty(jsonStr)){
@@ -317,7 +317,7 @@ public class JsonParseUtil {
                 }
             }
 
-            //TODO 扩展字段赋值：终端时间（long类型的）
+            // 扩展字段赋值：终端时间（long类型的）
             if(!StringUtils.isEmpty(itcastDataObj.getTerminalTime())){
                 itcastDataObj.setTerminalTimeStamp(DateUtil.convertStringToDate(itcastDataObj.getTerminalTime()).getTime());
             }
@@ -400,7 +400,6 @@ public class JsonParseUtil {
      * @return
      */
     private static Double convertDoubleType(String filedName, Map<String, Object> map){
-        // 这里会对异常值做处理
         return Double.parseDouble(map.getOrDefault(filedName, -999999D).toString());
     }
 

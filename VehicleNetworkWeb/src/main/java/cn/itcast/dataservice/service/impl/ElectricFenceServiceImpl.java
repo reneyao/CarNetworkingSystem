@@ -12,7 +12,7 @@ import java.util.List;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 2:05
- * @Description TODO 电子围栏后台数据服务接口，服务实现类
+ * @Description  电子围栏后台数据服务接口，服务实现类
  */
 @Service
 public class ElectricFenceServiceImpl implements ElectricFenceService {
@@ -22,7 +22,7 @@ public class ElectricFenceServiceImpl implements ElectricFenceService {
 
     @Override
     public List<ElectricFenceBean> queryAll(Integer pageNo, Integer pageSize) {
-        // todo 物理分页，mysql查询从索引'0'开始，所以用页码数减1
+        // 物理分页，mysql查询从索引'0'开始，所以用页码数减1
         if (pageNo <= 1) {
             pageNo = 0;
         } else {

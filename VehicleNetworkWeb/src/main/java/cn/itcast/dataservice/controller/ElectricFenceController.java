@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+// 也是从lombok中使用日志
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 2:07
- * @Description TODO 电子围栏后台数据服务接口，控制器类
+ * 电子围栏后台数据服务接口，控制器类
  */
 @Slf4j
 @RestController
@@ -41,6 +39,7 @@ public class ElectricFenceController {
             @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页显示记录数", defaultValue = "10", dataType = "Integer")
     })
     public Object queryAll(int pageNo, int pageSize) {
+        log.info("预期进行查数-------------------");
         Map<String, Object> resultMap = new HashMap<>(2);
         try {
             log.info("查询数据质量，起始页{},每页显示{}条记录",pageNo,pageSize);

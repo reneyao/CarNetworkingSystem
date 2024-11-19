@@ -1,30 +1,35 @@
-# todo 配置关联mybatis映射文件
+#  配置关联mybatis映射文件
 mybatis:
   mapperLocations: classpath:/cn/itcast/dataservice/mapper/*.xml
 
-# todo 配置多个数据源属性：hive、mysql
+# 数据库信息配置到这里了，mybatis可以支持，mysql，hive。而hbase需要使用特定的api进行操作
+#  配置多个数据源属性：hive、mysql
 spring:
   datasource:
-    # todo mysql主数据源，可关联mybatis
+    # TODO mysql主数据源，可关联mybatis
     mysql:
       type:
+        # 使用工具druid：连接池工具
         com.alibaba.druid.pool.DruidDataSource
-      url: jdbc:mysql://hadoop102:3306/vehicle_networking?useUnicode=true&useSSL=false&characterEncoding=utf-8
+      # 输入自己mysql的地址
+      url: jdbc:mysql://local/vehicle_networking?useUnicode=true&useSSL=false&characterEncoding=utf-8
       username: rene
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
     # todo hive数据源
+    # 输入自己hive的信息,itcast_ods是hive创建的库
     hive:
-      url: jdbc:hive2://hadoop102:10000/itcast_ods
+      url: jdbc:hive2://node03:10000/itcast_ods
       type: com.alibaba.druid.pool.DruidDataSource
-      username: rene
+      username: root
       password: 123456
       driver-class-name: org.apache.hive.jdbc.HiveDriver
-    # todo 连接池统一配置，应用到所有的数据源
+    # 连接池统一配置，应用到所有的数据源
+    # 统一配置
     commonconfig:
       initialSize: 1
       minIdle: 1
-      maxActive: 50
+      maxActive: 10
       maxWait: 10000
       timeBetweenEvictionRunsMillis: 10000
       minEvictableIdleTimeMillis: 300000

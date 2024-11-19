@@ -355,7 +355,7 @@ $(function () {
         });
 
         var max = 480,
-            min = 9; // todo
+            min = 9;
         var maxSize4Pin = 100,
             minSize4Pin = 20;
 

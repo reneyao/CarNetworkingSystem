@@ -21,7 +21,7 @@ import java.util.List;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:35
- * @Description TODO Mysql数据源测试类，查询车辆信息数据后台数据服务接口
+ * @Description Mysql数据源测试类，查询车辆信息数据后台数据服务接口
  */
 @Slf4j
 @RestController
@@ -32,7 +32,7 @@ public class MysqlController {
     private MySqlService mySqlService;
 
     /**
-     * @desc todo @LogAudit 调用自定义日志AOP注解
+     * @desc  @LogAudit 调用自定义日志AOP注解
      * @param pageNo
      * @param pageSize
      * @return
