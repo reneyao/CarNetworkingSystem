@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class DataApplication {
 // http://localhost:8021/swagger-ui.html#/
     // 进入页面：http://localhost:8021/index.html
-    // 能够启动，但是存在诸多报错
+    // 能够启动，但是无法连接到mogodb，考虑修改连接mysql
     public static void main(String[] args) {
         SpringApplication.run(DataApplication.class, args);
     }
