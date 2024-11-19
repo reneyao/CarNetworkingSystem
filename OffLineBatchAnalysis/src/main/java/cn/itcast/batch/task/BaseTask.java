@@ -41,11 +41,11 @@ public abstract class BaseTask {
         }
     }
 
-    //todo 1）初始化flink流式处理的开发环境
+    // 1）初始化flink流式处理的开发环境
     private static StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
     /**
-     * TODO 1）flink任务的初始化方法
+     *  1）flink任务的初始化方法
      * @return
      */
     public static StreamExecutionEnvironment getEnv(String className){
@@ -53,12 +53,12 @@ public abstract class BaseTask {
         System.setProperty("HADOOP_USER_NAME", "rene");
         //设置全局的参数（使用的时候可以直接用法：getRuntimeContext()）
         env.getConfig().setGlobalJobParameters(parameterTool);
-        //todo  2）按照事件时间处理数据（terminalTimeStamp）进行窗口的划分和水印的添加
+        //  2）按照事件时间处理数据（terminalTimeStamp）进行窗口的划分和水印的添加
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         //为了后续进行测试方便，将并行度设置为1，在生产环境一定不要设置代码级别的并行度，可以设置client级别的并行度
         env.setParallelism(1);
 
-        //todo 3）开启checkpoint
+        // 3）开启checkpoint
         //  3.1：设置每隔30s周期性开启checkpoint
         env.enableCheckpointing(30*1000);
         //  3.2：设置检查点的model、exactly-once、保证数据一次性语义
@@ -80,8 +80,8 @@ public abstract class BaseTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //todo  4）设置任务的重启策略（固定延迟重启策略、失败率重启策略、无重启策略）
-        //todo  4.1：如果开启了checkpoint，默认不停的重启，没有开启checkpoint，无重启策略
+        //  4）设置任务的重启策略（固定延迟重启策略、失败率重启策略、无重启策略）
+        //  4.1：如果开启了checkpoint，默认不停的重启，没有开启checkpoint，无重启策略
         env.setRestartStrategy(RestartStrategies.fallBackRestart());
 
         appName = className;
@@ -90,13 +90,13 @@ public abstract class BaseTask {
     }
 
     /**
-     * TODO 2）flink接入kafka数据源消费数据
+     *  2）flink接入kafka数据源消费数据
      * @param clazz
      * @param <T>
      * @return
      */
     public static <T> DataStream<T> createKafkaStream(Class<? extends DeserializationSchema> clazz) throws IllegalAccessException, InstantiationException {
-        //todo  5）创建flink消费kafka数据的对象，指定kafka的参数信息
+        // 5）创建flink消费kafka数据的对象，指定kafka的参数信息
         Properties props = new Properties();
         // 5.1：设置kafka的集群地址
         props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, parameterTool.getRequired("bootstrap.servers"));
@@ -115,7 +115,7 @@ public abstract class BaseTask {
         );
         // 5.7：设置自动递交offset保存到检查点
         kafkaConsumer011.setCommitOffsetsOnCheckpoints(true);
-        //todo  6）将kafka消费者对象添加到环境中
+        //  6）将kafka消费者对象添加到环境中
         DataStreamSource<T> streamSource = env.addSource(kafkaConsumer011);
         //返回消费到的数据
         return streamSource;

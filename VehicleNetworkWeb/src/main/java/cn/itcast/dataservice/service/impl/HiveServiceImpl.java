@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:37
- * @Description TODO 编写hive测试接口，service实现类
+ * @Description 编写hive测试接口，service实现类
  */
 @Service
 public class HiveServiceImpl implements HiveService {

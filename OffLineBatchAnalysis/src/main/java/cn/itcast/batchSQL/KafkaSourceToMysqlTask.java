@@ -76,7 +76,7 @@ public class KafkaSourceToMysqlTask {
     vehicledata.setCommitOffsetsOnCheckpoints(true);
     DataStreamSource<String> streamSource = env.addSource(vehicledata);
 
-    //TODO 将json字符串解析成对象  借助map一一对应转化
+    // 将json字符串解析成对象  借助map一一对应转化
     SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = streamSource.map(JsonParseUtil::parseJsonToObject);
     itcastDataObjStream.print("解析后的数据>>>");
 

@@ -12,10 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author laowei
+ * 调用这个实现类是操作mysql数据库
+ * @author rene
  * @commpany itcast
- * @Date 2020/9/16 1:33
- * @Description TODO 编写mysql测试接口，service实现类
+ * @Date 2024/9/16 1:33
+ * @Description 编写mysql测试接口，service实现类
  */
 @Service
 public class MySqlServiceImpl implements MySqlService {
@@ -29,7 +30,7 @@ public class MySqlServiceImpl implements MySqlService {
             pageNo = 1;
         }
         JdbcTemplate jdbcTemplate = mysqlJdbcDao.getJdbcTemplate();
-        // todo 物理分页
+        // 物理分页
         String sql = "select * from electronic_fence_vins limit " + (pageNo - 1) + "," + pageSize;
         List<Map<String, Object>> mapList = jdbcTemplate.queryForList(sql);
         ElectronicFenceVinsBean electronicFenceVinsBean = null;

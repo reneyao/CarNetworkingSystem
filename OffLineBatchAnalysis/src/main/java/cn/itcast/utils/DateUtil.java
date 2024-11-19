@@ -20,7 +20,7 @@ import java.util.Date;
  */
 public class DateUtil {
     /**
-     * TODO 1、直接获得当前日期，格式：“yyyy-MM-dd HH:mm:ss”
+     * 1、直接获得当前日期，格式：“yyyy-MM-dd HH:mm:ss”
      * @return
      */
     public static String getCurrentDateTime(){
@@ -29,14 +29,14 @@ public class DateUtil {
     }
 
     /**
-     * TODO 2、直接获得当前日期，格式：”yyyyMMdd”
+     *  2、直接获得当前日期，格式：”yyyyMMdd”
      * @return
      */
     public static String getCurrentDate(){
         return new SimpleDateFormat(DateFormatDefine.DATE_FORMAT.getFormat()).format(new Date());
     }
     /**
-     * TODO 3、字符串日期格式转换，传入参数格式：“yyyyMMdd”，转成Date类型
+     * 3、字符串日期格式转换，传入参数格式：“yyyyMMdd”，转成Date类型
      * @param str
      * @return
      */
@@ -53,7 +53,7 @@ public class DateUtil {
     }
 
     /**
-     * TODO 4、字符串日期格式转换，传入参数格式：“yyyy-MM-dd”，转成Date类型
+     * 4、字符串日期格式转换，传入参数格式：“yyyy-MM-dd”，转成Date类型
      * @param str
      * @return
      */
@@ -70,7 +70,7 @@ public class DateUtil {
     }
 
     /**
-     * TODO 5、字符串日期格式转换，传入参数格式：“yyyy-MM-dd HH:mm:ss”，转成Date类型
+     * 5、字符串日期格式转换，传入参数格式：“yyyy-MM-dd HH:mm:ss”，转成Date类型
      * @param str
      * @return
      */
@@ -86,7 +86,7 @@ public class DateUtil {
     }
 
     /**
-     * TODO 6、字符串日期格式转换，传入参数格式：”yyyy-MM-dd HH:mm:ss“，转成”yyyyMMdd”格式
+     * 6、字符串日期格式转换，传入参数格式：”yyyy-MM-dd HH:mm:ss“，转成”yyyyMMdd”格式
      * @param str
      * @return
      */

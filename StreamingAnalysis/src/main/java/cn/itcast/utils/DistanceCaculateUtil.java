@@ -9,7 +9,7 @@ import java.util.Objects;
 
 // 使用球面工具，根据两点的经纬度，计算出球面距离  单位m
 /**
- * TODO 球面距离计算工具类;根据两个点的经纬度，计算出距离
+ * 球面距离计算工具类;根据两个点的经纬度，计算出距离
  */
 public class DistanceCaculateUtil {
     /**
@@ -35,16 +35,16 @@ public class DistanceCaculateUtil {
      * @return
      */
     private static Double ellipsoidMethodDistance(Double latitude, Double longitude, Double latitude2, Double longitude2, Ellipsoid ellipsoid){
-        // todo 位置点经度、维度不为空 位置点2经度、维度不为空 椭圆算法
+        //  位置点经度、维度不为空 位置点2经度、维度不为空 椭圆算法
         Objects.requireNonNull(latitude, "latitude is not null");
         Objects.requireNonNull(longitude, "longitude is not null");
         Objects.requireNonNull(latitude2, "latitude2 is not null");
         Objects.requireNonNull(longitude2, "longitude2 is not null");
         Objects.requireNonNull(ellipsoid, "ellipsoid method is not null");
-        // todo 地球坐标对象：封装经度维度坐标对象
+        // 地球坐标对象：封装经度维度坐标对象
         GlobalCoordinates source = new GlobalCoordinates(latitude, longitude);
         GlobalCoordinates target = new GlobalCoordinates(latitude2, longitude2);
-        // todo 椭圆范围计算方法
+        // 椭圆范围计算方法
         return getDistanceMeter(source, target, ellipsoid);
     }
 

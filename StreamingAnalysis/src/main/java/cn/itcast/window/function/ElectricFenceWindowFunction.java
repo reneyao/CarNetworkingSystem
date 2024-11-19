@@ -76,12 +76,12 @@ public class ElectricFenceWindowFunction extends RichWindowFunction<ElectricFenc
 
         //使用google的工具类将迭代器转换成集合对象
         List<ElectricFenceModel> efModelList = Lists.newArrayList(iterable);
-        //TODO 1.对单个窗口中的车辆数据进行根据terminalTime进行排序
+        // 1.对单个窗口中的车辆数据进行根据terminalTime进行排序
         Collections.sort(efModelList);
         // 进入输出
         System.out.println("进入电子围栏滚动窗口的windowFunction，输入数据数组长度为：" + efModelList.size());
 
-        //TODO 2.从state中获取车辆vin对应的flag标记(车辆在围栏中或不在) 0：电子围栏里面 1：电子围栏外面
+        //2.从state中获取车辆vin对应的flag标记(车辆在围栏中或不在) 0：电子围栏里面 1：电子围栏外面
         //需要将当前的行驶的位置（围栏内还是围栏外）作为下一条数据的一个属性，所以将当前的状态保存到state中，
         // 可以利用flink——ValueState将上一次的历史状态存储到ValueState中
         Integer lastStatusValue = state.get(stateStartWith + key);
@@ -101,7 +101,7 @@ public class ElectricFenceWindowFunction extends RichWindowFunction<ElectricFenc
         if (electricFenceInCount >= electricFenceOutCount) currentStateValue = 0;
         //将当前窗口的电子围栏状态记录下来
         state.put(stateStartWith + key, currentStateValue);
-        //todo 如果当前电子围栏状态与历史电子围栏状态不同
+        //如果当前电子围栏状态与历史电子围栏状态不同
         if (lastStatusValue != currentStateValue) {
             //如果前后相邻的两个窗口的电子围栏状态不同，则需要处理数据
             //如果上一个窗口是电子围栏外，当前窗口是电子围栏内，则说明进入了电子围栏
@@ -125,7 +125,7 @@ public class ElectricFenceWindowFunction extends RichWindowFunction<ElectricFenc
                 electricFenceModel.setStatusAlarm(0);
                 //终端时间即进入电子围栏时间
                 electricFenceModel.setOutEleTime(fenceModel.getTerminalTime());
-                // TODO 返回数据
+                //  返回数据
                 collector.collect(electricFenceModel);
             }
         }

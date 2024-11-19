@@ -46,12 +46,12 @@ public class TripDivisionHBaseSink extends RichSinkFunction<TripModel> {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        //TODO 1）定义hbase的连接配置对象
+        // 1）定义hbase的连接配置对象
         org.apache.hadoop.conf.Configuration configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.quorum", ConfigLoader.getProperty("zookeeper.quorum"));
         configuration.set("hbase.zookeeper.property.clientPort", ConfigLoader.getProperty("zookeeper.clientPort"));
         configuration.set(TableInputFormat.INPUT_TABLE, tableName);
-        //TODO 2）创建hbase的连接对象
+        // 2）创建hbase的连接对象
         connection = ConnectionFactory.createConnection();
         //实例化BufferedMutator所需要的参数
         BufferedMutatorParams params = new BufferedMutatorParams(TableName.valueOf(tableName));

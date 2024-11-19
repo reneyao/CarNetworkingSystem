@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:39
- * @Description TODO 编写mongo测试接口，service实现类
+ * @Description 编写mongo测试接口，service实现类
  */
 @Service
 public class MongoServiceImpl implements MongoService {

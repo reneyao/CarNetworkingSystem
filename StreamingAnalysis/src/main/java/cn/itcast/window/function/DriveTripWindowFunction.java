@@ -24,9 +24,9 @@ public class DriveTripWindowFunction implements WindowFunction<ItcastDataObj, Tr
     @Override
     public void apply(String key, TimeWindow timeWindow, Iterable<ItcastDataObj> iterable, Collector<TripModel> collector) throws Exception {
         //窗口内的数据有水位线，因此需要对窗口内的数据进行排序，否则拼接出来的数据是不准确的
-        //todo 1：先将迭代器转换成集合对象
+        //1：先将迭代器转换成集合对象
         ArrayList<ItcastDataObj> itcastDataObjArrayList = Lists.newArrayList(iterable);
-        //todo 2：对每一个会话窗口内的元素进行排序操作
+        // 2：对每一个会话窗口内的元素进行排序操作
         itcastDataObjArrayList.sort(((o1, o2) -> {
             //如果第一个元素对象的TerminalTimeStamp，大于第二个元素对象的TerminalTimeStamp
             if(o1.getTerminalTimeStamp()> o2.getTerminalTimeStamp()){
@@ -53,7 +53,7 @@ public class DriveTripWindowFunction implements WindowFunction<ItcastDataObj, Tr
     private TripModel getTripModel(ArrayList<ItcastDataObj> itcastDataObjArrays) {
         //定义需要返回的JavaBean对象
         TripModel tripModel = new TripModel();
-        //todo：1：从第一条数据中得到
+        //1：从第一条数据中得到
         ItcastDataObj firstItcastDataObj = itcastDataObjArrays.get(0);
 
         //  vin（车架号）、
@@ -69,7 +69,7 @@ public class DriveTripWindowFunction implements WindowFunction<ItcastDataObj, Tr
         //  start_mileage（行程开始表显里程数）
         tripModel.setStart_mileage(firstItcastDataObj.getTotalOdometer());
 
-        //todo 2：从最后一条数据中得到
+        // 2：从最后一条数据中得到
         ItcastDataObj endItcastDataObj = itcastDataObjArrays.get(itcastDataObjArrays.size() - 1);
         //  tripEndTime（行程结束时间）、
         tripModel.setTripEndTime(endItcastDataObj.getTerminalTime());
@@ -91,13 +91,13 @@ public class DriveTripWindowFunction implements WindowFunction<ItcastDataObj, Tr
         //  lastMileage（上次的里程数）
         tripModel.setLastMileage(firstItcastDataObj.getTotalOdometer());
 
-        //todo 3：遍历list，计算得到
+        // 3：遍历list，计算得到
         itcastDataObjArrays.forEach(itcastDataObj -> {
-            //todo 获取每条数据的速度
+            // 获取每条数据的速度
             Double speed = itcastDataObj.getSpeed();
-            //todo 获取上次行程报文的soc(剩余电量百分比)
+            // 获取上次行程报文的soc(剩余电量百分比)
             Double lastSoc = tripModel.getLastSoc();
-            //todo 计算每条数据的soc与lastSoc进行比较（剩余电量百分比：上次行程剩余电量-当前行程的当前数据的剩余电量百分比）
+            //计算每条数据的soc与lastSoc进行比较（剩余电量百分比：上次行程剩余电量-当前行程的当前数据的剩余电量百分比）
             Double socDiff = lastSoc - itcastDataObj.getSoc();
             // soc_comsuption（行程soc消耗）、两次上报的数据的soc消耗可能差额非常所以有小数的存在，因此对数据进行四舍五入
             if(socDiff > 0) {
@@ -149,7 +149,7 @@ public class DriveTripWindowFunction implements WindowFunction<ItcastDataObj, Tr
             tripModel.setLastMileage(itcastDataObj.getMileageInformation()+0D);
         });
 
-        //todo 4：增加扩展字段，判断是否有异常数据
+        //4：增加扩展字段，判断是否有异常数据
         if(itcastDataObjArrays.size() > 1){
             //正常行程
             tripModel.setTripStatus(0);

@@ -19,13 +19,13 @@ public class ConfigLoader {
      * 4）编写方法获取int的key值
      */
 
-    //TODO 1）使用classLoader（类加载器），加载conf.properties
+    //1）使用classLoader（类加载器），加载conf.properties
     private final static InputStream inputStream = cn.itcast.utils.ConfigLoader.class.getClassLoader().getResourceAsStream("conf.properties");
 
     //定义properties
     private  final static Properties props = new Properties();
 
-    //TODO 2）使用Properties的load方法加载inputStream
+    // 2）使用Properties的load方法加载inputStream
     static {
         try {
             //加载inputStream-》conf.properties
@@ -35,10 +35,10 @@ public class ConfigLoader {
         }
     }
 
-    //TODO 3）编写方法获取配置项的key对应的值
+    // 3）编写方法获取配置项的key对应的值
     public static String getProperty(String key) { return  props.getProperty(key); }
 
-    //TODO 4）编写方法获取int的key值
+    //4）编写方法获取int的key值
     public static Integer getInteger(String key){
         //将获取到的value值转换成int类型返回
         return  Integer.parseInt(props.getProperty(key));

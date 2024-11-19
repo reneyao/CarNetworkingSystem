@@ -171,12 +171,8 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <!-- log4j日志 end-->
+
+
 
         <!-- mysql 连接驱动 -->
         <dependency>

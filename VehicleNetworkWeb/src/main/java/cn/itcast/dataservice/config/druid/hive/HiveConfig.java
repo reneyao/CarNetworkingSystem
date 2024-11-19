@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:08
- * @Description TODO Hive配置信息对应的对象
+ * @Description  Hive配置信息对应的对象
  */
 @Slf4j
 @Configuration
@@ -31,7 +31,7 @@ public class HiveConfig {
     private DataSourceCommonProperties dataSourceCommonProperties;
 
     /**
-     * @desc todo 根据hive配置信息获得dataSource对象
+     * @desc  根据hive配置信息获得dataSource对象
      * @return DataSource(hiveDataSource)
      */
     // rene：原是Bean("hiveDataSource")，改动为@Autowired
@@ -40,13 +40,13 @@ public class HiveConfig {
     public DataSource dataSource(){
         DruidDataSource datasource = new DruidDataSource();
 
-        // todo 配置数据源属性
+        // 配置数据源属性
         datasource.setUrl(dataSourceProperties.getHive().get("url"));
         datasource.setUsername(dataSourceProperties.getHive().get("username"));
         datasource.setPassword(dataSourceProperties.getHive().get("password"));
         datasource.setDriverClassName(dataSourceProperties.getHive().get("driver-class-name"));
 
-        // todo 配置统一属性
+        // 配置统一属性
         datasource.setInitialSize(dataSourceCommonProperties.getInitialSize());
         datasource.setMinIdle(dataSourceCommonProperties.getMinIdle());
         datasource.setMaxActive(dataSourceCommonProperties.getMaxActive());

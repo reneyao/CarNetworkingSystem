@@ -10,12 +10,12 @@ import java.io.Serializable;
 
 // AssignerWithPeriodicWatermarks 过时了，最好使用 WatermarkStrategy
 /**
- * TODO 驾驶行程自定义水位线对象：解决数据迟到30秒的问题
+ * 驾驶行程自定义水位线对象：解决数据迟到30秒的问题
  */
 public class TripDriveWatermark implements AssignerWithPeriodicWatermarks<ItcastDataObj>, Serializable {
-    // todo 允许最大乱序时间为:30秒（延迟时间
+    //  允许最大乱序时间为:30秒（延迟时间
     long maxOutOfOrderness = 1000 * 30;
-    // todo 初始化当前水位线时间戳
+    // 初始化当前水位线时间戳
     Long currentMaxTimestamp = 0L;
 
     @Nullable

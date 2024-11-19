@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/17 23:13
- * @Description TODO 车辆网项目web页面可视化控制类
+ * @Description  车辆网项目web页面可视化控制类
  */
 @Slf4j
 @RestController

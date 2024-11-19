@@ -22,7 +22,7 @@ import java.util.Properties;
 // 正确进入数据
 public class MysqlSinkTest {
     public static void main(String[] args) throws Exception {
-        // TODO 读取kafka的数据源
+        //  读取kafka的数据源
         // 创建流处理环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         // 创建table环境

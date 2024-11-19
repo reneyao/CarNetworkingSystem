@@ -119,12 +119,12 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
+            <version>${springfox-version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox.version}</version>
+            <version>${springfox-version}</version>
         </dependency>
         <!-- 解决DataAppliction缺少依赖-->
         <dependency>
@@ -171,12 +171,12 @@
                 <filtering>true</filtering>
             </resource>
             <!-- 这个是加载xml配置 -->
-            <!-- <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource> -->
+<!--             <resource>-->
+<!--                <directory>src/main/java</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
         </resources>
     </build>
 </project>

@@ -62,12 +62,12 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        //TODO 1）定义hbase的连接配置对象
+        // 1）定义hbase的连接配置对象
         org.apache.hadoop.conf.Configuration configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.quorum", ConfigLoader.getProperty("zookeeper.quorum"));
         configuration.set("hbase.zookeeper.property.clientPort", ConfigLoader.getProperty("zookeeper.clientPort"));
         configuration.set(TableInputFormat.INPUT_TABLE, tableName);
-        //TODO 2）创建hbase的连接对象
+        // 2）创建hbase的连接对象
         connection = ConnectionFactory.createConnection(configuration);  // 将配置传入
         //实例化Table对象
         table = connection.getTable(TableName.valueOf(tableName));  // 注意

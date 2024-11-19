@@ -18,7 +18,7 @@ import java.sql.SQLException;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:06
- * @Description TODO Mysql配置信息对应的对象
+ * @Description Mysql配置信息对应的对象
  */
 @Slf4j
 @Configuration
@@ -33,7 +33,7 @@ public class MysqlConfig {
     private DataSourceCommonProperties dataSourceCommonProperties;
 
     /**
-     * @desc todo 根据mysql配置信息获得dataSource对象
+     * @desc根据mysql配置信息获得dataSource对象
      * @return DataSource(mysqlDataSource)
      */
 
@@ -44,13 +44,13 @@ public class MysqlConfig {
         DruidDataSource datasource = new DruidDataSource();
 
         // 从配置文件中设置各种配置
-        // todo 配置数据源属性
+        // 配置数据源属性
         datasource.setUrl(dataSourceProperties.getMysql().get("url"));      // 获取
         datasource.setUsername(dataSourceProperties.getMysql().get("username"));
         datasource.setPassword(dataSourceProperties.getMysql().get("password"));
         datasource.setDriverClassName(dataSourceProperties.getMysql().get("driver-class-name"));
 
-        // todo 配置统一属性
+        //  配置统一属性
         datasource.setInitialSize(dataSourceCommonProperties.getInitialSize());
         datasource.setMinIdle(dataSourceCommonProperties.getMinIdle());
         datasource.setMaxActive(dataSourceCommonProperties.getMaxActive());

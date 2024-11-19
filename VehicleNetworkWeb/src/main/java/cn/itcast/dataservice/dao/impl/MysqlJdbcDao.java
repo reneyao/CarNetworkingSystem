@@ -11,7 +11,7 @@ import javax.sql.DataSource;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:08
- * @Description TODO mysql使用jdbcTemplate加载mysql的dataSource数据源访问数据
+ * @Description mysql使用jdbcTemplate加载mysql的dataSource数据源访问数据
  */
 @Repository
 public class MysqlJdbcDao {

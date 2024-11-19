@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 /**
- * TODO 自定义sink，数据写入hive
+ * 自定义sink，数据写入hive
  */
 public class SaveErrorDataHiveSink extends RichSinkFunction<ItcastDataObj> {
 

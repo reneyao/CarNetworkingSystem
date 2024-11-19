@@ -301,7 +301,7 @@ public class JsonParseUtil {
                 }
             }
 
-            //TODO 区分数据是正常的数据还是异常的数据！区分的依据是vin为空或者terminalTime为空
+            // 区分数据是正常的数据还是异常的数据！区分的依据是vin为空或者terminalTime为空
             if(StringUtils.isEmpty(itcastDataObj.getVin()) || StringUtils.isEmpty(itcastDataObj.getTerminalTime())){
                 //异常数据
                 if(!StringUtils.isEmpty(jsonStr)){
@@ -317,7 +317,7 @@ public class JsonParseUtil {
                 }
             }
 
-            //TODO 扩展字段赋值：终端时间（long类型的）
+            // 扩展字段赋值：终端时间（long类型的）
             if(!StringUtils.isEmpty(itcastDataObj.getTerminalTime())){
                 itcastDataObj.setTerminalTimeStamp(DateUtil.convertStringToDate(itcastDataObj.getTerminalTime()).getTime());
             }

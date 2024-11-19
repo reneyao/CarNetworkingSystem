@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author laowei
  * @commpany itcast
  * @Date 2020/9/16 1:04
- * @Description TODO 创建springboot中关于数据源的公共属性映射对象：第四级对象
+ * @Description  创建springboot中关于数据源的公共属性映射对象：第四级对象
  */
 @Getter
 @Setter

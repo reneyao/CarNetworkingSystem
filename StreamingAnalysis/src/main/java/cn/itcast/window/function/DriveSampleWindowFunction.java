@@ -26,9 +26,9 @@ public class DriveSampleWindowFunction implements WindowFunction<ItcastDataObj, 
     @Override
     public void apply(String key, TimeWindow timeWindow, Iterable<ItcastDataObj> iterable, Collector<String[]> collector) throws Exception {
         //窗口内的数据有水位线，因此需要对窗口内的数据进行排序，否则拼接出来的数据是不准确的
-        //todo 1：先将迭代器转换成集合对象
+        // 1：先将迭代器转换成集合对象
         ArrayList<ItcastDataObj> itcastDataObjArrayList = Lists.newArrayList(iterable);
-        //todo 2：对每一个会话窗口内的元素进行排序操作
+        // 2：对每一个会话窗口内的元素进行排序操作
         itcastDataObjArrayList.sort(((o1, o2) -> {
             //如果第一个元素对象的TerminalTimeStamp，大于第二个元素对象的TerminalTimeStamp
             if(o1.getTerminalTimeStamp()> o2.getTerminalTimeStamp()){
@@ -40,7 +40,7 @@ public class DriveSampleWindowFunction implements WindowFunction<ItcastDataObj, 
                 return 0;
             }
         }));
-        //todo 3：首先获取到排序后的第一条数据
+        //3：首先获取到排序后的第一条数据
         ItcastDataObj firstItcastDataObj = itcastDataObjArrayList.get(0);
         //采样的数据为5秒钟采样一次，采样数据的各个字段对应的属性值使用逗号进行拼接
         //soc:剩余电量百分比
@@ -53,17 +53,17 @@ public class DriveSampleWindowFunction implements WindowFunction<ItcastDataObj, 
         StringBuffer gps = new StringBuffer(String.valueOf(firstItcastDataObj.getLng()+"|"+firstItcastDataObj.getLat()));
         //terminalTime：终端时间
         StringBuffer terminalTime = new StringBuffer(String.valueOf(firstItcastDataObj.getTerminalTime()));
-        //todo 4：获得排序后的最后一条数据
+        //4：获得排序后的最后一条数据
         ItcastDataObj lastItcastDataObj = itcastDataObjArrayList.get(itcastDataObjArrayList.size() - 1);
-        //todo 5：获取会话窗口内第一条数据的车辆终端时间
+        //5：获取会话窗口内第一条数据的车辆终端时间
         Long startTime = firstItcastDataObj.getTerminalTimeStamp();
-        //todo 6：获取会话窗口内最后一条数据的车辆终端时间
+        // 6：获取会话窗口内最后一条数据的车辆终端时间
         Long endTime = lastItcastDataObj.getTerminalTimeStamp();
-        //todo 7：遍历整个窗口内所有的数据
+        //7：遍历整个窗口内所有的数据
         for(ItcastDataObj itcastDataObj : itcastDataObjArrayList) {
             //获取当前数据的终端时间
             Long currentTimestamp = itcastDataObj.getTerminalTimeStamp();
-            //TODO 每5秒钟采样一次数据，采样的内容soc、mileage、speed、gps、terminalTime
+            //每5秒钟采样一次数据，采样的内容soc、mileage、speed、gps、terminalTime
             if ((currentTimestamp - startTime) >= 5 * 1000 || currentTimestamp == endTime) {
                 singleSoc.append("," + itcastDataObj.getSoc());
                 singleMileage.append("," + itcastDataObj.getTotalOdometer());
