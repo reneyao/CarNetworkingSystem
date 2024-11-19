@@ -21,7 +21,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("cn.itcast.dataservice.mapper")
 public class DataApplication {
 // http://localhost:8021/swagger-ui.html#/
-    // 此模块主要用于学习使用swagger写数据接口，bi可视化可以使用自己熟悉的fineReport
+    // 进入页面：http://localhost:8021/index.html
+    // 能够启动，但是存在诸多报错
     public static void main(String[] args) {
         SpringApplication.run(DataApplication.class, args);
     }

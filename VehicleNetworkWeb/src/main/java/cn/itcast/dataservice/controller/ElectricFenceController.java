@@ -41,6 +41,7 @@ public class ElectricFenceController {
             @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页显示记录数", defaultValue = "10", dataType = "Integer")
     })
     public Object queryAll(int pageNo, int pageSize) {
+        log.info("预期进行查数-------------------");
         Map<String, Object> resultMap = new HashMap<>(2);
         try {
             log.info("查询数据质量，起始页{},每页显示{}条记录",pageNo,pageSize);
