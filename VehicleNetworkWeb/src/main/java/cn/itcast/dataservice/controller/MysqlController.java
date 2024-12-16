@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@Api(value = "Mysql数据源测试")
+@Api(value = "Mysql数据源")
 public class MysqlController {
 
     @Autowired

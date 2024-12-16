@@ -23,6 +23,7 @@
 	// var myChart = echarts.init(dom);
 	// 基于准备好的dom，初始化echarts实例
 	var myChart = echarts.init(document.getElementById('bmap'));
+	// TODO：热力图页面
 	var uploadedDataURL = "http://localhost:8021/heatmap/queryAllByCity";
 	$.getJSON(uploadedDataURL,{"city":"武汉"}, function (data) {
 	// $.getJSON('data/map/hangzhou-tracks.json', function (data) {
