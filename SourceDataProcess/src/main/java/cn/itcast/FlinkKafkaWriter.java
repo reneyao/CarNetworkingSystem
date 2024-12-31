@@ -13,6 +13,7 @@ import java.util.Properties;
 
 /**
  * 模拟程序
+ * 生成数据
  * 因为测试环境不具备车联网的TBox环境，因此只能编写数据生成器代码将数据直接写入到kafka集群
  *
  */
