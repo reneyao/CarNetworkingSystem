@@ -23,6 +23,7 @@ public class MysqlJdbcDao {
 
     @Autowired
     public void setJdbcTemplate(@Qualifier("mysqlDataSource") DataSource dataSource) {
+        // 注入数据源的配置
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@Api(value = "Mongo数据源测试")
+@Api(value = "Mongo数据源")
 public class MongoDbController {
 
     @Autowired

@@ -14,7 +14,7 @@ public class KafkaMsgProducer implements Runnable {
     private Logger logger = LoggerFactory.getLogger(KafkaMsgProducer.class);
 
     // 读取数据位置
-    private static String DIR = "E:\\BigDataProfile\\ProjectData\\3.Java Flink车联网项目\\全部讲义\\1-星途车联网系统第一章-项目基石与前瞻\\原始数据";
+    private static String DIR = "D:\\AlexRene\\allFiles\\BigDatFiles\\Java Flink车联网项目\\全部讲义\\1-星途车联网系统第一章-项目基石与前瞻\\原始数据/sourcedata.txt";
 
     public static void main(String[] args) {
         new Thread(new KafkaMsgProducer()).start();
@@ -28,7 +28,7 @@ public class KafkaMsgProducer implements Runnable {
          * producer.type : 默认就是同步sync
          */
         Properties props = new Properties();
-        props.put("bootstrap.servers", "hadoop102:9092,hadoop103:9092,hadoop104:9092");
+        props.put("bootstrap.servers", "124.222.201.133:9092");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("request.required.acks", "1");

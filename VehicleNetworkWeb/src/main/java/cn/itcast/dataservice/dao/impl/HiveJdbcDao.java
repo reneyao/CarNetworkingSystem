@@ -22,6 +22,7 @@ public class HiveJdbcDao {
     }
 
     @Autowired
+    // TODO： 根据@Qualifier("hiveDataSource") DataSource dataSource  来调用那个数据源头，要配置好hive
     public void setJdbcTemplate(@Qualifier("hiveDataSource") DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }

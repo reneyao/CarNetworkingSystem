@@ -15,13 +15,14 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * @author laowei
+ * @author rene
  * @commpany itcast
- * @Date 2020/9/16 1:06
- * @Description Mysql配置信息对应的对象
+ * @Date 2024/9/16 1:06
+ * @Description Mysql配置信息对应的对象,config类，各种mysql的配置对应
  */
 @Slf4j
 @Configuration
+// EnableConfigurationProperties用于对配置类Configuration的支持
 @EnableConfigurationProperties({DataSourceProperties.class, DataSourceCommonProperties.class})
 public class MysqlConfig {
 
@@ -38,13 +39,13 @@ public class MysqlConfig {
      */
 
     @Primary
-    @Bean(name = "mysqlDataSource")
-    @Qualifier("mysqlDataSource")
+    @Bean(name = "mysqlDataSource")    //  将方法返回的对象注册为 Spring 容器中的 Bean，名称为 "mysqlDataSource"
+    @Qualifier("mysqlDataSource")    // 指定Bean的唯一标识
     public DataSource dataSource(){
         DruidDataSource datasource = new DruidDataSource();
 
         // 从配置文件中设置各种配置
-        // 配置数据源属性
+        // 配置mysql数据源属性，url，账户，密码等
         datasource.setUrl(dataSourceProperties.getMysql().get("url"));      // 获取
         datasource.setUsername(dataSourceProperties.getMysql().get("username"));
         datasource.setPassword(dataSourceProperties.getMysql().get("password"));

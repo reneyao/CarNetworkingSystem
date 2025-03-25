@@ -95,6 +95,8 @@ public class TripDivisionHBaseSink extends RichSinkFunction<TripModel> {
      * @throws ParseException
      */
     private Put markPut(TripModel tripModel) throws ParseException {
+
+        // 使用模型的方法写入，避免在字符串中写大量sql而导致出错
         String rowKey = tripModel.getVin() + "_" + DateUtil.convertStringToDate(tripModel.getTripStartTime()).getTime();
         Put put = new Put(Bytes.toBytes(rowKey));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(tripModel.getVin()));

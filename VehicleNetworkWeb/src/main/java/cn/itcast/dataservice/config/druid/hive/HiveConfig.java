@@ -37,6 +37,7 @@ public class HiveConfig {
     // rene：原是Bean("hiveDataSource")，改动为@Autowired
     @Bean(name = "hiveDataSource")
     @Qualifier("hiveDataSource")
+    // TODO:返回的都是DataSource对象，调用时候通过Qualifier标识来确定调用的是那个数据源，需要配置好数据源
     public DataSource dataSource(){
         DruidDataSource datasource = new DruidDataSource();
 

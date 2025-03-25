@@ -7,7 +7,7 @@ $(function () {
 
     echart_map();
 
-    // ajax请求后台服务接口获得平台车辆总数
+    // TODO:ajax请求后台服务接口获得平台车辆总数
     getTotalNum();
 
     function getTotalNum() {
