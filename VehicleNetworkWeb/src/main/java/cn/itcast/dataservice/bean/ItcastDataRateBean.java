@@ -6,9 +6,7 @@ import lombok.Setter;
 import java.math.BigInteger;
 
 /**
- * @Auther: laowei
- * @Date: 2020/9/16 1:04
- * @Description: 数据准确率和错误率计算后台数据服务接口对象
+ *  数据准确率和错误率计算后台数据服务接口对象
  */
 @Getter
 @Setter

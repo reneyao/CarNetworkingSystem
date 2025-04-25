@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @Auther: laowei
- * @Date: 2020/9/16 1:45
- * @Description: 电子围栏数据服务接口对象
+ *  电子围栏数据服务接口对象
  */
 @Getter
 @Setter

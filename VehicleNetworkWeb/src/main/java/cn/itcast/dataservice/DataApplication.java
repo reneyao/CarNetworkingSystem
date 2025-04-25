@@ -25,6 +25,7 @@ public class DataApplication {
 // localhost:8021/swagger-ui.html    http://localhost:8021/v2/api-docs
     // 进入页面：http://localhost:8021/index.html
     // 能够启动，但是无法连接到mogodb，考虑修改连接mysql
+    // 检验：http://localhost:8021/hello
     public static void main(String[] args) {
         SpringApplication.run(DataApplication.class, args);
     }

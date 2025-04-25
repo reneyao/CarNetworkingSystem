@@ -1,11 +1,6 @@
 package cn.itcast.dataservice.dao;
 
-/**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/18 15:15
- * @Description
- */
+
 public interface VehicleViewDao {
     // 统计平台车辆总数 根据vin去重
     Long totalNum();

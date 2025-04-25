@@ -12,10 +12,7 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 0:53
- * @Description  根据切入点获得被添加注解的方法
+ *  根据切入点获得被添加注解的方法
  *                  根据http请求获得请求客户端的ip地址
  */
 @Slf4j

@@ -17,10 +17,7 @@ import java.lang.reflect.Method;
 
 // 切面实现
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 0:51
- * @Description  定义动态数据源切面实现类
+ * 定义动态数据源切面实现类
  *               @Aspect：定义切面类注解
  *               @Component：当前类创建对象，交给spring管理
  */

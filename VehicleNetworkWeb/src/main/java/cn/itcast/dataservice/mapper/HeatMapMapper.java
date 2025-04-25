@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:51
- * @Description 热力图后台数据服务接口Mapper接口，对应xml文件名称
+ *  热力图后台数据服务接口Mapper接口，对应xml文件名称
  */
 @Repository
 public interface HeatMapMapper {

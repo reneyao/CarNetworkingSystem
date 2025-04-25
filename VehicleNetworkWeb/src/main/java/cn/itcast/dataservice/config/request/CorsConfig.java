@@ -7,10 +7,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * @author rene
- * @commpany itcast
- * @Date 2020/9/17 23:05
- * @Description 后台解决json跨域请求
+  后台解决json跨域请求
  */
 @Configuration
 public class CorsConfig {

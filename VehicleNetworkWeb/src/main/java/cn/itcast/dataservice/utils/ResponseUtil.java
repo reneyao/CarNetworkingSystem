@@ -4,10 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:34
- * @Description  HTTP响应工具类
+   HTTP响应工具类
  */
 public class ResponseUtil {
 

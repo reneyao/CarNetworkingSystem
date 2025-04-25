@@ -14,10 +14,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:08
- * @Description  Hive配置信息对应的对象
+  Hive配置信息对应的对象
  */
 @Slf4j
 @Configuration

@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 2:01
- * @Description  数据正确率和错误率后台数据服务接口，service实现类
+ 数据正确率和错误率后台数据服务接口，service实现类
  */
 @Service
 public class ItcastDataRateServiceImpl implements ItcastDataRateService {

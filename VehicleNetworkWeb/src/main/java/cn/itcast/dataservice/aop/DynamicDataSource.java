@@ -3,10 +3,7 @@ package cn.itcast.dataservice.aop;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 0:50
- * @Description  动态数据源切换实现类
+ *  动态数据源切换实现类
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 

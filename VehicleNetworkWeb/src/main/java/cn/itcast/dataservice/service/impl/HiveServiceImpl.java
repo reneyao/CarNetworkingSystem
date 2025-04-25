@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:37
- * @Description 编写hive测试接口，service实现类
+编写hive测试接口，service实现类
  */
 @Service
 public class HiveServiceImpl implements HiveService {

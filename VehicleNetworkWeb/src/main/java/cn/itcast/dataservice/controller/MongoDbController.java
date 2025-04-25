@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:40
- * @Description  Mongo数据源测试类，查询自定义告警规则结果总数后台数据服务接口
+   Mongo数据源测试类，查询自定义告警规则结果总数后台数据服务接口
  */
 @Slf4j
 @RestController

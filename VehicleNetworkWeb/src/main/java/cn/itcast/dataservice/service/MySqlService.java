@@ -5,10 +5,7 @@ import cn.itcast.dataservice.bean.ElectronicFenceVinsBean;
 import java.util.List;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:33
- * @Description 编写Mysql测试接口service层
+ 编写Mysql测试接口service层
  */
 public interface MySqlService {
     // 分页查询电子围栏信息
