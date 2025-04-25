@@ -7,10 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 2:00
- * @Description 数据正确率和错误率后台数据服务接口Mapper接口，对应xml文件名称
+ 数据正确率和错误率后台数据服务接口Mapper接口，对应xml文件名称
  */
 @Repository
 public interface ItcastDataRateMapper {

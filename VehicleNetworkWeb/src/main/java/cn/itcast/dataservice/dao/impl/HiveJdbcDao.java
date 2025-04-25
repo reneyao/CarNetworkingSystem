@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:09
- * @Description hive使用jdbcTemplate加载hive的dataSource数据源访问数据
+ *  hive使用jdbcTemplate加载hive的dataSource数据源访问数据
  */
 @Repository
 public class HiveJdbcDao {

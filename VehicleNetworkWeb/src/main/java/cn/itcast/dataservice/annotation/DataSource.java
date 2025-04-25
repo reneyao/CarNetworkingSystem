@@ -6,10 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 0:49
- * @Description 自定义数据源注解
+ *  自定义数据源注解
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })

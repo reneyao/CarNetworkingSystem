@@ -5,10 +5,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:24
- * @Description  mongo使用mongoTemplate加载mongo服务访问数据
+   mongo使用mongoTemplate加载mongo服务访问数据
  */
 @Repository
 public class MongoDao {

@@ -21,6 +21,7 @@ import java.util.Map;
 
 /**
  * 电子围栏后台数据服务接口，控制器类
+ * mysql中拿数据
  */
 @Slf4j
 @RestController

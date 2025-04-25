@@ -12,11 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 调用这个实现类是操作mysql数据库
- * @author rene
- * @commpany itcast
- * @Date 2024/9/16 1:33
- * @Description 编写mysql测试接口，service实现类
+ 编写mysql测试接口，service实现类
  */
 @Service
 public class MySqlServiceImpl implements MySqlService {

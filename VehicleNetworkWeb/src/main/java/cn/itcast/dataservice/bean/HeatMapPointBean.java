@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @Auther: laowei
- * @Date: 2020/9/16 1:46
- * @Description: 后台数据服务接口热力图对象
+ *  后台数据服务接口热力图对象
  */
 @Getter
 @Setter

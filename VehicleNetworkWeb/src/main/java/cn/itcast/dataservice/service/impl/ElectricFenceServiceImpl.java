@@ -8,12 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 2:05
- * @Description  电子围栏后台数据服务接口，服务实现类
- */
+
 @Service
 public class ElectricFenceServiceImpl implements ElectricFenceService {
 

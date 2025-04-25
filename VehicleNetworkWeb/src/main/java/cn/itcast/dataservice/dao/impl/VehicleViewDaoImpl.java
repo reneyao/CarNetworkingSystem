@@ -8,12 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/18 15:17
- * @Description
- */
+
 @Repository
 public class VehicleViewDaoImpl implements VehicleViewDao {
 

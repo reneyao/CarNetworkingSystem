@@ -1,10 +1,7 @@
 package cn.itcast.dataservice.service;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/17 23:09
- * @Description 车辆可视化页面服务
+ 车辆可视化页面服务
  */
 public interface VehicleViewService {
     //  统计平台车辆总数

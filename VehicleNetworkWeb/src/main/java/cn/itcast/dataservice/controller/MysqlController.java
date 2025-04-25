@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 1:35
- * @Description Mysql数据源测试类，查询车辆信息数据后台数据服务接口
+  Mysql数据源测试类，查询车辆信息数据后台数据服务接口
  */
 @Slf4j
 @RestController

@@ -19,10 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 2:02
- * @Description 原始数据正确率和错误率后台数据服务接口，控制器
+ *  原始数据正确率和错误率后台数据服务接口，控制器
  */
 @Slf4j
 @RestController

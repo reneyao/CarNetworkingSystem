@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 0:56
- * @Description  创建日志切面类
+ *   创建日志切面类
  */
 @Aspect
 @Component

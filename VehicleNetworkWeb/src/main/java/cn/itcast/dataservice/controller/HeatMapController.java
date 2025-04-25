@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Auther: laowei
- * @Date: 2020/9/16 1:57
- * @Description:  热力图后台数据服务接口，控制器类
+ * 热力图后台数据服务接口，控制器类
  */
 @Slf4j
 @RestController

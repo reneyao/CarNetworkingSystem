@@ -19,10 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @author laowei
- * @commpany itcast
- * @Date 2020/9/16 0:58
- * @Description  http响应切面实现
+ *  http响应切面实现
  */
 @Slf4j
 @Aspect
