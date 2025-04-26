@@ -1,4 +1,4 @@
-package cn.itcast.batchSQL;
+package cn.itcast.demo;
 
 
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
@@ -6,7 +6,6 @@ import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.io.jdbc.JDBCInputFormat;
 import org.apache.flink.api.java.io.jdbc.JDBCOutputFormat;
-import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.typeutils.RowTypeInfo;
 import org.apache.flink.types.Row;
 import org.slf4j.Logger;
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: laowei
- * @Date: 2020/5/9 10:28
  * @Description:Flink加载mysql数据测试类
  */
 public class FlinkMysqlBatchTest  {

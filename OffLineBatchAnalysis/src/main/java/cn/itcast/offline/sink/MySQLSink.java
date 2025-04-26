@@ -1,6 +1,5 @@
-package cn.itcast.batch.sink;
+package cn.itcast.offline.sink;
 
-import cn.itcast.bean.UserBehavior;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 import org.slf4j.Logger;
@@ -12,8 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-// 自定义 SinkFunction 将数据写入 MySQL (两种方法数据都可以正常进入
-public  class MySQLSinkTest extends RichSinkFunction<UserBehavior> {
+// 自定义 SinkFunction 将数据写入 MySQL
+public  class MySQLSink extends RichSinkFunction<String[]> {
 
     // 日志打印
     private final static Logger logger = LoggerFactory.getLogger(MySQLSink.class);
@@ -21,12 +20,12 @@ public  class MySQLSinkTest extends RichSinkFunction<UserBehavior> {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "@Aabc939596";
     // "soc","mileage","speed","gps","terminalTime","processTime"
-    private static final String INSERT_SQL = "INSERT INTO user_behavior4  VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO Trip_data (vin,eventminTime,soc,mileage,speed,gps,terminalTime) VALUES (?, ?, ?, ?,?,?,?)";
 
 
     private String tableName;
 
-    public MySQLSinkTest(String tableName) {
+    public MySQLSink(String tableName) {
         this.tableName = tableName;
     }
 
@@ -51,16 +50,18 @@ public  class MySQLSinkTest extends RichSinkFunction<UserBehavior> {
     }
 
     @Override
-    public void invoke(UserBehavior value, Context context) throws Exception {
+    public void invoke(String[] value, Context context) throws Exception {
         super.invoke(value, context);
         try {
             preparedStatement = connection.prepareStatement(INSERT_SQL);
             // set指定数据类型
-            preparedStatement.setString(1, value.getUserId());
-            preparedStatement.setString(2, value.getItemId());
-            preparedStatement.setString(3, value.getCategoryId());
-            preparedStatement.setString(4, value.getBehavior());
-            preparedStatement.setLong(5, value.getTs());
+            preparedStatement.setString(1, value[0]);
+            preparedStatement.setString(2, value[1]);
+            preparedStatement.setString(3, value[2]);
+            preparedStatement.setString(4, value[3]);
+            preparedStatement.setString(5, value[4]);
+            preparedStatement.setString(6, value[5]);
+            preparedStatement.setString(7, value[6]);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

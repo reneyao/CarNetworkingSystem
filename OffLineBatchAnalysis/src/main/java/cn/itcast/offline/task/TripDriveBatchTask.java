@@ -1,12 +1,9 @@
-package cn.itcast.batch.task;
+package cn.itcast.offline.task;
 
-import cn.itcast.batch.sink.MySQLSink;
-import cn.itcast.batch.window.function.DriveSampleWindowFunction;
-import cn.itcast.batch.window.udfWatermark.TripDriveWatermark;
+import cn.itcast.offline.window.function.DriveSampleWindowFunction;
+import cn.itcast.offline.window.udfWatermark.TripDriveWatermark;
 import cn.itcast.bean.ItcastDataObj;
 import cn.itcast.utils.JsonParseUtil;
-import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.CheckpointingMode;
@@ -20,7 +17,6 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
-import java.time.Duration;
 import java.util.Properties;
 
 

@@ -13,22 +13,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * 这个项目配置的数据库有：
  * mysql，mongo（也是nosql数据库，hive
- * @author rene
- * @commpany itcast
- * @Date 2024/9/16 0:48
- * @Description  后台数据服务SpringBoot启动类
+ *  @author rene
+ *  @Description  后台数据服务SpringBoot启动类
  *  @SpringBootApplication: 配置springboot快速启动类注解
  *  @EnableSwagger2 ： 接口开发工具
  *  @MapperScan ： 扫描加载mybatis的接口的包路径
  *
  */
-@SpringBootApplication(exclude = {
-        MongoAutoConfiguration.class,
-        MongoDataAutoConfiguration.class,
-        MongoReactiveAutoConfiguration.class,
-        MongoReactiveDataAutoConfiguration.class
-})
-//@SpringBootApplication
+//@SpringBootApplication(exclude = {
+//        MongoAutoConfiguration.class,
+//        MongoDataAutoConfiguration.class,
+//        MongoReactiveAutoConfiguration.class,
+//        MongoReactiveDataAutoConfiguration.class
+//})
+@SpringBootApplication
 @EnableSwagger2
 @MapperScan("cn.itcast.dataservice.mapper")
 public class DataApplication {

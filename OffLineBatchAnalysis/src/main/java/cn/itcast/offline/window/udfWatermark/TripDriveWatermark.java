@@ -1,4 +1,4 @@
-package cn.itcast.batch.window.udfWatermark;
+package cn.itcast.offline.window.udfWatermark;
 
 
 import cn.itcast.bean.ItcastDataObj;

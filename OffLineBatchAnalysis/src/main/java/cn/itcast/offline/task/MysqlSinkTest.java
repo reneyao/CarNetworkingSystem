@@ -1,13 +1,10 @@
-package cn.itcast.batch.task;
+package cn.itcast.offline.task;
 
-import cn.itcast.batch.sink.MySQLSinkTest;
+import cn.itcast.offline.sink.MySQLSinkTest;
 import cn.itcast.bean.UserBehavior;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
-import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
-import org.apache.flink.connector.jdbc.JdbcSink;
-import org.apache.flink.connector.jdbc.JdbcStatementBuilder;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;

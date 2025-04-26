@@ -14,7 +14,6 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <flink.version>1.13.0</flink.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -38,7 +37,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -126,10 +125,11 @@
             <artifactId>flink-streaming-java_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-filesystem_2.12</artifactId>
-            <version>1.10.3</version>
+            <version>${flink.connector.version}</version>
         </dependency>
 
         <!--        <dependency>-->
@@ -178,13 +178,13 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.21</version>
+            <version>${mysql.version}</version>
         </dependency>
         <!-- mongodb连接驱动 -->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
-            <version>3.4.2</version>
+            <version>${mongodb-driver.version}</version>
         </dependency>
         <!-- redis客户端 -->
         <dependency>
@@ -244,7 +244,7 @@
         <dependency>
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
-            <version>1.4</version>
+            <version>${commons-cli.version}</version>
             <scope>compile</scope>
         </dependency>
 
