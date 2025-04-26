@@ -6,13 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
 
-/**
- *  数据配置类的中央管理
- * @author rene
- * @commpany itcast
- * @Date 2024/9/16 1:03
- * @Description  存放DataSource属性对象，第三级对象
- *                  @ConfigurationProperties： 这个注解配置之后，意味着会自定去springboot的默认文件
+/** 存放DataSource属性对象，第三级对象
+ * @ConfigurationProperties： 这个注解配置之后，意味着会自定去springboot的默认文件
  */
 @Getter
 @Setter

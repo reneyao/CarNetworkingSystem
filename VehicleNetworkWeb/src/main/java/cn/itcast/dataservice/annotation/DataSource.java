@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  *  自定义数据源注解
+ *  可以通过在方法上添加 @DataSource 注解，并设置 value 的值来动态切换数据源。
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })

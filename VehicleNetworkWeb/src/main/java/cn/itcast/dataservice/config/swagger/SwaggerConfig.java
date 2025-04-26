@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .description("本文档提供并展示系统所有对外接口的明细")
                 .termsOfServiceUrl("")
                 .version("2.0")
-                .contact(new Contact("rene-车联网大数据", "http://120.55.78.114:8080/webroot/decision", "heima@itcast.cn"))
+                .contact(new Contact("rene-车联网大数据", "www.baidu.com", "123@qq.com"))
                 .build();
     }
 

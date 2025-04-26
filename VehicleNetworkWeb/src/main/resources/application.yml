@@ -1,3 +1,6 @@
+# 注：前的 application.yml 和 application.properties 文件内容是可以被 Spring Boot 自动识别和加载的，无需额外配置。
+#  如果同时存在 application.yml 和 application.properties，Spring Boot 会优先加载 application.yml。
+
 #  配置关联mybatis映射文件
 mybatis:
   mapperLocations: classpath:/cn/itcast/dataservice/mapper/*.xml
