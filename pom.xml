@@ -58,6 +58,7 @@
         <maven-shade-plugin.version>3.1.1</maven-shade-plugin.version>
 
         <!--新增-->
+<!--        <druid>1.2.1</druid>-->
         <commons-lang>2.6</commons-lang>
         <scala-parser-combinators>1.1.2</scala-parser-combinators>
         <springfox-version>2.9.2</springfox-version>

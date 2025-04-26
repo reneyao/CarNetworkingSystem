@@ -3,6 +3,10 @@ package cn.itcast.dataservice;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -18,7 +22,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *  @MapperScan ： 扫描加载mybatis的接口的包路径
  *
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        MongoAutoConfiguration.class,
+        MongoDataAutoConfiguration.class,
+        MongoReactiveAutoConfiguration.class,
+        MongoReactiveDataAutoConfiguration.class
+})
+//@SpringBootApplication
 @EnableSwagger2
 @MapperScan("cn.itcast.dataservice.mapper")
 public class DataApplication {
