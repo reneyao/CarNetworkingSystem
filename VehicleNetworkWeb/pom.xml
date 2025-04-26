@@ -13,9 +13,12 @@
     <artifactId>VehicleNetworkWeb</artifactId>
 <!--    <packaging>war</packaging>-->
 
+    <properties>
+        <log4j.version>2.12.1</log4j.version>
+    </properties>
 
     <dependencies>
-        <!-- spring-boot-starter   这里有-->
+        <!-- spring-boot-starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -30,10 +33,13 @@
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-to-slf4j</artifactId>
                 </exclusion>
-
                 <exclusion>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jul-to-slf4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -127,21 +133,17 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-version}</version>
         </dependency>
-        <!-- 解决DataAppliction缺少依赖-->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.12.1</version>
-        </dependency>
+
+        <!-- 日志配置-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version> <!-- 或与你的其他依赖兼容的版本 -->
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.12.1</version> <!-- 确保版本与你的其他 Log4j 依赖一致 -->
+            <version>${log4j.version}</version>
         </dependency>
 
             <!-- 添加 Spring 事务管理依赖 -->
@@ -165,16 +167,6 @@
 <!--        </dependency>-->
 
 
-
-            <!-- 如果使用 JPA，添加以下依赖 -->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--                <version>${spring-boot.version}</version>&ndash;&gt;-->
-<!--            </dependency>-->
-
-
-
     </dependencies>
 
     <build>
@@ -188,7 +180,7 @@
         </plugins>
 
         <resources>
-            <!-- 添加访问静态资源文件 -->
+            <!-- 添加访问静态资源文件  移除了前端代码 -->
             <!-- 代码的作用是让src/main/webapp在编译的时候在resoureces路径下也生成webapp的文件 -->
 <!--            <resource>-->
 <!--                <directory>src/main/webapp</directory>-->

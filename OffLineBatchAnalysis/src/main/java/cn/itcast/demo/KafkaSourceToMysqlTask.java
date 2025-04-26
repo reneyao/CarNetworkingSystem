@@ -1,4 +1,4 @@
-package cn.itcast.batchSQL;
+package cn.itcast.demo;
 
 
 import cn.itcast.bean.ItcastDataObj;

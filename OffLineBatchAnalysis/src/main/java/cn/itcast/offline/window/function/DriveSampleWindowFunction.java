@@ -1,4 +1,4 @@
-package cn.itcast.batch.window.function;
+package cn.itcast.offline.window.function;
 
 
 import cn.itcast.bean.ItcastDataObj;

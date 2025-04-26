@@ -1,4 +1,4 @@
-package cn.itcast.batchSQL;
+package cn.itcast.demo;
 
 
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;

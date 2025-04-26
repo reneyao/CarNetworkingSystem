@@ -1,4 +1,4 @@
-package cn.itcast.batch.task;
+package cn.itcast.offline.task;
 
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
