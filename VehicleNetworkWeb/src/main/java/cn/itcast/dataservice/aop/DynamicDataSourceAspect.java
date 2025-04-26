@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 
-// 切面实现
+// 切面实现 ： 也就是拦截带@DataSource注解标识的方法，进行动态数据源切换
 /**
  * 定义动态数据源切面实现类
- *               @Aspect：定义切面类注解
- *               @Component：当前类创建对象，交给spring管理
+ * @Aspect：定义切面类注解
+ * @Component：当前类创建对象，交给spring管理
  */
 @Aspect
 @Component                // 使其成为spring 管理的Bean

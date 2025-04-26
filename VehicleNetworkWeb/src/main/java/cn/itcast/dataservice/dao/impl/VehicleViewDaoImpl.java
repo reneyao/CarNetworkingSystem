@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+// 这是jdbc的使用。真正的数据服务都是用的Mybatis的数据获取方式
 @Repository
 public class VehicleViewDaoImpl implements VehicleViewDao {
 

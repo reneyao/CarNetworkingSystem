@@ -5,10 +5,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author rene
- * @commpany itcast
- * @Date 2024/9/16 1:04
- * @Description  创建springboot中关于数据源的公共属性映射对象：第四级对象
+ *  创建springboot中关于数据源的公共属性映射对象：第四级对象
  */
 @Getter
 @Setter
