@@ -66,12 +66,17 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
         org.apache.hadoop.conf.Configuration configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.quorum", ConfigLoader.getProperty("zookeeper.quorum"));
         configuration.set("hbase.zookeeper.property.clientPort", ConfigLoader.getProperty("zookeeper.clientPort"));
+        configuration.set("hbase.client.default.schema", "GMALL");  // 限定使用数据库
         configuration.set(TableInputFormat.INPUT_TABLE, tableName);
         // 2）创建hbase的连接对象
         connection = ConnectionFactory.createConnection(configuration);  // 将配置传入
+        
+        // 修改此行，明确指定命名空间和表名
+        TableName tableNameWithNamespace = TableName.valueOf("GMALL", tableName);
         //实例化Table对象
-        table = connection.getTable(TableName.valueOf(tableName));  // 注意
-        logger.warn("获得hbase的连接对象，{}表对象初始化成功！", tableName);
+        table = connection.getTable(tableNameWithNamespace);  // 使用带命名空间的表名
+        
+        logger.warn("获得hbase的连接对象，GMALL:{}表对象初始化成功！", tableName);
     }
 
     /**

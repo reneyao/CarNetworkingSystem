@@ -1,6 +1,7 @@
-package cn.itcast.streaming.task;
+package cn.itcast.demo;
 
 
+import cn.itcast.streaming.task.KafkaSourceDataTask;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.utils.ParameterTool;
@@ -17,16 +18,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class KafkaSourceDataTask01 {
-    /**
-     *
-     * @param args
-     * @throws Exception
-     */
+public class KafkaSourceDataTaskDemo {
+
     public static void main(String[] args) throws Exception {
 
         // 加载conf.properties配置文件
-        ParameterTool parameterTool = ParameterTool.fromPropertiesFile(KafkaSourceDataTask01.class.getClassLoader().getResourceAsStream("conf.properties"));
+        ParameterTool parameterTool = ParameterTool.fromPropertiesFile(KafkaSourceDataTaskDemo.class.getClassLoader().getResourceAsStream("conf.properties"));
         // 设置hadooop的操作用户
         System.setProperty("HADOOP_USER_NAME","rene");
         // 创建流处理环境
@@ -53,7 +50,7 @@ public class KafkaSourceDataTask01 {
         String bashHdfsUri = parameterTool.getRequired("hdfsUri");  // 在配置文件中获得hadoop的uri
         try {
             // 将检查点数据报错到指定的hdfs的目录上
-            env.setStateBackend(new RocksDBStateBackend(bashHdfsUri+"/flink/checkpoint/"+KafkaSourceDataTask.class.getSimpleName()));
+            env.setStateBackend(new RocksDBStateBackend(bashHdfsUri+"/flink/checkpoint/"+ KafkaSourceDataTask.class.getSimpleName()));
         } catch (IOException e) {
             e.printStackTrace();
         }

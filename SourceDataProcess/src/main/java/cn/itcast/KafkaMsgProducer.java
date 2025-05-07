@@ -29,7 +29,7 @@ public class KafkaMsgProducer implements Runnable {
          * producer.type : 默认就是同步sync
          */
         Properties props = new Properties();
-        props.put("bootstrap.servers", "124.222.201.133:9092");
+        props.put("bootstrap.servers", "aliecs008:9092");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("request.required.acks", "1");

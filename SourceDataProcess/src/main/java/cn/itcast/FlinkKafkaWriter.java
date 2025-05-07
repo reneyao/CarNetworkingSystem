@@ -27,10 +27,10 @@ public class FlinkKafkaWriter {
         //2）设置应应用程序按照事件时间处理数据
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         //3）加载原始数据目录中的所有文件，返回dataStream对象：设置为自己的路径
-        DataStreamSource<String> source = env.readTextFile("D:\\AlexRene\\allFiles\\BigDatFiles\\Java Flink车联网项目\\全部讲义\\1-星途车联网系统第一章-项目基石与前瞻\\原始数据/sourcedata.txt");
+        DataStreamSource<String> source = env.readTextFile("E:\\BigDataProfile\\ProjectData\\3.Java Flink车联网项目\\cardata\\sourcedata/sourcedata.txt");
         //4）创建kafka的生产者实例，将数据写入到kafka集群(无集群
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "124.222.201.133:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "aliecs008:9092");
         props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 60000);  // 增加请求超时时间到 1 分钟
         props.put(ProducerConfig.LINGER_MS_CONFIG, 20);  // 调整 linger.ms 配置以减少网络请求次数
         // 加入ack就正常了，kafka集群不稳地

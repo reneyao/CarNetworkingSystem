@@ -21,8 +21,8 @@ public class FlinkKafkaReader {
         //读取kafka中的数据
         //配置属性
         Properties props = new Properties();
-        props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"hadoop102:9092,hadoop103:9092,hadoop104:9092");
-        props.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"vehicledata");
+        props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"aliecs008:9092");
+        props.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"test1");
         props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
         //自动发现分区的配置
         props.setProperty("flink.partition-discovery.interval-millis","5000");

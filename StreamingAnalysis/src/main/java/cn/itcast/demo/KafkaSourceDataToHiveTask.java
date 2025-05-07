@@ -1,7 +1,7 @@
-package cn.itcast.streaming.task;
+package cn.itcast.demo;
 
 import cn.itcast.entity.ItcastDataObj;
-import cn.itcast.streaming.sink.SrcDataToHBaseSink;
+import cn.itcast.streaming.task.BaseTask;
 import cn.itcast.utils.JsonParseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.flink.api.common.serialization.SimpleStringEncoder;
@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * 1）正常数据写入hdfs和hbase
  * 2）异常数据写入到hbase
  */
-public class KafkaSourceDataTask02 extends BaseTask {
+public class KafkaSourceDataToHiveTask extends BaseTask {
     /**
      * 入口方法
      * @param args
@@ -67,7 +67,8 @@ public class KafkaSourceDataTask02 extends BaseTask {
          */
 
         // 1）初始化flink流式处理的开发环境  getSimpleName()  获得类名 返回的是字符串格式
-        StreamExecutionEnvironment env = getEnv(KafkaSourceDataTask02.class.getSimpleName());
+        StreamExecutionEnvironment env = getEnv(KafkaSourceDataToHBaseTask.class.getSimpleName());
+        System.setProperty("HADOOP_USER_NAME","rene");
 
         // 6）将kafka消费者对象添加到环境中
         DataStream<String> dataStreamSource= createKafkaStream(SimpleStringSchema.class);  // 简单的string对象的序列化，反序列化对象类
@@ -86,7 +87,7 @@ public class KafkaSourceDataTask02 extends BaseTask {
 
         // 9）将异常的数据写入到hdfs中
         // 在flink1.2以后可以直接使用  FileSink操作，而不用使用StreamingFileSink，操作更加便利
-        StreamingFileSink errorFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/ods.db/itcast_error"),
+        StreamingFileSink errorFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/vehicle/ods.db/itcast_error"),
                         new SimpleStringEncoder<>("utf-8"))
                 // 按照数据进行桶分区
                 .withBucketAssigner(new DateTimeBucketAssigner("yyyyMMdd"))
@@ -118,7 +119,7 @@ public class KafkaSourceDataTask02 extends BaseTask {
          *   2：将数据写入到hive读取的hdfs的数据路径
          **/
         //指定写入的文件名称和格式  文件在hdfs中存储的位置"/apps/hive/warehouse/ods.db/itcast_src"
-        StreamingFileSink srcFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/ods.db/itcast_src"),
+        StreamingFileSink srcFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/vehicle/ods.db/itcast_src"),
                         new SimpleStringEncoder<>("utf-8"))
                 /**
                  * 指定分桶的策略
@@ -144,9 +145,9 @@ public class KafkaSourceDataTask02 extends BaseTask {
 
         // 12) 将数据落入hbase
         // 定义hbaseSink
-        SrcDataToHBaseSink hbaseSink = new SrcDataToHBaseSink("itcast_src");
-        // 保存原始数据存入 hbase   srcDataStream 是正常数据，并经过处理后的数据源
-        srcDataStream.addSink(hbaseSink);
+//        SrcDataToHBaseSink hbaseSink = new SrcDataToHBaseSink("itcast_src");
+//        // 保存原始数据存入 hbase   srcDataStream 是正常数据，并经过处理后的数据源
+//        srcDataStream.addSink(hbaseSink);
 
         // 13）启动作业，运行任务
         env.execute();
