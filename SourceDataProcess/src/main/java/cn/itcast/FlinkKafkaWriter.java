@@ -10,7 +10,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 
 import javax.annotation.Nullable;
 import java.util.Properties;
-
+// 使用flink连接kafka进行生成数据，支持并行处理
 /**
  * 模拟程序
  * 生成数据

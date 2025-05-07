@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.Properties;
 
+// kafka原生模式生成数据，使用了异步
 // 数据采集之kafka生成数据
 public class KafkaMsgProducer implements Runnable {
 

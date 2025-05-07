@@ -1,4 +1,4 @@
-package cn.itcast;
+package cn.itcast.JsonPaseDemo;
 
 import java.util.List;
 // 测试的json数据的bean对象
