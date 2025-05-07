@@ -1,6 +1,7 @@
 # 注：前的 application.yml 和 application.properties 文件内容是可以被 Spring Boot 自动识别和加载的，无需额外配置。
 #  如果同时存在 application.yml 和 application.properties，Spring Boot 会优先加载 application.yml。
-
+server:
+  port: 8022
 #  配置关联mybatis映射文件
 mybatis:
   mapperLocations: classpath:/cn/itcast/dataservice/mapper/*.xml
@@ -22,10 +23,10 @@ spring:
     # todo hive数据源
     # 输入自己hive的信息,itcast_ods是hive创建的库
     hive:
-      url: jdbc:hive2://node03:10000/itcast_ods
+      url: jdbc:hive2://hadoop102:10000/itcast_ods
       type: com.alibaba.druid.pool.DruidDataSource
-      username: root
-      password: 123456
+      # username: root
+      # password: 123456
       driver-class-name: org.apache.hive.jdbc.HiveDriver
     # 连接池统一配置，应用到所有的数据源
     # 统一配置
