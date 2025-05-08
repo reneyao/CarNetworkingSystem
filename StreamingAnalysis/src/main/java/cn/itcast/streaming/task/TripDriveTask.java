@@ -19,7 +19,7 @@ import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindow
 import org.apache.flink.streaming.api.windowing.time.Time;
 
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
-
+// 驾驶行程入库（采样）
 /**
  * 驾驶行程业务开发
  * 1）消费kafka数据过滤出来驾驶行程采样数据，实时的写入到hbase表中
@@ -68,12 +68,14 @@ public class TripDriveTask extends BaseTask {
         //12） 驾驶行程采样如hbase库TRIPDB:trip_sample
         driveSampleDataStream.addSink(new TripSampleToHBaseSink("TRIPDB:trip_sample"));
 
-        // 第二个数据处理
-        // 13）  沿用todo10 的window处理后的数据  再应用另一个function
-        SingleOutputStreamOperator<TripModel> tripModelSingleOutputStreamOperator = driveDataStream.apply(new DriveTripWindowFunction());
+//        // 第二个数据处理
+//        // 13）  沿用todo10 的window处理后的数据  再应用另一个function
+//        SingleOutputStreamOperator<TripModel> tripModelSingleOutputStreamOperator = driveDataStream.apply(new DriveTripWindowFunction());
+//
+//        //  14) 写入到hbase
+//        tripModelSingleOutputStreamOperator.addSink(new TripDivisionHBaseSink("TRIPDB:trip_division"));
 
-        //  14) 写入到hbase
-        tripModelSingleOutputStreamOperator.addSink(new TripDivisionHBaseSink("TRIPDB:trip_division"));
+        env.execute();
     }
 
 

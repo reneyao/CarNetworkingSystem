@@ -1,12 +1,10 @@
-package cn.itcast.streaming.task;
+package cn.itcast.tests;
 
 import cn.itcast.window.function.DstreamOperatorFlatMap;
-import cn.itcast.window.function.DstreamOperatorMap;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple5;
 import org.apache.flink.api.java.tuple.Tuple7;
 import org.apache.flink.streaming.api.TimeCharacteristic;
-import org.apache.flink.streaming.api.datastream.ConnectedStreams;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 

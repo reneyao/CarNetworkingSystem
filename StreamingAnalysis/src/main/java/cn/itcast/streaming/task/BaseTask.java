@@ -41,7 +41,6 @@ public abstract class BaseTask {
         }
     }
 
-    // 1）初始化flink流式处理的开发环境
     private static StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
     /**

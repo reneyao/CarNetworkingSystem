@@ -2,39 +2,25 @@ package cn.itcast.streaming.task;
 
 import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.streaming.sink.SrcDataToHBaseSink;
-import cn.itcast.utils.FlinkUtil;
 import cn.itcast.utils.JsonParseUtil;
 import org.apache.commons.lang.StringUtils;
-import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringEncoder;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
-import org.apache.flink.api.java.utils.ParameterTool;
-import org.apache.flink.contrib.streaming.state.RocksDBStateBackend;
 import org.apache.flink.core.fs.Path;
-import org.apache.flink.streaming.api.CheckpointingMode;
-import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
-import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.filesystem.OutputFileConfig;
 import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 import org.apache.flink.streaming.api.functions.sink.filesystem.bucketassigners.DateTimeBucketAssigner;
 import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.DefaultRollingPolicy;
-import org.apache.flink.streaming.connectors.fs.bucketing.BucketingSink;
-import org.apache.flink.streaming.connectors.fs.bucketing.DateTimeBucketer;
-
-
-import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 需求：原始数据ETL操作
  * flink消费kafka数据，将消费出来的数据进行转换、清洗、过滤以后，正常的数据需要写入到hbase和hdfs，异常的数据写入到hdfs中
  * 1）正常数据写入hdfs和hbase
- * 2）异常数据写入到hbase
+ * 2）异常数据写入到hive
  */
 public class KafkaSourceDataTask extends BaseTask {
     public static void main(String[] args) throws Exception {
@@ -42,22 +28,22 @@ public class KafkaSourceDataTask extends BaseTask {
         StreamExecutionEnvironment env = getEnv(KafkaSourceDataTask.class.getSimpleName());
         System.setProperty("HADOOP_USER_NAME","rene");
 
-        //6）将kafka消费者对象添加到环境中
+        //2）将kafka消费者对象添加到环境中
         DataStream<String> dataStreamSource= createKafkaStream(SimpleStringSchema.class);  // 简单的string对象的序列化，反序列化对象类
 
         //打印输出测试
 //        dataStreamSource.print();
-        //7）将json字符串解析成对象  借助map一一对应转化
+        // 3）数据处理
         SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = dataStreamSource.map(JsonParseUtil::parseJsonToObject);
         itcastDataObjStream.printToErr("解析后的数据>>>");
-        //8）获取到异常的数据   如果数据为空判断为异常数据
         SingleOutputStreamOperator<ItcastDataObj> errorDataStream = itcastDataObjStream.filter(
                 itcastDataObj -> !StringUtils.isEmpty(itcastDataObj.getErrorData()));
         errorDataStream.printToErr("异常数据>>>");
         //指定写入的文件名称和格式
         OutputFileConfig config = OutputFileConfig.builder().withPartPrefix("prefix").withPartSuffix(".txt").build();
 
-        // 9）将异常的数据写入到hdfs中
+        // 4）数据处理：落入到hdfs，后续到hive
+        // 将异常数据写入到hdfs中
         // 在flink1.2以后可以直接使用  FileSink操作，而不用使用StreamingFileSink，操作更加便利
         // 指定hdfs路径
         StreamingFileSink errorFileSink = StreamingFileSink.forRowFormat(new Path(parameterTool.getRequired("hdfsUri")+"/apps/hive/warehouse/vehicle/ods.db/itcast_error"),
@@ -77,11 +63,11 @@ public class KafkaSourceDataTask extends BaseTask {
                 ).withOutputFileConfig(config).build();
         errorDataStream.map(ItcastDataObj::toHiveString).addSink(errorFileSink);
 
-        //10）获取到正常的数据  （区分在与异常数据会加 “！”号 ，即是不等于号
+        // 获取到正常的数据  （区分在与异常数据会加 “！”号 ，即是不等于号
         SingleOutputStreamOperator<ItcastDataObj> srcDataStream = itcastDataObjStream.filter(itcastDataObj -> StringUtils.isEmpty(itcastDataObj.getErrorData()));
         srcDataStream.print("正常数据>>>");
 
-        //11）将正常的数据写入到hdfs中（StreamingFileSink、BucketingSink）StreamingFileSink是flink1.10的新特性，而flink1.8.1版本，是没有这个功能的，因此只能BucketingSink
+        //将正常的数据写入到hdfs中（StreamingFileSink、BucketingSink）StreamingFileSink是flink1.10的新特性，而flink1.8.1版本，是没有这个功能的，因此只能BucketingSink
         /**
          * 离线数据的写入是每天加载一次（离线数据是T+1的数据）
          * 异常数据落地到hive的方案：
@@ -116,13 +102,12 @@ public class KafkaSourceDataTask extends BaseTask {
                 ).withOutputFileConfig(config).build();
         srcDataStream.map(ItcastDataObj::toHiveString).addSink(srcFileSink);
 
-        //  12) 将数据落入hbase
+        //  5) 将数据落入hbase
         // 定义hbaseSink
         SrcDataToHBaseSink hbaseSink = new SrcDataToHBaseSink("itcast_src");
         // 保存原始数据存入 hbase   srcDataStream 是正常数据，并经过处理后的数据源
         srcDataStream.addSink(hbaseSink);
 
-        // 13）启动作业，运行任务
         env.execute();
     }
 }

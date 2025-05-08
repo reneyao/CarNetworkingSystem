@@ -5,7 +5,6 @@ import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.entity.TripModel;
 import cn.itcast.streaming.sink.TripDivisionHBaseSink;
 import cn.itcast.utils.JsonParseUtil;
-import cn.itcast.window.function.DriveSampleWindowFunction;
 import cn.itcast.window.function.DriveTripWindowFunction;
 import cn.itcast.window.udfWatermark.TripDriveWatermark;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -18,6 +17,7 @@ import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindow
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
+// 驾驶行程入库（分析）
 public class TripDriverAnalysisTask extends BaseTask{
 
     // 继承BaseTask任务
@@ -55,7 +55,10 @@ public class TripDriverAnalysisTask extends BaseTask{
         SingleOutputStreamOperator<TripModel> tripdataresult = driveDataStream.apply(new DriveTripWindowFunction());
 
 
-        //  12）驾驶行程入hbase库TRIPDB:strip_division
-        tripdataresult.addSink(new TripDivisionHBaseSink("TRIPDB:trip_division_test"));
+        //  12）驾驶行程入hbase库TRIPDB:trip_division
+        tripdataresult.addSink(new TripDivisionHBaseSink("TRIPDB:trip_division"));
+
+
+        env.execute();
     }
 }

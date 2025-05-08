@@ -4,7 +4,6 @@ import cn.itcast.entity.ElectricFenceModel;
 import cn.itcast.entity.ItcastDataObj;
 import cn.itcast.streaming.source.ElectricFenceResultTmp;
 import cn.itcast.streaming.source.MysqlElectricFenceSouce;
-import cn.itcast.utils.DateUtil;
 import cn.itcast.utils.JsonParseUtil;
 import cn.itcast.window.function.ElectricFenceRulesFunction;
 import cn.itcast.window.function.ElectricFenceWindowFunction;
@@ -24,8 +23,7 @@ import org.apache.flink.connector.jdbc.JdbcSink;
 import org.apache.flink.connector.jdbc.JdbcStatementBuilder;
 import java.util.HashMap;
 
-// 总结，别用flink1.10版本  太老了
-// 成功进数据拿下
+// 成功进数据拿下   数据落到mysql中   电子围栏需求
 public class ElectricFenceTask extends BaseTask {
     public static void main(String[] args) throws Exception {
         /**
