@@ -1,8 +1,5 @@
 package com.reneyao.realtime.utils;
 
-
-// 对json文件进行处理（需要预先建立好ItcastDataObj对象类
-
 import com.reneyao.realtime.entity.ItcastDataObj;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
@@ -20,10 +17,9 @@ public class JsonParseUtil {
     private final static Logger logger = LoggerFactory.getLogger(JsonParseUtil.class);
 
     /**
-     * 传递json字符串，返回解析后的javaBean对象
-     * {"gearDriveForce":0,"batteryConsistencyDifferenceAlarm":0,"soc":94,"socJumpAlarm":0,"satNum":10,"caterpillaringFunction":0,"socLowAlarm":0,"chargingGunConnectionState":0,"minTemperatureSubSystemNum":1,"chargedElectronicLockStatus":0,"terminalTime":"2019-11-20 15:33:41","maxVoltageBatteryNum":49,"singleBatteryOverVoltageAlarm":0,"otherFaultCount":0,"vehicleStorageDeviceOvervoltageAlarm":0,"brakeSystemAlarm":0,"serverTime":"2019-11-20 15:34:00.154","vin":"LS6A2E0E3KA006811","rechargeableStorageDevicesFaultCount":0,"driveMotorTemperatureAlarm":0,"remainedPowerMile":0,"dcdcStatusAlarm":0,"gearBrakeForce":1,"lat":29.0646,"driveMotorFaultCodes":"","vehicleSpeed":0.0,"lng":119.50206,"gpsTime":"2019-11-20 15:33:41","nevChargeSystemVoltageDtoList":[{"currentBatteryStartNum":1,"batteryVoltage":[4.15,4.15,4.147,4.148,4.149,4.148,4.139,4.147,4.146,4.152,4.149,4.149,4.15,4.149,4.146,4.148,4.152,4.147,4.149,4.15,4.146,4.15,4.149,4.148,4.148,4.149,4.148,4.149,4.152,4.141,4.146,4.151,4.152,4.154,4.15,4.147,4.15,4.144,4.146,4.145,4.149,4.148,4.147,4.148,4.144,4.143,4.147,4.141,4.156,4.155,4.15,4.15,4.151,4.156,4.153,4.145,4.151,4.144,4.15,4.152,4.145,4.15,4.148,4.149,4.151,4.156,4.152,4.152,4.151,4.142,4.149,4.151,4.148,4.145,4.148,4.146,4.148,4.146,4.151,4.138,4.147,4.138,4.146,4.142,4.149,4.15,4.146,4.148,4.143,4.146,4.147,4.147,4.155,4.151,4.141,4.147],"chargeSystemVoltage":398.2,"currentBatteryCount":96,"batteryCount":96,"childSystemNum":1,"chargeSystemCurrent":0.2999878}],"engineFaultCount":0,"currentElectricity":94,"singleBatteryUnderVoltageAlarm":0,"maxVoltageBatterySubSystemNum":1,"minTemperatureProbe":13,"driveMotorNum":1,"totalVoltage":398.2,"maxAlarmLevel":0,"temperatureDifferenceAlarm":0,"averageEnergyConsumption":0.0,"minVoltageBattery":4.138,"driveMotorData":[{"controllerInputVoltage":399.0,"controllerTemperature":38,"revolutionSpeed":0,"num":1,"controllerDcBusCurrent":0.0,"length":0,"temperature":40,"torque":0.0,"state":4,"type":0,"MAX_BYTE_VALUE":127}],"shiftPositionStatus":0,"minVoltageBatteryNum":80,"engineFaultCodes":"","minTemperatureValue":17,"chargeStatus":3,"deviceTime":"2019-11-20 15:33:41","shiftPosition":0,"totalOdometer":38595.0,"alti":57.0,"speed":0.0,"socHighAlarm":0,"vehicleStorageDeviceUndervoltageAlarm":0,"totalCurrent":0.3,"batteryAlarm":0,"rechargeableStorageDeviceMismatchAlarm":0,"isHistoryPoi":0,"maxVoltageBattery":4.156,"vehiclePureDeviceTypeOvercharge":0,"dcdcTemperatureAlarm":0,"isValidGps":true,"lastUpdatedTime":"2019-11-20 15:34:00.154","driveMotorControllerTemperatureAlarm":0,"nevChargeSystemTemperatureDtoList":[{"probeTemperatures":[18,18,18,20,19,19,19,20,19,19,18,19,17,17,17,17,17,17,18,18,18,17,18,18,17,17,17,17,17,17,18,18],"chargeTemperatureProbeNum":32,"childSystemNum":1}],"igniteCumulativeMileage":0.0,"dcStatus":1,"maxTemperatureSubSystemNum":1,"carStatus":2,"minVoltageBatterySubSystemNum":1,"heading":2.68,"driveMotorFaultCount":0,"tuid":"50003001190517140000000518553162","energyRecoveryStatus":0,"targetType":"VehicleRealtimeDto","maxTemperatureProbe":4,"rechargeableStorageDevicesFaultCodes":"","carMode":1,"highVoltageInterlockStateAlarm":0,"insulationAlarm":0,"maxTemperatureValue":20,"otherFaultCodes":"","remainPower":94.00001,"insulateResistance":6417,"batteryLowTemperatureHeater":0}
-     * @param jsonStr
-     * @return
+     * 公共方法，目前处理kafka的数据源，转化为javaBean对象。
+     * @param jsonStr  要求传入字符串
+     * @return ItcastDataObj
      */
     public static ItcastDataObj parseJsonToObject(String jsonStr){
         //定义需要返回的javaBean对象

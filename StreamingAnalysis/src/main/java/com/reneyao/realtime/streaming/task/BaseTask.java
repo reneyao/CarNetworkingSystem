@@ -3,6 +3,7 @@ package com.reneyao.realtime.streaming.task;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.java.utils.ParameterTool;
+import org.apache.flink.contrib.streaming.state.RocksDBStateBackend;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -43,12 +44,13 @@ public abstract class BaseTask {
     private static StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
     /**
-     *  1）flink任务的初始化方法
+     *  1.flink任务的初始化方法
      * @return
      */
     public static StreamExecutionEnvironment getEnv(String className){
         // 传入的String className  在本方法中限定了hdfs的文件名，在后面的方法中加了消费者组id的限定
-//        System.setProperty("HADOOP_USER_NAME", "rene");
+        // 1)BaseTask设置hadoop的用户名
+//        System.setProperty("HADOOP_USER_NAME", "rene");    // 还是需要在每个任务中添加
         //设置全局的参数（使用的时候可以直接用法：getRuntimeContext()）
         env.getConfig().setGlobalJobParameters(parameterTool);
         //  2）按照事件时间处理数据（terminalTimeStamp）进行窗口的划分和水印的添加
@@ -71,13 +73,16 @@ public abstract class BaseTask {
         env.getCheckpointConfig().enableExternalizedCheckpoints(CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);
         //  3.7：设置执行job过程中，保存检查点错误时，job不失败
         env.getCheckpointConfig().setFailOnCheckpointingErrors(false);
+
         //  3.8：设置检查点的存储位置，使用rocketDBStateBackend，存储本地+hdfs分布式文件系统，可以进行增量检查点
-//        String hdfsBasePath = parameterTool.getRequired("hdfsUri");
-//        try {
-//            env.setStateBackend(new RocksDBStateBackend(hdfsBasePath+"/flink/checkpoint/"+ className));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        // 重要设置：便于flink自己管理offset，以及恢复任务
+        String hdfsBasePath = parameterTool.getRequired("hdfsUri");
+        try {
+            env.setStateBackend(new RocksDBStateBackend(hdfsBasePath+"/flink/checkpoint/"+ className));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // 4）设置任务的重启策略（固定延迟重启策略、失败率重启策略、无重启策略）
         // 4.1：如果开启了checkpoint，默认不停的重启，没有开启checkpoint，无重启策略
         env.setRestartStrategy(RestartStrategies.noRestart());
@@ -88,7 +93,7 @@ public abstract class BaseTask {
     }
 
     /**
-     *  2）flink接入kafka数据源消费数据
+     *  2.flink接入kafka数据源消费数据
      * @param clazz
      * @param <T>
      * @return
@@ -111,7 +116,7 @@ public abstract class BaseTask {
                 clazz.newInstance(),
                 props
         );
-        kafkaConsumer.setStartFromEarliest();  // 从头开始消费
+        kafkaConsumer.setStartFromEarliest();   // 从头开始消费
         // 5.7：设置自动递交offset保存到检查点
         kafkaConsumer.setCommitOffsetsOnCheckpoints(true);
         //  6）将kafka消费者对象添加到环境中

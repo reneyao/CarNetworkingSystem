@@ -194,6 +194,11 @@
         </dependency>
         <!-- log4j日志 start-->
         <dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.7.25</version>
+</dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
@@ -313,13 +318,21 @@
             <artifactId>flink-table-runtime-blink_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.flink</groupId>-->
+<!--            <artifactId>flink-jdbc_2.11</artifactId>-->
+<!--            <version>${flink.connector.version}</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>cn.itcast</groupId>
-            <artifactId>OffLineBatchAnalysis</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-jdbc_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client-runtime</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
 
     </dependencies>
 

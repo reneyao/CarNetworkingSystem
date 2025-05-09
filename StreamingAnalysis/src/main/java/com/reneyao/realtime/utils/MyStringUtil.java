@@ -4,7 +4,7 @@ package com.reneyao.realtime.utils;
 /**
  * 字符串处理工具类
  */
-public class StringUtil {
+public class MyStringUtil {
     /**
      * 字符串倒序：有递归法（不推荐）、数组倒序拼接、冒泡对调、使用StringBuffer的reverse方法等。
      * 冒泡对调（推荐）

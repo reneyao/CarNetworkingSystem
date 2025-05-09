@@ -19,7 +19,7 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
     private String tableName;
     private Connection conn = null;
     // hbase客户端中的数据写缓存对象
-    private BufferedMutator mutator = null;
+    private BufferedMutator mutator = null;        // 优化版本就是用缓存
     private String cf = "cf";
 
     public SourceDataHBaseSinkOptimize(String tableName) {
@@ -51,7 +51,7 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
 
     // 简化代码
     private Put hbasePut(ItcastDataObj itcastDataObj){
-// rowkey设计:保证rowKey不会有序
+        // rowkey设计:保证rowKey不会有序          这个设计不合理
         Put put = new Put(Bytes.toBytes(itcastDataObj.getVin() + "_" + (Long.MAX_VALUE - itcastDataObj.getTerminalTimeStamp())));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(itcastDataObj.getVin()));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("terminalTime"), Bytes.toBytes(itcastDataObj.getTerminalTime()));

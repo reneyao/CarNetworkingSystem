@@ -3,7 +3,7 @@ package com.reneyao.realtime.streaming.sink;
 import com.reneyao.realtime.entity.ItcastDataObj;
 import com.reneyao.realtime.utils.ConfigLoader;
 import com.reneyao.realtime.utils.DateUtil;
-import com.reneyao.realtime.utils.StringUtil;
+import com.reneyao.realtime.utils.MyStringUtil;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -103,8 +103,8 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
         //1611298737570->0757378921161
         //1611298756579->9756578921161
         //Long.MAX_VALUE-itcastDataObj.getTerminalTimeTimestamp()
-        //需要将时间戳数据反转（自己实现）
-        String rowKey = itcastDataObj.getVin() + "_" + StringUtil.reverse(itcastDataObj.getTerminalTimeStamp().toString());
+        //需要将时间戳数据反转（自己实现）            rowKey这个设计不合理
+        String rowKey = itcastDataObj.getVin() + "_" + MyStringUtil.reverse(itcastDataObj.getTerminalTimeStamp().toString());
         //定义列族的名称
         String cf = "cf";
         Put put = new Put(Bytes.toBytes(rowKey));
