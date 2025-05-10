@@ -17,18 +17,14 @@ import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindow
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
-// 驾驶行程入库（分析）
+// 驾驶行程入库（分析）  业务需求：对车辆驾驶的里程进行分析
 public class TripDriverAnalysisTask extends BaseTask{
 
-    // 继承BaseTask任务
     public static void main(String[] args) throws Exception {
-        // 1）初始化flink流式处理的开发环境
         StreamExecutionEnvironment env = getEnv(TripDriverAnalysisTask.class.getSimpleName());
 
-        // 6）将kafka消费者对象添加到环境中
         DataStream<String> dataStreamSource = createKafkaStream(SimpleStringSchema.class);
 
-        // 7）将消费出来的数据进行json解析成javaBean对象  map处理   数据
         SingleOutputStreamOperator<ItcastDataObj> itcastJsonStream = dataStreamSource.map(JsonParseUtil::parseJsonToObject)
                 //过滤出来驾驶行程数据
                 .filter(itcastDataObj -> 2 == itcastDataObj.getChargeStatus() || 3 == itcastDataObj.getChargeStatus());
@@ -39,24 +35,24 @@ public class TripDriverAnalysisTask extends BaseTask{
             e.printStackTrace();
         }
 
-        // 8）添加水位线（允许数据延迟到达30秒钟）
+        // 添加水位线（允许数据延迟到达30秒钟）
         // 使用自定义的水位线对象 tripDriveWatermark
         SingleOutputStreamOperator<ItcastDataObj> tripDriveWatermark = itcastJsonStream
                 .assignTimestampsAndWatermarks(new TripDriveWatermark());
         // 上面处理好的数据可以被采用数据/分析行程数据一起用
         // 后续要单独处理
-        // 9）根据vin进行分组
+        // 根据vin进行分组
         KeyedStream<ItcastDataObj, String> keyedStream = tripDriveWatermark.keyBy(ItcastDataObj::getVin);
-        // 10）应用sessionWindow
+        // 应用sessionWindow
         WindowedStream<ItcastDataObj, String, TimeWindow> driveDataStream = keyedStream.window(
                 EventTimeSessionWindows.withGap(Time.minutes(15)));
 
-        //  11) 应用自定义的function
+        //   应用自定义的function
         SingleOutputStreamOperator<TripModel> tripdataresult = driveDataStream.apply(new DriveTripWindowFunction());
 
 
-        //  12）驾驶行程入hbase库TRIPDB:trip_division
-        tripdataresult.addSink(new TripDivisionHBaseSink("TRIPDB:trip_division"));
+        //  驾驶行程入GMALL库TRIPDB:trip_division
+        tripdataresult.addSink(new TripDivisionHBaseSink("GMALL:trip_division"));
 
 
         env.execute();

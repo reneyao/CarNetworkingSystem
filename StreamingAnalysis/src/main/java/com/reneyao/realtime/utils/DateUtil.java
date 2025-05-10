@@ -140,5 +140,9 @@ public class DateUtil {
         // 只取前6位
         return reversedStr.length() >= 8 ? reversedStr.substring(0, 8) : reversedStr;
     }
-    
+
+    public static String getCurrentTime() {
+        long currentTimeMillis = getCurrentTimeMillis();
+        return String.valueOf(currentTimeMillis);
+    }
 }

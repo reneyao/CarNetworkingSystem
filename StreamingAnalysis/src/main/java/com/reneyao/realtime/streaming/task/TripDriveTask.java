@@ -16,9 +16,9 @@ import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindow
 import org.apache.flink.streaming.api.windowing.time.Time;
 
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
-// 驾驶行程入库（采样）
+// 驾驶数据入库：主要是车辆形式的电量，里程，速度，位置信息
 /**
- * 驾驶行程业务开发
+ * 驾驶行程业务开发  ： 采样对应行程划分中四个时间段：5分钟、10分钟、15分钟、20分钟，取得样本数据
  * 1）消费kafka数据过滤出来驾驶行程采样数据，实时的写入到hbase表中
  * 2）消费kafka数据过滤出来驾驶行程数据，实时的写入到hbase表中
  * 添加行程划分水位线
@@ -28,15 +28,12 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
  * 驾驶行程划分与入库
  */
 public class TripDriveTask extends BaseTask {
-    // 继承BaseTask任务
+
     public static void main(String[] args) throws Exception {
-        // 1）初始化flink流式处理的开发环境
         StreamExecutionEnvironment env = getEnv(TripDriveTask.class.getSimpleName());
 
-        // 6）将kafka消费者对象添加到环境中
         DataStream<String> dataStreamSource = createKafkaStream(SimpleStringSchema.class);
 
-        // 7）将消费出来的数据进行json解析成javaBean对象  map处理   数据
         SingleOutputStreamOperator<ItcastDataObj> itcastJsonStream = dataStreamSource.map(JsonParseUtil::parseJsonToObject)
                 //过滤出来驾驶行程数据
                 .filter(itcastDataObj -> 2 == itcastDataObj.getChargeStatus() || 3 == itcastDataObj.getChargeStatus());
@@ -47,31 +44,25 @@ public class TripDriveTask extends BaseTask {
             e.printStackTrace();
         }
 
-        //8）添加水位线（允许数据延迟到达30秒钟）
+        //添加水位线（允许数据延迟到达30秒钟）
         // 使用自定义的水位线对象 tripDriveWatermark
         SingleOutputStreamOperator<ItcastDataObj> tripDriveWatermark = itcastJsonStream
                 .assignTimestampsAndWatermarks(new TripDriveWatermark());
         // 上面处理好的数据可以被采用数据/分析行程数据一起用
-        //9）根据vin进行分组
+        //根据vin进行分组
         KeyedStream<ItcastDataObj, String> keyedStream = tripDriveWatermark.keyBy(ItcastDataObj::getVin);
 
-        //10）应用sessionWindow
+        //应用sessionWindow
         WindowedStream<ItcastDataObj, String, TimeWindow> driveDataStream = keyedStream.window(
-                EventTimeSessionWindows.withGap(Time.minutes(15)));
+                EventTimeSessionWindows.withGap(Time.minutes(15)));          // 此处使用的时间窗口是15分钟
 
-        // 11) 应用自定义的function  亦可以使用Process，aggregate去计算
+        //  应用自定义的function  亦可以使用Process，aggregate去计算
         // 传入ItcastDataObj类型的迭代器
         SingleOutputStreamOperator<String[]> driveSampleDataStream = driveDataStream.apply(new DriveSampleWindowFunction());
 
-        //12） 驾驶行程采样如hbase库TRIPDB:trip_sample
-        driveSampleDataStream.addSink(new TripSampleToHBaseSink("TRIPDB:trip_sample"));
+        // 驾驶行程采样如hbase库GMALL:trip_sample
+        driveSampleDataStream.addSink(new TripSampleToHBaseSink("GMALL:trip_sample"));
 
-//        // 第二个数据处理
-//        // 13）  沿用todo10 的window处理后的数据  再应用另一个function
-//        SingleOutputStreamOperator<TripModel> tripModelSingleOutputStreamOperator = driveDataStream.apply(new DriveTripWindowFunction());
-//
-//        //  14) 写入到hbase
-//        tripModelSingleOutputStreamOperator.addSink(new TripDivisionHBaseSink("TRIPDB:trip_division"));
 
         env.execute();
     }

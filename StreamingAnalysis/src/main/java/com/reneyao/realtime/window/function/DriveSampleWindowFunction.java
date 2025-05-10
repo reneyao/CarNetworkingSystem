@@ -74,7 +74,7 @@ public class DriveSampleWindowFunction implements WindowFunction<ItcastDataObj, 
             //在list循环的内部，在采样逻辑判断的外部，当下一次采样之前，赋值开始时间为当前时间
             startTime = currentTimestamp;
         }
-        //processTime：计算时间，分析结果的当前时间
+        // processTime：计算时间，分析结果的当前时间
         String[] result = new String[7];
         result[0] = firstItcastDataObj.getVin();
         result[1] = String.valueOf(firstItcastDataObj.getTerminalTimeStamp());

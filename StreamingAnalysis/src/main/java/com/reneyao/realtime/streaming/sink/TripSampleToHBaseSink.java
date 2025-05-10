@@ -81,9 +81,9 @@ public class TripSampleToHBaseSink extends RichSinkFunction<String[]> {
         String rowKey = value[0] + value[1];
         Put put = new Put(Bytes.toBytes(rowKey));      // 也是7个元素
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("soc"), Bytes.toBytes(value[2]));
-        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("mileage"), Bytes.toBytes(value[3]));
+        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("mileage"), Bytes.toBytes(value[3]));   // 里程
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("speed"), Bytes.toBytes(value[4]));
-        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("gps"), Bytes.toBytes(value[5]));
+        put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("gps"), Bytes.toBytes(value[5]));   // 地理位置
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("terminalTime"), Bytes.toBytes(value[6]));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("processTime"), Bytes.toBytes(DateUtil.getCurrentDate()));
         return put;
