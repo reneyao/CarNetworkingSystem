@@ -103,8 +103,10 @@ public class SrcDataToHBaseSink extends RichSinkFunction<ItcastDataObj> {
         //1611298737570->0757378921161
         //1611298756579->9756578921161
         //Long.MAX_VALUE-itcastDataObj.getTerminalTimeTimestamp()
-        //需要将时间戳数据反转（自己实现）            rowKey这个设计不合理
-        String rowKey = itcastDataObj.getVin() + "_" + MyStringUtil.reverse(itcastDataObj.getTerminalTimeStamp().toString());
+        //需要将时间戳数据反转（自己实现）            rowKey这个设计不合理    itcastDataObj.getTerminalTimeStamp()  是固定值
+//        String rowKey = itcastDataObj.getVin() + "_" + MyStringUtil.reverse(itcastDataObj.getTerminalTimeStamp().toString());
+        // 自定义rowkey
+        String rowKey = itcastDataObj.getVin() + "_" + DateUtil.getMillisKey();
         //定义列族的名称
         String cf = "cf";
         Put put = new Put(Bytes.toBytes(rowKey));

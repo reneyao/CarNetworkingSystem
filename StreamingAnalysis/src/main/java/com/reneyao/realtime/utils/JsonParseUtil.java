@@ -313,11 +313,14 @@ public class JsonParseUtil {
                 }
             }
 
-            // 扩展字段赋值：终端时间（long类型的）
+            // 扩展字段赋值：终端时间（long类型的）     这里只要是正常的数据，才会进行赋值
             if(!StringUtils.isEmpty(itcastDataObj.getTerminalTime())){
-                itcastDataObj.setTerminalTimeStamp(DateUtil.convertStringToDate(itcastDataObj.getTerminalTime()).getTime());
+                itcastDataObj.setTerminalTimeStamp(DateUtil.convertStringToDateTime(itcastDataObj.getTerminalTime()).getTime());
             }
-        } catch (Exception exception) {
+
+        }
+
+        catch (Exception exception) {
             //异常数据
             if(!StringUtils.isEmpty(jsonStr)){
                 itcastDataObj.setErrorData(jsonStr);
@@ -325,6 +328,7 @@ public class JsonParseUtil {
             logger.error(exception.getMessage());
             exception.printStackTrace();
         }
+
         //返回解析后的javaBean对象
         return itcastDataObj;
     }

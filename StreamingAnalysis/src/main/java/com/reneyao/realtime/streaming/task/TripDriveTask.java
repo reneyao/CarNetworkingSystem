@@ -60,6 +60,7 @@ public class TripDriveTask extends BaseTask {
                 EventTimeSessionWindows.withGap(Time.minutes(15)));
 
         // 11) 应用自定义的function  亦可以使用Process，aggregate去计算
+        // 传入ItcastDataObj类型的迭代器
         SingleOutputStreamOperator<String[]> driveSampleDataStream = driveDataStream.apply(new DriveSampleWindowFunction());
 
         //12） 驾驶行程采样如hbase库TRIPDB:trip_sample

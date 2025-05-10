@@ -59,7 +59,7 @@ public class VehicleDetailSinkOptimizer extends RichSinkFunction<ItcastDataObj> 
     public void close() throws Exception {
         super.close();
         if(mutator!=null) mutator.close();
-        logger.warn("没有继续获取到数据，关闭hbase的连接对象");
+        System.out.println("没有继续获取到数据，关闭hbase的连接对象");
         if(conn != null) conn.close();
 
     }
@@ -81,8 +81,8 @@ public class VehicleDetailSinkOptimizer extends RichSinkFunction<ItcastDataObj> 
 
 
     private Put setDataSourcePut(ItcastDataObj itcastDataObj) {
-        //确定rowkey
-        String rowKey = itcastDataObj.getVin() + MyStringUtil.reverse(itcastDataObj.getTerminalTimeStamp().toString());
+        //  自定义rowkey的写法
+        String rowKey =  itcastDataObj.getVin() + DateUtil.getMillisKey();
         Put put = new Put(Bytes.toBytes(rowKey));   // phoenix建表需要注意PK,"ROWKEY" 
         //这两个列一定不为空，如果为空就不是正常数据了
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(itcastDataObj.getVin()));

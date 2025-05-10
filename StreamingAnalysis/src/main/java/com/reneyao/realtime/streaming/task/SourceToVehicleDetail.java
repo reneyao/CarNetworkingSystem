@@ -28,7 +28,7 @@ public class SourceToVehicleDetail extends BaseTask{
                 filter(itcastDataObj -> StringUtils.isEmpty(itcastDataObj.getErrorData()));
 
         // 正常数据，写入到hbase中：只取目标表的字段  itcastsrc_vehicle_detail已经在phoenix创建好
-        VehicleDetailSinkOptimizer hbaseSink = new VehicleDetailSinkOptimizer("itcastsrc_vehicle_detail_test");
+        VehicleDetailSinkOptimizer hbaseSink = new VehicleDetailSinkOptimizer("itcastsrc_vehicle_detail");
 //        // 使用自定义的sink
         srcDataStream.addSink(hbaseSink);
 

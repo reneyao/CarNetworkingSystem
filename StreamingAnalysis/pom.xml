@@ -20,16 +20,12 @@
   
 
     <dependencies>
-
-
         <!-- geodesy地址位置查询 -->
         <dependency>
             <groupId>org.gavaghan</groupId>
             <artifactId>geodesy</artifactId>
             <version>${geodesy.version}</version>
         </dependency>
-
-        <!-- google guava开发工具依赖-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -90,7 +86,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- hadoop开发环境 end -->
         <!-- hive开发环境 -->
         <dependency>
             <groupId>org.apache.hive</groupId>
@@ -151,13 +146,11 @@
             <artifactId>flink-streaming-java_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-filesystem_2.12</artifactId>
             <version>${flink.connector.version}</version>
         </dependency>
-
         <!--        <dependency>-->
         <!--            <groupId>org.apache.flink</groupId>-->
         <!--            <artifactId>flink-hbase_2.12</artifactId>-->
@@ -173,7 +166,6 @@
             <artifactId>flink-runtime-web_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
-        <!-- flink 开发环境 end -->
         <!-- kafka开发环境客户端 -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
@@ -193,24 +185,22 @@
             <version>${lombok.version}</version>
         </dependency>
         <!-- log4j日志 start-->
+        <!--日志配置-->
         <dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>1.7.25</version>
-</dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
         <!-- mysql 连接驱动 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -254,13 +244,7 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-
         <!-- google guava开发工具依赖-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
@@ -284,45 +268,34 @@
             <version>${commons-cli.version}</version>
             <scope>compile</scope>
         </dependency>
-
-
         <!-- Flink Table API -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-java-bridge_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
-
         <!-- Flink Table Planner (for blink planner) -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-planner-blink_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-planner_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-common</artifactId>
             <version>${flink.version}</version>
         </dependency>
-
         <!-- Flink Table Runtime -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-runtime-blink_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.flink</groupId>-->
-<!--            <artifactId>flink-jdbc_2.11</artifactId>-->
-<!--            <version>${flink.connector.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-jdbc_${scala.binary.version}</artifactId>

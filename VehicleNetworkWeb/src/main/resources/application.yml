@@ -20,7 +20,7 @@ spring:
       username: rene
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-    # todo hive数据源
+    # TODO hive数据源
     # 输入自己hive的信息,itcast_ods是hive创建的库
     hive:
       url: jdbc:hive2://hadoop102:10000/itcast_ods

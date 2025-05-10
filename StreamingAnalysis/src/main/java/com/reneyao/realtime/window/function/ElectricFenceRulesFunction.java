@@ -81,7 +81,7 @@ public class ElectricFenceRulesFunction implements CoFlatMapFunction<ItcastDataO
                         fenceModel.setNowStatus(1);
                     }
                     System.out.println("关联成功，返回-fenceModel："+fenceModel);
-                    //TODO 返回数据
+                    // 返回数据
                     collector.collect(fenceModel);
                 }  else{
                     System.out.println("电子围栏规则有效时间不在原始数据的位置时间内，eventTime："+eventTime+"，electricFenceResultTmp："+electricFenceResultTmp);

@@ -16,6 +16,8 @@ import com.reneyao.realtime.bean.DateFormatDefine;
  * 4. 转换成 yyyy-MM-dd 格式的日期
  * 5. 转换成 yyyy-MM-dd HH:mm:ss 格式的日期时间
  * 6. 传入日期时间转换成日期字符串
+ * 7. 获取当前时间的毫秒级时间戳
+ * 8. 获取当前时间的毫秒级时间戳并格式化为字符串
  */
 public class DateUtil {
     /**
@@ -115,4 +117,28 @@ public class DateUtil {
             return -1;
         }
     }
+
+    /**
+     * 7、获取当前时间的毫秒级时间戳
+     * @return 当前时间的毫秒数，从1970年1月1日00:00:00 GMT开始计算
+     */
+    public static long getCurrentTimeMillis() {
+        return System.currentTimeMillis();
+    }
+    
+    /**
+     * 8、获取当前时间的毫秒级时间戳，转为字符串后反转，并只返回前6位
+     * 可用于生成基于时间的简短标识符
+     * @return 反转后的时间戳字符串的前6位
+     */
+    public static String getMillisKey() {
+        long currentTimeMillis = getCurrentTimeMillis();
+        String timeStr = String.valueOf(currentTimeMillis);
+        // 反转字符串
+        StringBuilder reversed = new StringBuilder(timeStr);
+        String reversedStr = reversed.reverse().toString();
+        // 只取前6位
+        return reversedStr.length() >= 8 ? reversedStr.substring(0, 8) : reversedStr;
+    }
+    
 }

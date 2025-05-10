@@ -49,10 +49,10 @@ public class SourceDataHBaseSinkOptimize extends RichSinkFunction<ItcastDataObj>
         mutator.flush();
     }
 
-    // 简化代码
     private Put hbasePut(ItcastDataObj itcastDataObj){
-        // rowkey设计:保证rowKey不会有序          这个设计不合理
-        Put put = new Put(Bytes.toBytes(itcastDataObj.getVin() + "_" + (Long.MAX_VALUE - itcastDataObj.getTerminalTimeStamp())));
+        // rowkey设计:保证rowKey不会有序  自定义rowkey的写法
+        String rowKey = itcastDataObj.getVin() + "_" + DateUtil.getMillisKey();
+        Put put = new Put(Bytes.toBytes(rowKey));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("vin"), Bytes.toBytes(itcastDataObj.getVin()));
         put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("terminalTime"), Bytes.toBytes(itcastDataObj.getTerminalTime()));
         if (itcastDataObj.getSoc() != -999999) put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("soc"), Bytes.toBytes(String.valueOf(itcastDataObj.getSoc())));
