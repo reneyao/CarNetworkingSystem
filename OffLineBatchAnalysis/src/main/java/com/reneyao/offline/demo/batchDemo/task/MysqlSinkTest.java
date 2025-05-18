@@ -1,6 +1,6 @@
-package com.reneyao.offline.demo.batch.task;
+package com.reneyao.offline.demo.batchDemo.task;
 
-import com.reneyao.offline.demo.batch.sink.MySQLSinkTest;
+import com.reneyao.offline.demo.batchDemo.sink.MySQLSinkTest;
 import com.reneyao.offline.bean.UserBehavior;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;

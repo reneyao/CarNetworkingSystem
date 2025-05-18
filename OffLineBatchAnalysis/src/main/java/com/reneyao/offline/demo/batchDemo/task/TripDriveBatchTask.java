@@ -1,9 +1,9 @@
-package com.reneyao.offline.demo.batch.task;
+package com.reneyao.offline.demo.batchDemo.task;
 
-import com.reneyao.offline.demo.batch.window.function.DriveSampleWindowFunction;
-import com.reneyao.offline.demo.batch.window.udfWatermark.TripDriveWatermark;
+import com.reneyao.offline.demo.batchDemo.window.function.DriveSampleWindowFunction;
+import com.reneyao.offline.demo.batchDemo.window.udfWatermark.TripDriveWatermark;
 import com.reneyao.offline.bean.ItcastDataObj;
-import com.reneyao.offline.utils.JsonParseUtil;
+import com.reneyao.offline.utils.OfflineJsonParseUtil;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.CheckpointingMode;
@@ -78,7 +78,7 @@ public class TripDriveBatchTask {
         // 输出测试
        streamSource.print();  // 消费是没有问题的
 
-        SingleOutputStreamOperator<ItcastDataObj> map = streamSource.map(JsonParseUtil::parseJsonToObject);// 没有问题
+        SingleOutputStreamOperator<ItcastDataObj> map = streamSource.map(OfflineJsonParseUtil::parseJsonToObject);// 没有问题
         SingleOutputStreamOperator<ItcastDataObj> filter = map.filter(r -> 2 == r.getChargeStatus() || 3 == r.getChargeStatus());
         filter.assignTimestampsAndWatermarks(new TripDriveWatermark())
                 // window 和apply这一块有问题----> 自定义的windowFunction函数有问题

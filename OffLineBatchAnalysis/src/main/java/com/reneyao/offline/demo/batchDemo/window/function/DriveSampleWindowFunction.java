@@ -1,4 +1,4 @@
-package com.reneyao.offline.demo.batch.window.function;
+package com.reneyao.offline.demo.batchDemo.window.function;
 
 
 import com.reneyao.offline.bean.ItcastDataObj;

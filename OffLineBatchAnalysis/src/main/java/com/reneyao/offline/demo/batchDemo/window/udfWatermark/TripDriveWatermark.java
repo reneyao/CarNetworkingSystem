@@ -1,4 +1,4 @@
-package com.reneyao.offline.demo.batch.window.udfWatermark;
+package com.reneyao.offline.demo.batchDemo.window.udfWatermark;
 
 
 import com.reneyao.offline.bean.ItcastDataObj;

@@ -1,7 +1,7 @@
-package com.reneyao.offline.demo;
+package com.reneyao.offline.demo.flinkToMysqlDemo;
 
 
-import com.reneyao.offline.utils.JsonParseUtil;
+import com.reneyao.offline.utils.OfflineJsonParseUtil;
 import com.reneyao.offline.bean.ItcastDataObj;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
@@ -28,7 +28,7 @@ public class KafkaSourceToMysqlTask2 {
 
 // Kafka 配置
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "120.55.78.114:9092");
+        props.setProperty("bootstrap.servers", "aliecs:9092");
         props.setProperty("group.id", "test4");
         props.setProperty("auto.offset.reset", "earliest");
         props.setProperty("enable.auto.commit", "false");
@@ -40,7 +40,7 @@ public class KafkaSourceToMysqlTask2 {
         );
 
         DataStreamSource<String> streamSource = env.addSource(vehicledata);
-        SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = streamSource.map(JsonParseUtil::parseJsonToObject);
+        SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = streamSource.map(OfflineJsonParseUtil::parseJsonToObject);
 
         itcastDataObjStream.print("解析后的数据>>>");
 

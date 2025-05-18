@@ -1,7 +1,7 @@
 package com.reneyao.offline.bean;
 
 
-import com.reneyao.offline.utils.DateUtil;
+import com.reneyao.offline.utils.OfflineDateUtil;
 
 public class ItcastDataObj {
 
@@ -790,7 +790,7 @@ public class ItcastDataObj {
         if (vehPwrlim != -999999) resultString.append(vehPwrlim).append("\t"); else resultString.append("NULL").append("\t");
         if (vehCfgInfo != "") resultString.append(vehCfgInfo).append("\t"); else resultString.append("NULL").append("\t");
         if (vacBrkPRmu != -999999) resultString.append(vacBrkPRmu).append("\t"); else resultString.append("NULL").append("\t");
-        resultString.append(DateUtil.getCurrentDateTime());
+        resultString.append(OfflineDateUtil.getCurrentDateTime());
 
         return resultString.toString();
     }

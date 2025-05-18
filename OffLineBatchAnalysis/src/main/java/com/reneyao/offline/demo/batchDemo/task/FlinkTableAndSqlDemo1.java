@@ -1,4 +1,4 @@
-package com.reneyao.offline.demo.batch.task;
+package com.reneyao.offline.demo.batchDemo.task;
 
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

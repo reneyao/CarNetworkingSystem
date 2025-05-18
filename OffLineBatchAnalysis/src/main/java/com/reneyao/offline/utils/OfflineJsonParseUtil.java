@@ -16,9 +16,9 @@ import java.util.*;
  * 日志json解析工具类
  * 将消费到的json字符串解析成javaBean对象返回
  */
-public class JsonParseUtil {
+public class OfflineJsonParseUtil {
     //使用指定的类（JsonParseUtil）初始化日志对象，方便在日志输出的时候，打印出来日志信息所属的类
-    private final static Logger logger = LoggerFactory.getLogger(JsonParseUtil.class);
+    private final static Logger logger = LoggerFactory.getLogger(OfflineJsonParseUtil.class);
 
     /**
      * 传递json字符串，返回解析后的javaBean对象
@@ -319,7 +319,7 @@ public class JsonParseUtil {
 
             //扩展字段赋值：终端时间（long类型的）
             if(!StringUtils.isEmpty(itcastDataObj.getTerminalTime())){
-                itcastDataObj.setTerminalTimeStamp(DateUtil.convertStringToDate(itcastDataObj.getTerminalTime()).getTime());
+                itcastDataObj.setTerminalTimeStamp(OfflineDateUtil.convertStringToDate(itcastDataObj.getTerminalTime()).getTime());
             }
         } catch (Exception exception) {
             //异常数据

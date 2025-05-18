@@ -1,4 +1,4 @@
-package com.reneyao.offline.demo;
+package com.reneyao.offline.demo.flinkToMysqlDemo;
 
 
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
@@ -13,31 +13,29 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// 用于测试flink对mysql的插入和查询操作
 /**
  * @Description:Flink加载mysql数据测试类
  */
-public class FlinkMysqlBatchTest  {
-    private final static Logger logger = LoggerFactory.getLogger(FlinkMysqlBatchTest.class);
+public class TestFlinkMysqlBatch {
+    private final static Logger logger = LoggerFactory.getLogger(TestFlinkMysqlBatch.class);
 
-    private final static String URL = "jdbc:mysql://localhost:3306/test";
+    private final static String URL = "jdbc:mysql://localhost:3306/mydb_test?serverTimezone=Asia/Shanghai";
     private final static String USER = "root";
     private final static String PASSWORD = "123456";
-    private final static String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-    private final static String SQL = "select name,age,country from user_info";
-    private final static String INSERT_SQL = "insert into user_info (name,age,country) values(?,?,?)";
+    private final static String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+    private final static String SQL = "select name,age,country from user_info_vehicle";
+    private final static String INSERT_SQL = "insert into user_info_vehicle (name,age,country) values(?,?,?)";
 
     public static void main(String[] args) {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
         try {
-//            DataSet<Row> inputMysql = testJDBCRead(env);
-//            inputMysql.print();
-//            DataSet<Tuple3> mysqlDataSet = inputMysql.map(row ->
-//                    new Tuple3<>(row.getField(0),row.getField(1),row.getField(2)));
-//            mysqlDataSet.print();
+            DataSet<Row> inputMysql = testJDBCRead(env);
+            inputMysql.print();
 
-            testJDBCWrite(env);
+
+//            testJDBCWrite(env);
         } catch (Exception e) {
             e.printStackTrace();
         }

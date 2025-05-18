@@ -18,7 +18,7 @@ import java.util.Date;
  * 5. 转换成 yyyy-MM-dd HH:mm:ss 格式的日期时间
  * 6. 传入日期时间转换成日期字符串
  */
-public class DateUtil {
+public class OfflineDateUtil {
     /**
      * 1、直接获得当前日期，格式：“yyyy-MM-dd HH:mm:ss”
      * @return

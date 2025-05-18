@@ -1,8 +1,8 @@
-package com.reneyao.offline.demo;
+package com.reneyao.offline.demo.flinkToMysqlDemo;
 
 
 import com.reneyao.offline.bean.ItcastDataObj;
-import com.reneyao.offline.utils.JsonParseUtil;
+import com.reneyao.offline.utils.OfflineJsonParseUtil;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.CheckpointingMode;
@@ -61,7 +61,7 @@ public class KafkaSourceToMysqlTask {
 
     // 创建flink消费Kafka数据的对象
     Properties props = new Properties();
-        props.setProperty("bootstrap.servers","120.55.78.114:9092");
+        props.setProperty("bootstrap.servers","aliecs:9092");
         props.setProperty("group.id","test1");   // 消费者的组id
         props.setProperty("auto.offset.reset","earliest");
         props.setProperty("enable.auto.commit","false");
@@ -77,7 +77,7 @@ public class KafkaSourceToMysqlTask {
     DataStreamSource<String> streamSource = env.addSource(vehicledata);
 
     // 将json字符串解析成对象  借助map一一对应转化
-    SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = streamSource.map(JsonParseUtil::parseJsonToObject);
+    SingleOutputStreamOperator<ItcastDataObj> itcastDataObjStream = streamSource.map(OfflineJsonParseUtil::parseJsonToObject);
     itcastDataObjStream.print("解析后的数据>>>");
 
 
