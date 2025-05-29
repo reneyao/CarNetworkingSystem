@@ -39,7 +39,7 @@ public class HiveConfig {
         DruidDataSource datasource = new DruidDataSource();
 
         // 配置数据源属性
-        datasource.setUrl(dataSourceProperties.getHive().get("url"));
+        datasource.setUrl(dataSourceProperties.getHive().get("url"));   // jdbc
         datasource.setUsername(dataSourceProperties.getHive().get("username"));
         datasource.setPassword(dataSourceProperties.getHive().get("password"));
         datasource.setDriverClassName(dataSourceProperties.getHive().get("driver-class-name"));

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     @ApiOperation(value = "检测是否正常启动")
     public String helloWorld() {
         return "Hello World";
