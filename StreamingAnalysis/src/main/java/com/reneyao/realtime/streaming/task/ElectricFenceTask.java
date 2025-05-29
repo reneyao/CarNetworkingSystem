@@ -40,20 +40,18 @@ public class ElectricFenceTask extends BaseTask {
         // 1.电子围栏分析任务设置、原始数据json解析、过滤异常数据
         StreamExecutionEnvironment env = getEnv(ElectricFenceTask.class.getSimpleName());
 
-        //1.1：将kafka消费者实例添加到环境中
+        //将kafka消费者实例添加到环境中
         DataStream<String> dataStreamSource = createKafkaStream(SimpleStringSchema.class);
 
-        //1.2：将字符串转换成对象，过滤出来正常的数据
+        //将字符串转换成对象，过滤出来正常的数据
         SingleOutputStreamOperator<ItcastDataObj> itcastJsonDataStream = dataStreamSource.map(JsonParseUtil::parseJsonToObject)
                 .filter(itcastDataObj -> StringUtils.isEmpty(itcastDataObj.getErrorData()));
-//        itcastJsonDataStream.print("原始数据>>>");
 
         // 2.读取已存在电子围栏中的车辆与电子围栏信息(广播流临时结果数据)
-        // broadcast()方法，将广播DStream中的元素到每一个slot中
+        // broadcast()方法，将广播DStream中的元素到每一个slot中         拿mysql的电子围栏数据
         DataStream<HashMap<String, ElectricFenceResultTmp>> electricFenceVinsStream = env.addSource(new MysqlElectricFenceSouce()).broadcast();
-//        electricFenceVinsStream.print("电子围栏数据>>>");
-        // 合并广播流数据和原有数据
 
+        // 合并广播流数据和原有数据
         //3.原始车辆数据与电子围栏广播流进行合并，生成电子围栏规则模型流数据（DStream<ElectricFenceModel>）
         ConnectedStreams<ItcastDataObj, HashMap<String, ElectricFenceResultTmp>> electricFenceVinsConnectStream =
                 // 合并kafka读取出来的原始数据和mysql读取出来的电子围栏数据
@@ -79,6 +77,7 @@ public class ElectricFenceTask extends BaseTask {
         electricFenceDataStream.print("电子围栏结果>>>");
 
         // 落地mysql  表 electric_fence  使用jdbc sink，或者 mysql sink
+        // jdbc sink 是flink官方推荐使用的方法
         electricFenceDataStream
                 .addSink(JdbcSink.sink(
                         // 注：processTime由mysql操作插入数据
@@ -102,7 +101,7 @@ public class ElectricFenceTask extends BaseTask {
 //                    ps.setString(14,DateUtil.getCurrentDateTime());
                 },
                 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
-                        .withUrl("jdbc:mysql://120.55.78.114:3306/test_data?characterEncoding=utf-8&useSSL=false")
+                        .withUrl("jdbc:mysql://localhost:3306/test_data?characterEncoding=utf-8&useSSL=false")
                         .withDriverName("com.mysql.cj.jdbc.Driver")
                         .withUsername("rene")
                         .withPassword("@Aabc939596")
@@ -110,7 +109,6 @@ public class ElectricFenceTask extends BaseTask {
                         )
                 );
 
-        // 目前依赖有点问题
         env.execute();
     }
 
