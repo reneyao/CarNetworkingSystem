@@ -17,6 +17,8 @@ import org.apache.flink.util.Collector;
 
 import java.util.Random;
 
+
+// Data skew处理：先加盐计算分组计算(加盐是4个分组），然后再根据实际key汇总
 public class DataSkewState {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env =
@@ -37,7 +39,9 @@ public class DataSkewState {
                         Tuple3.of("a", 1L, 9000L),
                         Tuple3.of("a", 1L, 10000L),
                         Tuple3.of("a", 1L, 11000L),
-                        Tuple3.of("b", 1L, 12000L)
+                        Tuple3.of("b", 1L, 12000L),
+                        Tuple3.of("c", 1L, 12000L),
+                        Tuple3.of("c", 1L, 13000L)
                 )
                 .map(new MapFunction<Tuple3<String, Long, Long>, Tuple3<String, Long,
                                         Long>>() {
@@ -45,7 +49,7 @@ public class DataSkewState {
                     public Tuple3<String, Long, Long> map(Tuple3<String, Long, Long> value)
                             throws Exception {
                         Random rand = new Random();
-                        // 手动加数，分区
+                        // 手动加数，分区           加盐
                         return Tuple3.of(value.f0 + "-" + rand.nextInt(4), value.f1,
                                 value.f2);
                     }
@@ -69,12 +73,13 @@ public class DataSkewState {
                 .keyBy(r -> r.f0)
                 .process(new KeyedProcessFunction<String, Tuple3<String, Long, Long>,
                                         Tuple2<String, Long>>() {
-                    // TODO:ValueState
+                    // TODO:ValueState   声明阶段  ValueState是接口
                     private ValueState<Tuple2<String, Long>> sum;
                     private ValueState<Long> timerTs;        // 记录时间定时器
                     @Override
                     public void open(Configuration parameters) throws Exception {
                         super.open(parameters);
+                        // 通过ValueStateDescriptor来初始化，ValueStateDescriptor是具体实现
                         sum = getRuntimeContext().getState(new
                                 ValueStateDescriptor<Tuple2<String, Long>>("sum",
                                 Types.TUPLE(Types.STRING, Types.LONG)));
@@ -105,7 +110,9 @@ public class DataSkewState {
                     @Override
                     public void onTimer(long timestamp, OnTimerContext ctx,
                                         Collector<Tuple2<String, Long>> out) throws Exception {
+                        // 定时器触发  执行的函数
                         super.onTimer(timestamp, ctx, out);
+                        // 输出结果，10s内的结果
                         out.collect(Tuple2.of(ctx.getCurrentKey(), sum.value().f1));
                         timerTs.clear();       // 对时间器清空
                     }
@@ -126,8 +133,8 @@ public class DataSkewState {
                     private MapState<Long, Long> mapState;   // 能够记录多个状态
                     @Override
                     public void open(Configuration parameters) throws Exception {
-                        // 初始化
                         super.open(parameters);
+                        // 初始化
                         mapState = getRuntimeContext().getMapState(
                                 new MapStateDescriptor<Long, Long>("map", Types.LONG,
                                         Types.LONG)
@@ -137,8 +144,9 @@ public class DataSkewState {
                     public void processElement(Tuple3<String, Integer, Long> value, Context
                             ctx, Collector<Tuple2<String, Long>> out) throws Exception {
                         // 放入f1，和f2
-                        mapState.put((long)value.f1, value.f2);
+                        mapState.put((long)value.f1, value.f2);   // key是f1（加盐的随机数字），value是f2（sum的值）
                         long sum = 0L;
+                        // 计算总的
                         for (Long v : mapState.values()) {
                             sum += v;
                         }

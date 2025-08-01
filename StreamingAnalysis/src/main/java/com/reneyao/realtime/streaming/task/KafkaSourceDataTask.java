@@ -108,6 +108,7 @@ public class KafkaSourceDataTask extends BaseTask {
         // 保存原始数据存入 hbase   srcDataStream 是正常数据，并经过处理后的数据源
         srcDataStream.addSink(hbaseSink);
 
+
         env.execute();
     }
 }

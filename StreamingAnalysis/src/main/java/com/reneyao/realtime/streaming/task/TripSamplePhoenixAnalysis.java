@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 // 从phoenix中拿到hbase中的数据，然后写入到mysql中
+
+// 统计样本总数，并写入到mysql
 public class TripSamplePhoenixAnalysis {
     private static Logger logger = LoggerFactory.getLogger(TripSamplePhoenixAnalysis.class);
 
@@ -61,7 +64,7 @@ public class TripSamplePhoenixAnalysis {
             }
         }
         System.out.println("总样本数：" + totalNum);
-        String insertSql = "insert into vehicle_networking.t_sample_result(name, totalNum, processTime) values (?,?,?)";
+        String insertSql = "insert into vehicle.t_sample_result(name, totalNum, processTime) values (?,?,?)";
         ArrayList<Object> arrayList = new ArrayList<>();
         arrayList.add(0, "采样样本总数");
         arrayList.add(1, totalNum);

@@ -53,6 +53,8 @@ public class OnlineStatisticsWindowFunction implements WindowFunction<ItcastData
                 System.out.println("没有异常指标数据");
                 collector.collect(onlineDataObj);
             }else{
+
+                // 异常数据标记为1
                 OnlineDataObj onlineDataObj = setOnlineDataObj(dataPartObj, firstItcastDataPartObj, 1);
                 System.out.println("存在异常指标数据");
                 collector.collect(onlineDataObj);

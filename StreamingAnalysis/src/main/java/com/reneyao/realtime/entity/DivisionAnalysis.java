@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DivisionAnalysis {
+    // 对应mysql的表t_division_result
     private String vin;
     private String name;
     private String analyzeValue1;

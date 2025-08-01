@@ -38,9 +38,12 @@ public class TripDivisionPhoenixAnalysis {
      * @throws SQLException
      */
     private static void tripDivisionAnalysis(String sql, String divisionName, float analyzeType) throws SQLException {
+        // 获取到phoenix中的行程划分结果
         List<DivisionAnalysis> divisionResultList = sqlToTripDivisionEntity(sql, divisionName, analyzeType);
         logger.warn("phoenix查询，分析的指标名称:{}, hbase on sql:{}", divisionName, sql);
-        String insertSql = "insert into vehicle_networking.t_division_result(vin, name, analyze_value1, analyze_value2, analyze_value3, analyze_type, terminalTime, processTime) VALUES (?,?,?,?,?,?,?,?)";
+
+        // 将数据插入到mysql中
+        String insertSql = "insert into vehicle.t_division_result(vin, name, analyze_value1, analyze_value2, analyze_value3, analyze_type, terminalTime, processTime) VALUES (?,?,?,?,?,?,?,?)";
         List<ArrayList<Object>> paramList = new ArrayList<>();
         divisionResultList.forEach(divisionResult -> {
             ArrayList<Object> tempList = new ArrayList<>();
@@ -52,9 +55,9 @@ public class TripDivisionPhoenixAnalysis {
             tempList.add(5, divisionResult.getAnalyzeType());
             tempList.add(6, divisionResult.getTerminalTime());
             tempList.add(7, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-            paramList.add(tempList);
+            paramList.add(tempList);   // 汇总结果
         });
-        JDBCUtil.executeBatch(insertSql, paramList);
+        JDBCUtil.executeBatch(insertSql, paramList);   // 批量插入数据
         logger.warn("插入数据到行程划分结果表中成功,sql:{}", insertSql);
     }
 
@@ -67,6 +70,7 @@ public class TripDivisionPhoenixAnalysis {
         List<String[]> list = PhoenixJDBCUtil.select(sql);
         List<DivisionAnalysis> resultList = new ArrayList<>();
         DivisionAnalysis divisionResult = null;
+
         for (String[] results : list) {
             // rowNum、mileage、soc_comsuption、time_comsuption
             String rowNum = results[0];
